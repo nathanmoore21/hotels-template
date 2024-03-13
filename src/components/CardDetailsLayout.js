@@ -118,6 +118,27 @@ export default function FlexGrow() {
                   margin: "10px 0",
                 }}
               />
+              Want to discuss your reservation further? Call us at
+              1-800-123-4567
+              <br />
+              Your unique booking code is: <h4>MQ63893</h4>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <hr
+                  style={{
+                    borderTop: "1px solid #CACCD2",
+                    flexGrow: 1,
+                    margin: "10px 0",
+                  }}
+                />
+                <span style={{ margin: "0 10px" }}>OR</span>
+                <hr
+                  style={{
+                    borderTop: "1px solid #CACCD2",
+                    flexGrow: 1,
+                    margin: "10px 0",
+                  }}
+                />
+              </div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Icon
                   icon={tickCircle}

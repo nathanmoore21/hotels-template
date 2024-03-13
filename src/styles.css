@@ -252,3 +252,47 @@ button[type="submit"] {
 .checkbox-label:hover input[type="checkbox"] {
   border-color: #1169e0;
 }
+
+/* ////////////////////// Search Form */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-form-group {
+  flex: 1 1 auto; /* Adjust the flex settings */
+  margin-right: 20px;
+}
+
+.search-field-label {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.2px;
+  color: #191e3a;
+  margin-bottom: 5px;
+}
+
+.search-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; /* Apply Roboto font to input fields */
+}
+
+.search-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}

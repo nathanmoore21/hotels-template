@@ -5,11 +5,14 @@ import Box from "@mui/material/Box";
 
 // Define the FilterCheckboxes component
 function FilterCheckboxes({
-  // Destructure the props
+  // Destructure the props (items i need to use)
   predefinedAmenities,
   selectedAmenities,
   onChange,
   onFilterChange,
+  predefinedFRAmenities,
+  selectedFRAmenities,
+  onChangeFRAmenities,
 }) {
   // Define state for min and max price
   const [minPrice, setMinPrice] = useState("");
@@ -79,14 +82,38 @@ function FilterCheckboxes({
         Popular Amenities
       </div>
       {/* Map over the predefinedAmenities array */}
+      {/* For each amenity, create a checkbox */}
+      {/* index is the index of the current amenity */}
       {predefinedAmenities.map((amenity, index) => (
         <div key={index} style={{ marginBottom: "5px" }}>
           <label className="checkbox-label">
             <input
               type="checkbox"
               value={amenity}
+              //includes() method determines whether an array includes a certain value
               checked={selectedAmenities.includes(amenity)}
               onChange={onChange}
+            />
+            {amenity}
+          </label>
+        </div>
+      ))}
+      <div style={{ fontSize: "15px", marginTop: "10px", fontWeight: 400 }}>
+        Function Room Amenities
+      </div>
+      {/* Function Room Amenities */}
+      {/* Map over the predefinedFRAmenities array */}
+      {/* For each amenity, create a checkbox */}
+      {/* index is the index of the current amenity */}
+      {predefinedFRAmenities.map((amenity, index) => (
+        <div key={index} style={{ marginBottom: "5px" }}>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              value={amenity}
+              checked={selectedFRAmenities.includes(amenity)}
+              // Call the onChangeFRAmenities function when the checkbox is clicked
+              onChange={(e) => onChangeFRAmenities(e, amenity)}
             />
             {amenity}
           </label>

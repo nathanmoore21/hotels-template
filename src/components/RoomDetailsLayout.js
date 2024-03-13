@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import { Icon } from "@iconify/react";
 import bedIcon from "@iconify-icons/mdi/bed";
-import wifiIcon from "@iconify-icons/mdi/wifi";
-import gymIcon from "@iconify-icons/mdi/dumbbell";
-import noSmokingIcon from "@iconify-icons/mdi/smoking-off";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -73,6 +70,17 @@ export default function FlexGrow() {
     },
   });
 
+  //state variable called isOpen and a function to update it called setIsOpen
+  //the initial value of isOpen is false
+  //useState hook returns an array with two items: isOpen and setIsOpen
+  //const = constant, it cannot be changed
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [expandSpecialRequests, setExpandSpecialRequests] =
+    React.useState(false);
+  const [expandAccessibilityRequests, setExpandAccessibilityRequests] =
+    React.useState(false);
+  const [expandArrival, setExpandArrival] = React.useState(false);
+
   return (
     <>
       <div
@@ -110,7 +118,7 @@ export default function FlexGrow() {
                   style={{ fontSize: "1.1875rem", marginRight: "8px" }}
                 />
                 <h4 style={{ fontSize: "1.1875rem", margin: "0" }}>
-                  Step 1: Your Details
+                  Step 2: Room Details
                 </h4>
               </div>
               <hr
@@ -120,127 +128,151 @@ export default function FlexGrow() {
                   margin: "10px 0",
                 }}
               />
-              <div>
-                <h5>Property Highlights</h5>
-                <div className="CO1-icon-text">
-                  <Icon
-                    icon={wifiIcon}
-                    style={{ fontSize: "0.875rem", marginRight: "4px" }}
-                  />
-                  Free WiFi
-                  <Icon
-                    icon={gymIcon}
-                    style={{
-                      fontSize: "0.875rem",
-                      marginLeft: "25px",
-                      marginRight: "4px",
-                    }}
-                  />
-                  Gym
-                  <Icon
-                    icon={noSmokingIcon}
-                    style={{
-                      fontSize: "0.875rem",
-                      marginLeft: "25px",
-                      marginRight: "4px",
-                    }}
-                  />
-                  Non-Smoking
-                </div>
-              </div>
               <form onSubmit={formik.handleSubmit}>
-                {/* First Name */}
-                <h5 className="field-label">
-                  First Name <span className="required-indicator">*</span>
-                </h5>
-                <TextField
-                  id="firstName"
-                  name="firstName"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                  }
-                  helperText={
-                    formik.touched.firstName && formik.errors.firstName
-                  }
-                  Input={{
-                    classes: {
-                      input: "input-field",
-                    },
-                  }}
-                />
-                {/* Last Name */}
-                <h5 className="field-label">
-                  Last Name <span className="required-indicator">*</span>
-                </h5>
-                <TextField
-                  id="lastName"
-                  name="lastName"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                  }
-                  helperText={formik.touched.lastName && formik.errors.lastName}
-                  Input={{
-                    classes: {
-                      input: "input-field",
-                    },
-                  }}
-                />
-                {/* Email */}
-                <h5 className="field-label">
-                  Email Address <span className="required-indicator">*</span>
-                </h5>
-                <TextField
-                  id="email"
-                  name="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                  Input={{
-                    classes: {
-                      input: "input-field",
-                    },
-                  }}
-                />
-                {/* Phone Number */}
-                <h5 className="field-label">
-                  Phone Number <span className="required-indicator">*</span>
-                </h5>
-                <TextField
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formik.values.phoneNumber}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.phoneNumber &&
-                    Boolean(formik.errors.phoneNumber)
-                  }
-                  helperText={
-                    formik.touched.phoneNumber && formik.errors.phoneNumber
-                  }
-                  Input={{
-                    classes: {
-                      input: "input-field",
-                    },
-                  }}
-                />
-                {/* Submit Button */}
-                <div style={{ marginTop: "1rem" }}>
-                  <label className="checkbox-label">
-                    <input type="checkbox" />
-                    Check this box if you would not like to receive Hotels.com
-                    special deals email newsletter that contains great hotel
-                    promotions.
-                  </label>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {/* TextField with Icon */}
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    {/* Icon */}
+                    <div
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        border: "1px solid #1169E0",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginRight: "8px",
+                        color: "#191E3A",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      1
+                    </div>
+                    {/* TextField */}
+                    <TextField
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Guest Name"
+                      value={formik.values.firstName}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.firstName &&
+                        Boolean(formik.errors.firstName)
+                      }
+                      helperText={
+                        formik.touched.firstName && formik.errors.firstName
+                      }
+                      InputProps={{
+                        classes: {
+                          input: "input-field",
+                        },
+                      }}
+                    />
+                  </div>
+                  {/* Dropdown Menu */}
+                  <div
+                    style={{
+                      textDecoration: "none",
+                      cursor: "pointer",
+                      fontSize: "11px",
+                      fontWeight: "normal",
+                      color: "#1169E0",
+                      marginLeft: "2.5rem",
+                      marginBottom: "1px", 
+                    }}
+                    //When the user clicks on the div, the setIsOpen function is called with the opposite value
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    Booking Preferences
+                  </div>
+                  {/* If isOpen is true, the dropdown menu will be displayed with the below styling */}
+                  {/* && is the logical and operator */}
+                  {isOpen && (
+                    <ul
+                      style={{
+                        listStyleType: "none",
+                        marginTop: "0",
+                        paddingLeft: 0,
+                      }}
+                    >
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          setExpandSpecialRequests(!expandSpecialRequests)
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Any special requests?
+                        </span>
+                        {expandSpecialRequests && (
+                          <p style={{ margin: "4px 0 0 16px" }}>
+                            special requests
+                          </p>
+                        )}
+                      </li>
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          setExpandAccessibilityRequests(
+                            !expandAccessibilityRequests
+                          )
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Any accessibility requests?
+                        </span>
+                        {expandAccessibilityRequests && (
+                          <p style={{ margin: "4px 0 0 16px" }}>
+                            accessibility requests
+                          </p>
+                        )}
+                      </li>
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() => setExpandArrival(!expandArrival)}
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Will this guest be arriving on the same day?
+                        </span>
+                        {expandArrival && (
+                          <p style={{ margin: "4px 0 0 16px" }}>
+                            arrival on same day
+                          </p>
+                        )}
+                      </li>
+                    </ul>
+                  )}
                 </div>
+                {/* Submit Button */}
                 <div
                   style={{
                     display: "flex",

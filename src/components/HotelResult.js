@@ -6,15 +6,23 @@ import RiuPlaza from "./images/riu-plaza-dublin.jpeg";
 
 // Create a component called HotelResult
 // hotel is passed in as a prop
+// ({ hotel }) is destructuring the hotel prop (getting what we know)
+// } = hotel; is destructuring the hotel object
 const HotelResult = ({ hotel }) => {
   const {
     //rename hotel_name to name
     hotel_name: name,
     description,
     address,
+    image,
+    amenities,
   } = hotel;
   // Extract price_per_night from the first room of the hotel
   const price = hotel.hotel_room[0].price_per_night;
+
+  // Get the first three amenities
+  // Slice the amenities array to get the first three amenities
+  const amenitiesList = amenities.slice(0, 3);
 
   return (
     <div
@@ -37,7 +45,7 @@ const HotelResult = ({ hotel }) => {
         }}
       >
         <img
-          src={RiuPlaza}
+          src={image}
           alt="Riu Plaza Dublin"
           style={{
             width: "100%",
@@ -56,6 +64,13 @@ const HotelResult = ({ hotel }) => {
         </Link>
         <p className="icon-text">{address}</p>
         <p>{description}</p>
+
+        {/* Display the first three amenities as a list */}
+        <ul>
+          {amenitiesList.map((amenity, index) => (
+            <li key={index}>{amenity}</li>
+          ))}
+        </ul>
 
         <div style={{ display: "flex", marginBottom: "0.5rem" }}>
           <div

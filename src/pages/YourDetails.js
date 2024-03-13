@@ -7,11 +7,11 @@ import Footer from "../components/Footer";
 
 // Define the YourDetails component
 function YourDetails() {
-  // Return the JSX for the YourDetails component
+  // Return YourDetails component
   return (
     <div>
       <ResponsiveAppBar />
-      {/* Add padding to the top of the page to account for the fixed position of the app bar */}
+      {/* Add padding to the top of the page for the fixed position of the app bar */}
       <div style={{ paddingTop: "70px" }}>
         <Stepper />
         <YourDetailsLayout />

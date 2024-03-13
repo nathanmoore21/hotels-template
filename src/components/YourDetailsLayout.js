@@ -96,8 +96,7 @@ export default function Form() {
     onSubmit: (values) => {
       // Handle form submission here
       // Stopped working when I changed the submit button to a link
-      alert(JSON.stringify(values, null, 2));
-    },
+      console.log(values);  },
   });
 
   // Return your details layout
@@ -382,7 +381,7 @@ export default function Form() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Wednesday, April 17, 2024
+                      Thursday, October 10, 2024
                     </p>
                   </div>
                   <div
@@ -404,7 +403,7 @@ export default function Form() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, April 19, 2024
+                      Saturday, October 12, 2024
                     </p>
                   </div>
                   <div
@@ -430,13 +429,16 @@ export default function Form() {
                   >
                     <h5>Your Stay Breakdown</h5>
                     <div className="body-text">
-                      <p className="info-body">2 nights, 33 guests</p>
+                      <p className="info-body">2 nights, 20 guests</p>
                       <ul className="info-body" style={{ paddingLeft: "13px" }}>
-                        <li>Twin Room x3</li>
-                        <li>Double Room x6</li>
-                        <li>Single Room x1</li>
+                        <li>Standard Double Room x3</li>
+                        <li>Deluxe Suite x2</li>
+                        <li>King Deluxe Suite x1</li>
+                        </ul>
+                        <p className="info-body">Extras:</p>
+                        <ul className="info-body" style={{ paddingLeft: "13px" }}>
                         <li>Function Room</li>
-                      </ul>
+                        </ul>
                     </div>
                     <br></br>
                     <div style={{ textAlign: "right" }}>

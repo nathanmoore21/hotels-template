@@ -1,6 +1,7 @@
 [
     {
       "hotel_name": "Dublin Palace Hotel",
+      "image": "https://images.unsplash.com/photo-1455587734955-081b22074882?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "Luxurious hotel in the heart of Dublin offering unparalleled comfort and service.",
       "guest_review_rating": 9.2,
@@ -57,6 +58,7 @@
     },
     {
       "hotel_name": "Emerald City Hotel",
+      "image": "https://plus.unsplash.com/premium_photo-1675745329954-9639d3b74bbf?q=80&w=2335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "A modern hotel with stunning views of Dublin's skyline.",
       "guest_review_rating": 8.7,
@@ -113,6 +115,7 @@
     },
     {
       "hotel_name": "Riverside Inn",
+      "image": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 3,
       "description": "A cozy riverside hotel offering a peaceful retreat in the bustling city.",
       "guest_review_rating": 8.2,
@@ -169,6 +172,7 @@
     },
     {
       "hotel_name": "Grand View Hotel",
+      "image": "https://images.unsplash.com/photo-1541971875076-8f970d573be6?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "A sophisticated hotel with breathtaking views of Dublin's skyline.",
       "guest_review_rating": 9.0,
@@ -225,6 +229,7 @@
     },
     {
       "hotel_name": "Harbor View Hotel",
+      "image": "https://images.unsplash.com/photo-1518733057094-95b53143d2a7?q=80&w=2765&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "A charming hotel overlooking Dublin's vibrant harbor.",
       "guest_review_rating": 8.5,
@@ -281,6 +286,7 @@
     },
     {
       "hotel_name": "Tranquil Haven Hotel",
+      "image": "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 5,
       "description": "A peaceful retreat nestled in the heart of Dublin's bustling city center.",
       "guest_review_rating": 8.9,
@@ -337,6 +343,7 @@
     },
     {
       "hotel_name": "Cosmopolitan Hotel",
+      "image": "https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=2835&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 5,
       "description": "An elegant hotel offering sophistication and comfort in Dublin's city center.",
       "guest_review_rating": 9.1,
@@ -393,6 +400,7 @@
     },
     {
       "hotel_name": "Golden Gate Hotel",
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "A welcoming hotel offering comfort and convenience near Dublin's top attractions.",
       "guest_review_rating": 8.6,
@@ -449,6 +457,7 @@
     },
     {
       "hotel_name": "Majestic Manor Hotel",
+      "image": "https://plus.unsplash.com/premium_photo-1661964225206-fd5d445a6edd?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "A majestic hotel offering opulent accommodations and exceptional service.",
       "guest_review_rating": 8.8,
@@ -505,6 +514,7 @@
     }, 
     {
       "hotel_name": "Dublin Palace Hotel",
+      "image": "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
       "description": "Luxurious hotel in the heart of Dublin offering unparalleled comfort and service.",
       "guest_review_rating": 9.2,

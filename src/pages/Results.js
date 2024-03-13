@@ -7,6 +7,9 @@ import FilterCheckboxes from "../components/FilterCheckboxes";
 import HotelResult from "../components/HotelResult";
 import hotelData from "../components/data/hotel-data.json";
 
+import SearchBar from "../components/SearchBar";
+import Search from "../components/Search";
+
 // Define the Results component
 function Results() {
   // Declare variable sortBy and a function setSortBy to update it, initialised with null (no initial sorting criteria selected)
@@ -14,6 +17,7 @@ function Results() {
   // Declare variable selectedAmenities and a function setSelectedAmenities to update it, initialised with an empty array
   // Initialising with an empty array allows it to store selected amenities; initially, no amenities are selected
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [selectedFRAmenities, setSelectedFRAmenities] = useState([]);
 
   // Declare variable filteredHotels and a function setFilteredHotels to update it, initialised with an empty array
   const [filteredHotels, setFilteredHotels] = useState([]);
@@ -25,6 +29,17 @@ function Results() {
     "Room service",
     "Air conditioning",
     "Concierge service",
+  ];
+
+  // Declare variable and initialise it with an array of predefined function room amenities to select from
+  const predefinedFRAmenities = [
+    "Audiovisual equipment",
+    "High-speed Wi-Fi",
+    "Flexible seating arrangements",
+    "Catering services",
+    "Dedicated event planning staff",
+    "Climate control",
+    "Test",
   ];
 
   // Use the useEffect hook to update the filteredHotels variable when sortBy or selectedAmenities change
@@ -64,8 +79,8 @@ function Results() {
           .sort(
             // (a, b) is a comparison function that compares two elements of the array
             (a, b) =>
-              // Return the difference between the price of the first room in the first hotel and the price of the first room in the second hotel
-              // By subtracting b's price from a's price, the comparison function determines the order in which the hotels should appear
+              // Return the difference between the price of the first room in the first hotel (and second)
+              // Subtracting b's price from a's price, the comparison function determines the order
               a.hotel_room[0]["price_per_night"] -
               b.hotel_room[0]["price_per_night"]
           )
@@ -120,6 +135,23 @@ function Results() {
     });
   };
 
+  // Define a function to handle changes to the selected function room amenities
+  const handleFRAmenitiesChange = (e, amenity) => {
+    // isChecked is a boolean that is true if the checkbox is checked
+    const isChecked = e.target.checked;
+    // Update the selectedFRAmenities array based on the selected amenity
+    setSelectedFRAmenities((prevState) => {
+      // if the checkbox is checked, add the amenity to the array
+      if (isChecked) {
+        // return a new array with the selected amenity added
+        return [...prevState, amenity];
+      } else {
+        // else return an array when the selected amenity removed
+        return prevState.filter((item) => item !== amenity);
+      }
+    });
+  };
+
   // Define a function to handle changes to the filter criteria
   const handleFilterChange = ({
     minPrice,
@@ -167,7 +199,12 @@ function Results() {
         hotel.guest_review_rating >= minRating &&
         hotel.guest_review_rating < maxRating &&
         // === "" is used to check if the starRating is empty
-        (starRating === "" || hotel.star_rating.toString() === starRating)
+        // || is the OR operator
+        (starRating === "" || hotel.star_rating.toString() === starRating) &&
+        // .every() is used to check if all the selected amenities are included in the function room amenities
+        selectedFRAmenities.every((amenity) =>
+          hotel.function_room.amenities.includes(amenity)
+        )
       );
     });
 
@@ -194,20 +231,11 @@ function Results() {
         }}
       >
         <div style={{ paddingLeft: "20px" }}>
+          {/* <SearchBar /> */}
+          <Search />
           <div style={{ display: "flex", marginBottom: "10px" }}>
-            <input
-              type="text"
-              placeholder="Where to"
-              style={{ marginRight: "10px" }}
-            />
-            <input
-              type="text"
-              placeholder="Dates"
-              style={{ marginRight: "10px" }}
-            />
-            <input type="text" placeholder="Travellers" />
             {/* Add a div with flex: 1 to push the sort dropdown to the right */}
-            <div style={{ flex: 1 }}></div>
+            {/* <div style={{ flex: 1 }}></div> */}
           </div>
           {/* Add a div with display: flex and marginBottom: 10px to align the filter checkboxes and hotel results */}
           <div style={{ display: "flex", marginBottom: "10px" }}>
@@ -218,6 +246,9 @@ function Results() {
                 selectedAmenities={selectedAmenities}
                 onChange={handleCheckboxChange}
                 onFilterChange={handleFilterChange}
+                predefinedFRAmenities={predefinedFRAmenities}
+                selectedFRAmenities={selectedFRAmenities}
+                onChangeFRAmenities={handleFRAmenitiesChange}
               />
             </div>
             <div

@@ -29,6 +29,9 @@ const HotelPage = ({ hotels }) => {
   // Add state for selected rooms
   // {} is the initial value, an empty object
   const [selectedRooms, setSelectedRooms] = useState({});
+  // false is the initial value (function room is not selected)
+  const [groupBooking, setGroupBooking] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   // Add functions to handle adding and removing rooms
   const handleAddRoom = (room) => {
@@ -88,19 +91,25 @@ const HotelPage = ({ hotels }) => {
 
   // Add a function to calculate the total price
   const getTotalPrice = () => {
+    // Set the initial total price to 0
     let totalPrice = 0;
     // Loop through the selected rooms
     // Add the price for each room type
+    // Object.entries understands each room type and its quantity as an array
     for (const [roomType, quantity] of Object.entries(selectedRooms)) {
       // Find the room with the matching type
       const room = hotel.hotel_room.find((room) => room.type === roomType);
       // If the room exists, add the price to the total
       if (room) {
         // Multiply the quantity by the price
+        // =+ is a shorthand for adding to the total
         totalPrice += quantity * parseFloat(room.price_per_night);
       }
     }
-    // Return the total price as a string with 2 decimal places
+    // If group booking is selected, add the function room price to the total
+    if (groupBooking && functionRoomData) {
+      totalPrice += parseFloat(functionRoomData.price_per_day);
+    }
     return totalPrice.toFixed(2);
   };
 
@@ -111,6 +120,77 @@ const HotelPage = ({ hotels }) => {
 
   // Get the function room data
   const functionRoomData = hotel.function_room;
+
+  // Add a function to handle the group booking selection (Yes or No)
+  const handleGroupBookingSelection = (value) => {
+    setGroupBooking(value);
+  };
+
+  // Add a component for the basket
+  const YourBasket = ({
+    totalRooms,
+    totalPrice,
+    totalGuests,
+    groupBooking,
+    toggleExpanded,
+    expanded,
+  }) => {
+    return (
+      <div style={{ position: "fixed", bottom: "20px", right: "20px" }}>
+        <div
+          style={{
+            width: "400px",
+            textAlign: "left",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "10px",
+            padding: "20px",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "25px",
+              fontWeight: "600",
+              marginBottom: "20px",
+            }}
+          >
+            Your Basket
+          </h1>
+          {/* If expanded is true, show the expanded content */}
+          {expanded ? (
+            <div>
+              <h5>Total Rooms in Basket: {totalRooms}</h5>
+              <h5>Total Price Per Night: €{totalPrice}</h5>
+              <h5>Total Price: €{totalPrice * 2}</h5>
+              <h5>Number of Guests: {totalGuests}</h5>
+              <h5>Function room selection: {groupBooking ? "Yes" : "No"}</h5>
+              <Link to="/YourDetails" className="router-link">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                  style={{ marginTop: "1rem" }}
+                >
+                  Next
+                </Button>
+              </Link>
+              <button onClick={toggleExpanded}>Collapse</button>
+            </div>
+          ) : (
+            <div>
+              <h5>Total Price: €{totalPrice}</h5>
+              <button onClick={toggleExpanded}>Expand</button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Function to toggle the expanded state
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     <div style={{ backgroundColor: "#FBF8F2" }}>
@@ -419,10 +499,14 @@ const HotelPage = ({ hotels }) => {
                   fontWeight: "bold",
                   borderRadius: "7px",
                   marginRight: "10px",
-                  backgroundColor: "#FFFFFF",
-                  color: "#191E3A",
-                  border: "2px solid #1169E0",
+                  // Use the groupBooking state to determine the background color
+                  // ? "#1169E0" : "#FFFFFF" means if groupBooking is true, use #1169E0, else use #FFFFFF
+                  backgroundColor: groupBooking ? "#1169E0" : "#FFFFFF",
+                  color: groupBooking ? "#FFFFFF" : "#191E3A",
+                  border: groupBooking ? "none" : "2px solid #EBEBEB",
                 }}
+                // Use the handleGroupBookingSelection function to update the groupBooking state
+                onClick={() => handleGroupBookingSelection(true)}
               >
                 Yes
               </button>
@@ -433,10 +517,11 @@ const HotelPage = ({ hotels }) => {
                   fontSize: "18px",
                   fontWeight: "bold",
                   borderRadius: "7px",
-                  backgroundColor: "#EBEBEB",
-                  color: "#191E3A",
-                  border: "1px solid #818494",
+                  backgroundColor: groupBooking ? "#FFFFFF" : "#1169E0",
+                  color: groupBooking ? "#191E3A" : "#FFFFFF",
+                  border: groupBooking ? "2px solid #EBEBEB" : "none",
                 }}
+                onClick={() => handleGroupBookingSelection(false)}
               >
                 No
               </button>
@@ -614,40 +699,15 @@ const HotelPage = ({ hotels }) => {
         ))}
       </div>
       {/* YOUR BASKET */}
-      <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
-        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Your Basket</h1>{" "}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: "#FFFFFF",
-            marginBottom: "20px",
-            padding: "10px",
-            borderRadius: "13px",
-          }}
-        >
-          <div>
-            {/*Get the total rooms */}
-            <h5>Total Rooms in Basket: {getTotalRooms()}</h5>
-            {/*Get the total price */}
-            <h5>Total Price: €{getTotalPrice()}</h5>
-            {/*Get the total guests */}
-            <h5>Number of Guests: {getTotalGuests()}</h5>
-          </div>
-
-          <Link to="/YourDetails" className="router-link">
-            <Button
-              color="primary"
-              variant="contained"
-              type="submit"
-              style={{ marginLeft: "1rem" }}
-            >
-              Next
-            </Button>
-          </Link>
-        </div>
-      </div>
+      <YourBasket
+        // Pass in the total rooms, total price, total guests, group booking, toggleExpanded, and expanded
+        totalRooms={getTotalRooms()}
+        totalPrice={getTotalPrice()}
+        totalGuests={getTotalGuests()}
+        groupBooking={groupBooking}
+        toggleExpanded={toggleExpanded}
+        expanded={expanded}
+      />
 
       <Footer />
     </div>
