@@ -21,7 +21,6 @@ function Index() {
         <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
           <HomePageGrid />
         </div>
-        {/* footer */}
         <Footer />
       </div>
     </div>
