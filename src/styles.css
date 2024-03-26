@@ -1,7 +1,7 @@
 body {
   background-color: #f3f3f5;
   font-family: "Roboto", sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400; 
   font-size: 0.6875rem;
   letter-spacing: 0.12px;
   line-height: 1.5;
@@ -10,8 +10,8 @@ body {
 /* styles for h1 */
 h1 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 2rem; /* 32px in rem */
+  font-weight: 600; 
+  font-size: 2rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -21,8 +21,8 @@ h1 {
 /* styles for h2 */
 h2 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 1.6875rem; /* 27px in rem */
+  font-weight: 600; 
+  font-size: 1.6875rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -32,8 +32,8 @@ h2 {
 /* styles for h3 */
 h3 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 1.4375rem; /* 23px in rem */
+  font-weight: 600; 
+  font-size: 1.4375rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -43,8 +43,8 @@ h3 {
 /* styles for h4 */
 h4 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 1.1875rem; /* 19px in rem */
+  font-weight: 600; 
+  font-size: 1.1875rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -54,8 +54,8 @@ h4 {
 /* styles for h5 */
 h5 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 1.0625rem; /* 17px in rem */
+  font-weight: 600; 
+  font-size: 1.0625rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -65,8 +65,8 @@ h5 {
 /* styles for h6 */
 h6 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; /* Semi-bold */
-  font-size: 0.75rem; /* 12px in rem */
+  font-weight: 600; 
+  font-size: 0.75rem; 
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -108,9 +108,33 @@ h6 {
 .checkbox-label {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
   letter-spacing: 0.12px;
   color: #191e3a;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px; 
+  height: 18px; 
+  margin-right: 5px; 
+}
+
+
+.radio-label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.12px;
+  color: #191e3a;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; 
+}
+
+.radio-label input[type="radio"] {
+  width: 18px; 
+  height: 18px; 
+  margin-right: 5px; 
 }
 
 /* styles for input fields */
@@ -242,16 +266,10 @@ button[type="submit"] {
 /* //////////////////////////////////////// Checkbox */
 
 .checkbox-label {
-  font-size: 13px;
-}
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;}
 
-.checkbox-label:hover {
-  cursor: pointer;
-}
-
-.checkbox-label:hover input[type="checkbox"] {
-  border-color: #1169e0;
-}
 
 /* ////////////////////// Search Form */
 .search-form {
@@ -260,7 +278,7 @@ button[type="submit"] {
 }
 
 .search-form-group {
-  flex: 1 1 auto; /* Adjust the flex settings */
+  flex: 1 1 auto; 
   margin-right: 20px;
 }
 
@@ -280,7 +298,7 @@ button[type="submit"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif; /* Apply Roboto font to input fields */
+  font-family: "Roboto", sans-serif; 
 }
 
 .search-button {
@@ -296,3 +314,8 @@ button[type="submit"] {
 .search-button:hover {
   background-color: #0056b3;
 }
+
+.rmdp-input {
+  width: 20.9375rem !important;
+}
+

@@ -11,7 +11,9 @@ function RoomDetails() {
       <div style={{ paddingTop: "70px" }}>
         {" "}
         <StepperRoom />
-        <RoomDetailsLayout />
+        <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
+          <RoomDetailsLayout />
+        </div>
         <Footer />
       </div>
     </div>

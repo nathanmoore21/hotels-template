@@ -35,12 +35,12 @@ function ResponsiveAppBar() {
                 color: "#F03346",
                 textTransform: "none",
                 "&:hover": {
-                  color: "#D21543", // Change text color on hover
+                  color: "#D21543",
                   bgcolor: "transparent",
                 },
               }}
             >
-              Shop Travel
+              Group Booking
             </Button>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", pr: 2 }}>
@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
                   color: "#F03346",
                   textTransform: "none",
                   "&:hover": {
-                    color: "#D21543", // Change text color on hover
+                    color: "#D21543",
                     bgcolor: "transparent",
                   },
                 }}

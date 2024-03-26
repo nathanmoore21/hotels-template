@@ -13,10 +13,24 @@ import locationIcon from "@iconify-icons/mdi/map-marker";
 import functionRoomImage from "./images/functionroom.png";
 import twinRoomImage from "./images/twinRoom.png";
 import Button from "@mui/material/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faGreaterThan,
+  faExpand,
+  faBed,
+  faUsers,
+  faHeart as solidHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingBasket,
+  faAngleUp,
+  faAngleDown,
+} from "@fortawesome/free-solid-svg-icons";
 
-// Create a component called HotelPage
-// Pass in the hotels as a prop
-// useParams is a hook from react-router-dom
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import amenitiesIcons from "./data/amenitiesIcons";
+
 const HotelPage = ({ hotels }) => {
   const { name } = useParams();
 
@@ -26,12 +40,11 @@ const HotelPage = ({ hotels }) => {
     (hotel) => hotel["hotel_name"] === decodeURIComponent(name)
   );
 
-  // Add state for selected rooms
-  // {} is the initial value, an empty object
   const [selectedRooms, setSelectedRooms] = useState({});
-  // false is the initial value (function room is not selected)
   const [groupBooking, setGroupBooking] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [activeLink, setActiveLink] = useState("#overview");
+  const [isHeartClicked, setIsHeartClicked] = useState(false);
 
   // Add functions to handle adding and removing rooms
   const handleAddRoom = (room) => {
@@ -126,8 +139,28 @@ const HotelPage = ({ hotels }) => {
     setGroupBooking(value);
   };
 
-  // Add a component for the basket
-  const YourBasket = ({
+  const image = hotel.image;
+
+  const getRatingColor = (rating) => {
+    if (rating >= 8) {
+      return { backgroundColor: "#217952", color: "#FFFFFF" };
+    } else {
+      return { backgroundColor: "#DFE0E4", color: "#191E3A" };
+    }
+  };
+
+  const handleHeartClick = () => {
+    setIsHeartClicked(!isHeartClicked);
+  };
+
+  const handleClick = (link) => {
+    setActiveLink(link);
+  };
+
+  const collapsedWidth = "150px";
+  const expandedWidth = "220px";
+
+  const Basket = ({
     totalRooms,
     totalPrice,
     totalGuests,
@@ -136,58 +169,179 @@ const HotelPage = ({ hotels }) => {
     expanded,
   }) => {
     return (
-      <div style={{ position: "fixed", bottom: "20px", right: "20px" }}>
+      <div>
+        {expanded && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+            }}
+            onClick={toggleExpanded}
+          />
+        )}
         <div
           style={{
-            width: "400px",
-            textAlign: "left",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "10px",
-            padding: "20px",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            zIndex: 1000,
           }}
         >
-          <h1
+          <div
             style={{
-              fontSize: "25px",
-              fontWeight: "600",
-              marginBottom: "20px",
+              width: expanded ? expandedWidth : "auto",
+              textAlign: "left",
+              backgroundColor: expanded ? "white" : "transparent",
+              borderRadius: expanded ? "10px" : "50%",
+              padding: expanded ? "20px" : 0,
+              boxShadow: expanded ? "0px 4px 10px rgba(0, 0, 0, 0.1)" : "none",
+              cursor: "pointer",
+              display: "flex",
             }}
+            onClick={toggleExpanded}
           >
-            Your Basket
-          </h1>
-          {/* If expanded is true, show the expanded content */}
-          {expanded ? (
-            <div>
-              <h5>Total Rooms in Basket: {totalRooms}</h5>
-              <h5>Total Price Per Night: €{totalPrice}</h5>
-              <h5>Total Price: €{totalPrice * 2}</h5>
-              <h5>Number of Guests: {totalGuests}</h5>
-              <h5>Function room selection: {groupBooking ? "Yes" : "No"}</h5>
-              <Link to="/YourDetails" className="router-link">
-                <Button
-                  color="primary"
-                  variant="contained"
-                  type="submit"
-                  style={{ marginTop: "1rem" }}
+            {expanded ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <h1
+                  style={{
+                    fontSize: "25px",
+                    fontWeight: "100",
+                    marginBottom: "0.5rem",
+                  }}
                 >
-                  Next
-                </Button>
-              </Link>
-              <button onClick={toggleExpanded}>Collapse</button>
-            </div>
-          ) : (
-            <div>
-              <h5>Total Price: €{totalPrice}</h5>
-              <button onClick={toggleExpanded}>Expand</button>
-            </div>
-          )}
+                  Your Basket <FontAwesomeIcon icon={faAngleDown} />
+                </h1>
+                <div
+                  style={{
+                    marginBottom: "0.5rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ fontSize: "15px" }}>
+                    Total Rooms in Basket:
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      marginLeft: "3rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {totalRooms}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    marginBottom: "0.5rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ fontSize: "15px" }}>Total Price:</span>
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      marginLeft: "auto",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    €{totalPrice * 2}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    marginBottom: "0.5rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ fontSize: "15px" }}>Number of Guests:</span>
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      marginLeft: "auto",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {totalGuests}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    marginBottom: "0.5rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <span style={{ fontSize: "15px" }}>
+                    Function room selection:
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      marginLeft: "auto",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {groupBooking ? "Yes" : "No"}
+                  </span>
+                </div>
+                <Link
+                  to="/YourDetails"
+                  className="router-link"
+                  style={{ alignSelf: "flex-end" }}
+                >
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    style={{ marginTop: "1rem" }}
+                  >
+                    Next
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  backgroundColor: "white",
+                  borderRadius: "50%",
+                  border: "2px solid #1169E0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faShoppingBasket}
+                  style={{ fontSize: "40px", color: "#CACCD2" }}
+                />{" "}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
   };
 
-  // Function to toggle the expanded state
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
@@ -202,9 +356,62 @@ const HotelPage = ({ hotels }) => {
           justifyContent: "center",
         }}
       >
-        <div style={{ width: "70%", backgroundColor: "#FFFFFF" }}>
+        <div
+          style={{
+            width: "70%",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "0 0 20px 20px",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#FBF8F2",
+              display: "flex",
+              alignItems: "center",
+              padding: "8px",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              style={{
+                color: "#1169E0",
+                fontSize: "14px",
+                paddingRight: "8px",
+              }}
+            />
+            <Link
+              to="/results"
+              className="router-link"
+              style={{ color: "#1169E0", fontSize: "14px" }}
+            >
+              See all properties
+            </Link>
+            <div
+              style={{
+                cursor: "pointer",
+                marginLeft: "auto",
+                border: "1px solid #CACCD2",
+                borderRadius: "25px",
+                padding: "8px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+              onClick={handleHeartClick}
+            >
+              <div style={{ marginRight: "8px" }}>
+                <FontAwesomeIcon
+                  icon={isHeartClicked ? solidHeart : regularHeart}
+                  style={{ color: "#FF0000", fontSize: "20px" }}
+                />
+              </div>
+              <span style={{ color: "#191E3A", fontSize: "14px" }}>
+                {isHeartClicked ? "Saved" : "Save"}
+              </span>
+            </div>
+          </div>
+
           <img
-            src={RiuPlaza}
+            src={image}
             alt="Hotel"
             style={{ width: "100%", height: "300px", objectFit: "cover" }}
           />
@@ -221,53 +428,99 @@ const HotelPage = ({ hotels }) => {
               borderBottom: "2px solid #DFE0E4",
             }}
           >
-            <div style={{}}>
+            <div style={{ padding: "5px" }}>
               <Link
                 to="#overview"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  borderBottom: "2px solid transparent",
+                  color: activeLink === "#overview" ? "#1169E0" : "#191E3A",
+                  fontWeight: activeLink === "#overview" ? "bold" : "normal",
+                  borderBottom:
+                    activeLink === "#overview"
+                      ? "2px solid #1169E0"
+                      : "2px solid transparent",
+                  paddingBottom: "20px",
+                  fontSize: "14px",
                 }}
+                onClick={() => handleClick("#overview")}
               >
                 Overview
               </Link>
+
               <Link
                 to="#rooms"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  borderBottom: "2px solid transparent",
+                  color: activeLink === "#rooms" ? "#1169E0" : "#191E3A",
+                  fontWeight: activeLink === "#rooms" ? "bold" : "normal",
+                  borderBottom:
+                    activeLink === "#rooms"
+                      ? "2px solid #1169E0"
+                      : "2px solid transparent",
+                  paddingBottom: "20px",
+                  fontSize: "14px",
                 }}
+                onClick={() => handleClick("#rooms")}
               >
                 Rooms
               </Link>
+
               <Link
                 to="#amenities"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  borderBottom: "2px solid transparent",
+                  color: activeLink === "#amenities" ? "#1169E0" : "#191E3A",
+                  fontWeight: activeLink === "#amenities" ? "bold" : "normal",
+                  borderBottom:
+                    activeLink === "#amenities"
+                      ? "2px solid #1169E0"
+                      : "2px solid transparent",
+                  paddingBottom: "20px",
+                  fontSize: "14px",
                 }}
+                onClick={() => handleClick("#amenities")}
               >
                 Amenities
               </Link>
+
               <Link
                 to="#accessibility"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  borderBottom: "2px solid transparent",
+                  color:
+                    activeLink === "#accessibility" ? "#1169E0" : "#191E3A",
+                  fontWeight:
+                    activeLink === "#accessibility" ? "bold" : "normal",
+                  borderBottom:
+                    activeLink === "#accessibility"
+                      ? "2px solid #1169E0"
+                      : "2px solid transparent",
+                  paddingBottom: "20px",
+                  fontSize: "14px",
                 }}
+                onClick={() => handleClick("#accessibility")}
               >
                 Accessibility
               </Link>
+
               <Link
                 to="#policies"
                 style={{
                   textDecoration: "none",
-                  borderBottom: "2px solid transparent",
+                  color: activeLink === "#policies" ? "#1169E0" : "#191E3A",
+                  fontWeight: activeLink === "#policies" ? "bold" : "normal",
+                  borderBottom:
+                    activeLink === "#policies"
+                      ? "2px solid #1169E0"
+                      : "2px solid transparent",
+                  paddingBottom: "20px",
+                  fontSize: "14px",
                 }}
+                onClick={() => handleClick("#policies")}
               >
                 Policies
               </Link>
@@ -276,25 +529,39 @@ const HotelPage = ({ hotels }) => {
               style={{
                 backgroundColor: "#1169E0",
                 color: "white",
-                borderRadius: "15px",
+                fontSize: "16px",
+                fontWeight: "bold",
+                borderRadius: "25px",
                 padding: "10px 20px",
                 border: "none",
               }}
             >
-              Reserve
+              <a
+                href="#rooms-section"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Reserve a room
+              </a>
             </button>
           </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            {" "}
+
+          <div style={{ display: "flex", flexDirection: "row", width: "90%" }}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                marginRight: "1rem",
+                margin: "1rem",
               }}
             >
-              {" "}
-              <h2 style={{ fontSize: "32px" }}>{hotel["hotel_name"]}</h2>
+              <h2
+                style={{
+                  fontSize: "32px",
+                  fontWeight: "400",
+                  marginBottom: "0px",
+                }}
+              >
+                {hotel["hotel_name"]}
+              </h2>
               <div style={{ display: "flex", alignItems: "center" }}>
                 {/* Use Array.from to create an array with the length of the star rating */}
                 {/* Use the map function to create an array based off of stars */}
@@ -303,31 +570,50 @@ const HotelPage = ({ hotels }) => {
                   <Icon
                     key={index}
                     icon={starIcon}
-                    style={{ fontSize: "20px", marginRight: "5px" }}
+                    style={{
+                      fontSize: "14px",
+                      color: "#4D5166",
+                      marginBottom: "0px",
+                      marginTop: "0px",
+                    }}
                   />
                 ))}
               </div>
-              <p>{hotel["description"]}</p>
+              <p
+                style={{
+                  fontSize: "14px",
+                  marginBottom: "20px",
+                  marginTop: "2px",
+                }}
+              >
+                {hotel["description"]}
+              </p>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  color: "green",
-                  fontWeight: "bold",
-                  marginBottom: "5px",
+                  color: "#217952",
+                  fontWeight: "600",
+                  fontSize: "14px",
+                  marginBottom: "20px",
                 }}
               >
                 <Icon
                   icon={checkmarkIcon}
-                  style={{ fontSize: "15px", marginRight: "5px" }}
+                  style={{
+                    fontSize: "18px",
+                    marginRight: "5px",
+                    color: "#217952",
+                  }}
                 />
                 <span>Fully Refundable</span>
                 <Icon
                   icon={checkmarkIcon}
                   style={{
-                    fontSize: "15px",
+                    fontSize: "18px",
                     marginRight: "5px",
                     marginLeft: "10px",
+                    color: "#217952",
                   }}
                 />
                 <span>Reserve now, Pay later</span>
@@ -338,27 +624,37 @@ const HotelPage = ({ hotels }) => {
                     marginRight: "1rem",
                     display: "flex",
                     alignItems: "center",
+                    fontSize: "12px",
                   }}
                 >
                   <div
                     style={{
                       marginRight: "0.5rem",
-                      border: "1px solid black",
                       borderRadius: "4px",
                       padding: "0.2rem 0.5rem",
+                      fontSize: "12px",
+                      ...getRatingColor(hotel.guest_review_rating),
                     }}
                   >
                     {hotel.guest_review_rating}
                   </div>
                   Guest Rating
                 </div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{
+                    marginRight: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "12px",
+                  }}
+                >
                   <div
                     style={{
                       marginRight: "0.5rem",
-                      border: "1px solid black",
                       borderRadius: "4px",
                       padding: "0.2rem 0.5rem",
+                      fontSize: "12px",
+                      ...getRatingColor(hotel.event_management_rating),
                     }}
                   >
                     {hotel.event_management_rating}
@@ -371,101 +667,148 @@ const HotelPage = ({ hotels }) => {
                   fontWeight: "medium",
                   fontSize: "13px",
                   color: "#1169E0",
-                  marginBottom: "5px",
+                  marginBottom: "20px",
                 }}
               >
-                See all 1,204 reviews
+                <Link
+                  to="#"
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  See all 1,204 reviews{" "}
+                  <FontAwesomeIcon
+                    icon={faGreaterThan}
+                    style={{ fontSize: "9px" }}
+                  />
+                </Link>
               </div>
               <div
                 style={{
                   fontWeight: "medium",
                   fontSize: "17px",
                   color: "#191E3A",
+                  marginBottom: "10px",
                 }}
               >
                 Popular Amenities
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", width: "50%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "75%",
+                  fontSize: "14px",
+                  marginTop: "0px",
+                }}
+              >
                 {hotel.amenities.map((amenity, index) => (
                   <div
                     key={index}
-                    style={{ width: "50%", marginBottom: "5px" }}
-                  >
-                    <span>{amenity}</span>
-                  </div>
-                ))}
-              </div>
-              <div
-                style={{
-                  fontWeight: "medium",
-                  fontSize: "13px",
-                  color: "#1169E0",
-                  marginTop: "5px",
-                }}
-              >
-                See all
-              </div>
-            </div>
-            {/* content on the right */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginLeft: "1rem",
-              }}
-            >
-              <p
-                style={{
-                  fontWeight: 600,
-                  fontSize: "18px",
-                  color: "#191E3A",
-                  marginTop: "5px",
-                }}
-              >
-                What's Around
-              </p>
-              <img
-                src={mapImage}
-                alt="Map"
-                style={{ maxWidth: "278px", height: "auto" }}
-              />
-              <p
-                style={{
-                  fontWeight: 600,
-                  fontSize: "18px",
-                  color: "#191E3A",
-                  marginTop: "5px",
-                }}
-              >
-                {hotel.address}
-              </p>
-              <div
-                style={{
-                  fontWeight: "medium",
-                  fontSize: "13px",
-                  color: "#1169E0",
-                  marginTop: "5px",
-                }}
-              >
-                View in a map
-              </div>
-              <ul style={{ listStyle: "none", padding: 0, marginTop: "10px" }}>
-                {hotel.nearby.map((item, index) => (
-                  <li
-                    key={index}
                     style={{
-                      marginBottom: "5px",
+                      width: "50%",
+                      marginBottom: "20px",
                       display: "flex",
                       alignItems: "center",
                     }}
                   >
-                    <IconifyIcon
-                      icon={locationIcon}
-                      style={{ fontSize: "20px", marginRight: "5px" }}
+                    <FontAwesomeIcon
+                      icon={amenitiesIcons[amenity]}
+                      style={{ marginRight: "5px", marginLeft: "3px" }}
                     />
-                    <span>{item.location}</span>
-                    <span style={{ marginLeft: "10px" }}>{item.distance}</span>
-                  </li>
+                    <span>{amenity}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  fontWeight: "medium",
+                  fontSize: "13px",
+                  color: "#1169E0",
+                  marginTop: "0px",
+                }}
+              >
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  See all
+                </Link>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginLeft: "auto",
+                marginRight: "1rem",
+                marginTop: "1.4rem",
+                width: "50%",
+              }}
+            >
+              <p
+                style={{
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  color: "#191E3A",
+                  marginTop: "5px",
+                  marginBottom: "3px",
+                }}
+              >
+                What's Around
+              </p>
+
+              <iframe
+                width="325"
+                height="auto"
+                style={{
+                  border: 0,
+                  borderRadius: "12px",
+                  marginBottom: "10px",
+                }}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9527.511181835902!2d-6.284163838527213!3d53.34544372355672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e9cb559ea73%3A0x2600c7a819c83012!2sTemple%20Bar%2C%20Dublin%2C%20Ireland!5e0!3m2!1sen!2sus!4v1710941241962!5m2!1sen!2sus"
+                allowFullScreen=""
+                aria-hidden="false"
+                tabIndex="0"
+                title="Embedded Google Map"
+              ></iframe>
+
+              <p
+                style={{
+                  fontWeight: 200,
+                  fontSize: "14px",
+                  color: "#191E3A",
+                  marginTop: "0px",
+                }}
+              >
+                {hotel.address}
+              </p>
+
+              <ul style={{ listStyle: "none", padding: 0, marginTop: "10px" }}>
+                {hotel.nearby.map((item, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      marginBottom: "10px",
+                      display: "flex",
+                      fontSize: "14px",
+                      fontWeight: "100",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <IconifyIcon
+                        icon={locationIcon}
+                        style={{ fontSize: "20px", marginRight: "5px" }}
+                      />
+                      <span>{item.location}</span>
+                    </div>
+                    <span>{item.distance}</span>
+                  </div>
                 ))}
               </ul>
             </div>
@@ -476,9 +819,21 @@ const HotelPage = ({ hotels }) => {
       {/* FUNCTION ROOM INFO */}
       <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Group Booking</h1>{" "}
-        <div style={{ display: "flex", backgroundColor: "#FFFFFF" }}>
-          <div style={{ width: "50%" }}>
-            <p style={{ fontSize: "17px", fontWeight: "600" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "20px 0 0 20px",
+          }}
+        >
+          <div style={{ width: "50%", marginLeft: "15px" }}>
+            <p
+              style={{
+                fontSize: "17px",
+                fontWeight: "600",
+                marginBottom: "5px",
+              }}
+            >
               Will you and your guests require the use of our function room?
             </p>
             <p
@@ -486,6 +841,7 @@ const HotelPage = ({ hotels }) => {
                 fontSize: "12px",
                 fontWeight: "lighter",
                 fontStyle: "italic",
+                marginTop: "0px",
               }}
             >
               Additional €{functionRoomData?.price_per_day} a day
@@ -499,13 +855,14 @@ const HotelPage = ({ hotels }) => {
                   fontWeight: "bold",
                   borderRadius: "7px",
                   marginRight: "10px",
+                  marginBottom: "20px",
                   // Use the groupBooking state to determine the background color
                   // ? "#1169E0" : "#FFFFFF" means if groupBooking is true, use #1169E0, else use #FFFFFF
                   backgroundColor: groupBooking ? "#1169E0" : "#FFFFFF",
                   color: groupBooking ? "#FFFFFF" : "#191E3A",
                   border: groupBooking ? "none" : "2px solid #EBEBEB",
+                  cursor: "pointer",
                 }}
-                // Use the handleGroupBookingSelection function to update the groupBooking state
                 onClick={() => handleGroupBookingSelection(true)}
               >
                 Yes
@@ -520,6 +877,7 @@ const HotelPage = ({ hotels }) => {
                   backgroundColor: groupBooking ? "#FFFFFF" : "#1169E0",
                   color: groupBooking ? "#191E3A" : "#FFFFFF",
                   border: groupBooking ? "2px solid #EBEBEB" : "none",
+                  cursor: "pointer",
                 }}
                 onClick={() => handleGroupBookingSelection(false)}
               >
@@ -534,9 +892,6 @@ const HotelPage = ({ hotels }) => {
                 gridGap: "10px",
               }}
             >
-              {/* Map through the amenities and display them */}
-              {/* Use the index as the key */}
-              {/* Use the amenity as the value */}
               {functionRoomData?.amenities.map((amenity, index) => (
                 <div
                   key={index}
@@ -547,7 +902,11 @@ const HotelPage = ({ hotels }) => {
                     fontWeight: "100",
                   }}
                 >
-                  {amenity}
+                  <FontAwesomeIcon
+                    icon={amenitiesIcons[amenity]}
+                    style={{ marginRight: "5px", marginLeft: "3px" }}
+                  />
+                  <span>{amenity}</span>
                 </div>
               ))}
             </div>
@@ -575,131 +934,198 @@ const HotelPage = ({ hotels }) => {
           </div>
         </div>
       </div>
+      <div id="rooms-section"></div>
       <br />
 
       {/* AVAILABLE ROOMS FOR YOUR STAY */}
-      <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
+      <div
+        style={{
+          width: "70%",
+          margin: "0px auto",
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+        }}
+      >
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
-          Available Rooms for your stay
+          Available rooms for your stay
         </h1>{" "}
         {hotel.hotel_room.map((room, index) => (
           <div
             key={index}
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              backgroundColor: "#FFFFFF",
-              marginBottom: "20px",
-              padding: "10px",
-              borderRadius: "13px",
+              display: "inline-block",
+              width: "32.33%",
+              marginLeft: index !== 0 ? "1.6%" : 0,
+              verticalAlign: "top",
             }}
           >
             <div
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
+                backgroundColor: "#FFFFFF",
+                marginBottom: "20px",
+                borderRadius: "13px",
+                border: "1px solid #DFE0E4",
               }}
             >
               <img
-                src={twinRoomImage}
+                src={room.room_image}
                 alt="Twin Room"
                 style={{
-                  width: "250px",
-                  marginRight: "20px",
-                  // Clip the image to create a slanted edge
-                  clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
+                  width: "100%",
+                  height: "200px",
+                  marginBottom: 0,
+                  borderTopLeftRadius: "13px",
+                  borderTopRightRadius: "13px",
                 }}
               />
 
               <div style={{ textAlign: "left" }}>
-                <h2 style={{ fontSize: "32px", fontWeight: "600" }}>
+                <h2
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "300",
+                    marginLeft: "15px",
+                  }}
+                >
                   {room.type}
                 </h2>
-                <ul style={{ listStyle: "none", padding: 0, fontSize: "13px" }}>
-                  <li>
-                    {" "}
-                    <strong>Size:</strong> {room.size}
+                <ul
+                  style={{ listStyle: "none", padding: 0, marginLeft: "15px" }}
+                >
+                  <li style={{ marginBottom: "10px", fontSize: "16px" }}>
+                    <FontAwesomeIcon
+                      icon={faExpand}
+                      style={{ fontSize: "19px", marginRight: "4px" }}
+                    />{" "}
+                    {room.size}
                   </li>
-                  <li>
-                    {" "}
-                    <strong>Sleeps:</strong> {room.sleeps}
+                  <li style={{ marginBottom: "10px", fontSize: "16px" }}>
+                    <FontAwesomeIcon
+                      icon={faUsers}
+                      style={{ fontSize: "14px", marginRight: "3px" }}
+                    />{" "}
+                    Sleeps {room.sleeps}
                   </li>
-                  <li>
-                    {" "}
-                    <strong>Bed Type:</strong> {room.bed_type}
+                  <li style={{ marginBottom: "10px", fontSize: "16px" }}>
+                    <FontAwesomeIcon
+                      icon={faBed}
+                      style={{ fontSize: "14px", marginRight: "7px" }}
+                    />
+                    {room.bed_type}
                   </li>
-                  <li>
+                  <li
+                    style={{
+                      textAlign: "right",
+                      marginRight: "15px",
+                      fontSize: "17px",
+                      marginBottom: "0px",
+                    }}
+                  >
                     {" "}
-                    <strong>Price Per Night:</strong> €{room.price_per_night}.00
+                    €{room.price_per_night}.00
+                    <div style={{ fontSize: "11px", marginTom: "0px" }}>
+                      per night
+                    </div>
                   </li>
                 </ul>
               </div>
-            </div>
 
-            <div>
-              <h2 style={{ fontSize: "19px", fontWeight: "600" }}>
-                Number of Rooms
-              </h2>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <button
+              <hr />
+
+              <div>
+                <h2
                   style={{
-                    width: "30px",
-                    height: "30px",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    borderRadius: "50%",
-                    backgroundColor: "#EBEBEB",
-                    color: "#191E3A",
-                    border: "2px solid #818494",
-                  }}
-                  // Pass in the room to the handleRemoveRoom function
-                  onClick={() => handleRemoveRoom(room)}
-                >
-                  -
-                </button>
-                <span
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    margin: "0 10px",
+                    fontSize: "19px",
+                    fontWeight: "100",
+                    textAlign: "center",
                   }}
                 >
-                  {selectedRooms[room.type] || 0}
-                </span>
-                <button
+                  Number of Rooms
+                </h2>
+                <div
                   style={{
-                    width: "30px",
-                    height: "30px",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    borderRadius: "50%",
-                    backgroundColor: "#EBEBEB",
-                    color: "#191E3A",
-                    border: "2px solid #818494",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                  // Pass in the room to the handleAddRoom function
-                  onClick={() => handleAddRoom(room)}
                 >
-                  +
-                </button>
+                  {" "}
+                  <button
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      borderRadius: "50%",
+                      backgroundColor: "#FFFFFF",
+                      color: "#191E3A",
+                      border: "1px solid #1169E0",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleRemoveRoom(room)}
+                  >
+                    -
+                  </button>
+                  <span
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "100",
+                      margin: "0 20px",
+                    }}
+                  >
+                    {selectedRooms[room.type] || 0}
+                  </span>
+                  <button
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      borderRadius: "50%",
+                      backgroundColor: "#FFFFFF",
+                      color: "#191E3A",
+                      border: "1px solid #1169E0",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleAddRoom(room)}
+                  >
+                    +
+                  </button>
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "300",
+                    textAlign: "right",
+                    marginRight: "15px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Total:
+                  <div style={{ fontSize: "19px", fontWeight: "600" }}>
+                    €
+                    {selectedRooms[room.type]
+                      ? selectedRooms[room.type] * room.price_per_night + ".00"
+                      : "0.00"}
+                  </div>
+                </div>
               </div>
-              <p>Total Room Value</p>
-              <p style={{ fontSize: "18px", fontWeight: "600" }}>
-                €
-                {selectedRooms[room.type]
-                  ? // If the room is selected, calculate the total price
-                    // ? is the ternary operator for if/else
-                    selectedRooms[room.type] * room.price_per_night + ".00"
-                  : "0.00"}
-              </p>
             </div>
           </div>
         ))}
       </div>
-      {/* YOUR BASKET */}
-      <YourBasket
+      <div
+        style={{
+          width: "70%",
+          margin: "0px auto",
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Checkout</h1>{" "}
+      </div>
+      {/* BASKET */}
+      <Basket
         // Pass in the total rooms, total price, total guests, group booking, toggleExpanded, and expanded
         totalRooms={getTotalRooms()}
         totalPrice={getTotalPrice()}

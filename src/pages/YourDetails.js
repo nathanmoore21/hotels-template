@@ -11,10 +11,11 @@ function YourDetails() {
   return (
     <div>
       <ResponsiveAppBar />
-      {/* Add padding to the top of the page for the fixed position of the app bar */}
       <div style={{ paddingTop: "70px" }}>
         <Stepper />
-        <YourDetailsLayout />
+        <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
+          <YourDetailsLayout />
+        </div>
         <Footer />
       </div>
     </div>

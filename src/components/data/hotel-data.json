@@ -3,7 +3,7 @@
       "hotel_name": "Dublin Palace Hotel",
       "image": "https://images.unsplash.com/photo-1455587734955-081b22074882?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "star_rating": 4,
-      "description": "Luxurious hotel in the heart of Dublin offering unparalleled comfort and service.",
+      "description": "Luxurious hotel in the heart of Dublin offering unparalleled comfort.",
       "guest_review_rating": 9.2,
       "event_management_rating": 8.8,
       "amenities": [
@@ -24,6 +24,7 @@
       "hotel_room": [
         {
           "type": "Standard Double Room",
+          "room_image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "30 sq m",
           "sleeps": 2,
           "bed_type": "1 Double Bed",
@@ -31,6 +32,7 @@
         },
         {
           "type": "Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1629078691977-dc51747c0263?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "45 sq m",
           "sleeps": 4,
           "bed_type": "2 Double Beds",
@@ -38,6 +40,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -51,7 +54,7 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control"
         ]
       }
@@ -59,9 +62,9 @@
     {
       "hotel_name": "Emerald City Hotel",
       "image": "https://plus.unsplash.com/premium_photo-1675745329954-9639d3b74bbf?q=80&w=2335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 4,
+      "star_rating": 3,
       "description": "A modern hotel with stunning views of Dublin's skyline.",
-      "guest_review_rating": 8.7,
+      "guest_review_rating": 7.7,
       "event_management_rating": 9.0,
       "amenities": [
         "Flat-screen TV",
@@ -81,6 +84,7 @@
       "hotel_room": [
         {
           "type": "Executive King Room",
+          "room_image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "35 sq m",
           "sleeps": 2,
           "bed_type": "1 King Bed",
@@ -88,6 +92,7 @@
         },
         {
           "type": "Family Suite",
+          "room_image": "https://images.unsplash.com/photo-1622127922040-13cab637ee78?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "50 sq m",
           "sleeps": 4,
           "bed_type": "1 King Bed, 2 Single Beds",
@@ -95,6 +100,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -107,7 +113,7 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Adjustable lighting options",
           "Accessible facilities"
         ]
@@ -116,7 +122,7 @@
     {
       "hotel_name": "Riverside Inn",
       "image": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 3,
+      "star_rating": 2,
       "description": "A cozy riverside hotel offering a peaceful retreat in the bustling city.",
       "guest_review_rating": 8.2,
       "event_management_rating": 8.5,
@@ -138,6 +144,7 @@
       "hotel_room": [
         {
           "type": "Standard Twin Room",
+          "room_image": "https://images.unsplash.com/photo-1648383228240-6ed939727ad6?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "28 sq m",
           "sleeps": 2,
           "bed_type": "2 Single Beds",
@@ -145,6 +152,7 @@
         },
         {
           "type": "Junior Suite",
+          "room_image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "40 sq m",
           "sleeps": 3,
           "bed_type": "1 Queen Bed, 1 Sofa Bed",
@@ -152,6 +160,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -173,7 +182,7 @@
     {
       "hotel_name": "Grand View Hotel",
       "image": "https://images.unsplash.com/photo-1541971875076-8f970d573be6?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 4,
+      "star_rating": 5,
       "description": "A sophisticated hotel with breathtaking views of Dublin's skyline.",
       "guest_review_rating": 9.0,
       "event_management_rating": 9.2,
@@ -195,6 +204,7 @@
       "hotel_room": [
         {
           "type": "Standard Queen Room",
+          "room_image": "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "32 sq m",
           "sleeps": 2,
           "bed_type": "1 Queen Bed",
@@ -202,6 +212,7 @@
         },
         {
           "type": "Executive Suite",
+          "room_image": "https://images.unsplash.com/photo-1630660664869-c9d3cc676880?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 4,
           "bed_type": "1 King Bed, 1 Sofa Bed",
@@ -209,6 +220,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -222,7 +234,7 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control"
         ]
       }
@@ -252,6 +264,7 @@
       "hotel_room": [
         {
           "type": "Standard Single Room",
+          "room_image": "https://images.unsplash.com/photo-1590490360836-2e3b067c082b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "25 sq m",
           "sleeps": 1,
           "bed_type": "1 Single Bed",
@@ -259,6 +272,7 @@
         },
         {
           "type": "Family Room",
+          "room_image": "https://images.unsplash.com/photo-1622127922040-13cab637ee78?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "45 sq m",
           "sleeps": 4,
           "bed_type": "1 Queen Bed, 2 Single Beds",
@@ -266,6 +280,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -278,7 +293,7 @@
           "Audiovisual equipment",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control",
           "Whiteboards or flip charts"
         ]
@@ -309,6 +324,7 @@
       "hotel_room": [
         {
           "type": "Standard Double Room",
+          "room_image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "30 sq m",
           "sleeps": 2,
           "bed_type": "1 Double Bed",
@@ -316,6 +332,7 @@
         },
         {
           "type": "Junior Suite",
+          "room_image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "40 sq m",
           "sleeps": 3,
           "bed_type": "1 King Bed, 1 Sofa Bed",
@@ -323,6 +340,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -334,7 +352,7 @@
         "amenities": [
           "Audiovisual equipment",
           "Flexible seating arrangements",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control",
           "Adjustable lighting options",
           "Whiteboards or flip charts"
@@ -344,7 +362,7 @@
     {
       "hotel_name": "Cosmopolitan Hotel",
       "image": "https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=2835&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 5,
+      "star_rating": 3,
       "description": "An elegant hotel offering sophistication and comfort in Dublin's city center.",
       "guest_review_rating": 9.1,
       "event_management_rating": 9.0,
@@ -366,6 +384,7 @@
       "hotel_room": [
         {
           "type": "Deluxe King Room",
+          "room_image": "https://images.unsplash.com/photo-1612320743558-020669ff20e8?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "35 sq m",
           "sleeps": 2,
           "bed_type": "1 King Bed",
@@ -373,6 +392,7 @@
         },
         {
           "type": "Family Suite",
+          "room_image": "https://images.unsplash.com/photo-1622127922040-13cab637ee78?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "50 sq m",
           "sleeps": 4,
           "bed_type": "1 King Bed, 2 Single Beds",
@@ -380,6 +400,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -393,7 +414,7 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control"
         ]
       }
@@ -401,8 +422,8 @@
     {
       "hotel_name": "Golden Gate Hotel",
       "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 4,
-      "description": "A welcoming hotel offering comfort and convenience near Dublin's top attractions.",
+      "star_rating": 2,
+      "description": "A welcoming hotel offering comfort and convenience near top attractions.",
       "guest_review_rating": 8.6,
       "event_management_rating": 8.3,
       "amenities": [
@@ -423,6 +444,7 @@
       "hotel_room": [
         {
           "type": "Standard Double Room",
+          "room_image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "30 sq m",
           "sleeps": 2,
           "bed_type": "1 Double Bed",
@@ -430,6 +452,7 @@
         },
         {
           "type": "Family Room",
+          "room_image": "https://images.unsplash.com/photo-1622127922040-13cab637ee78?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "45 sq m",
           "sleeps": 4,
           "bed_type": "1 Queen Bed, 2 Single Beds",
@@ -437,6 +460,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -449,7 +473,7 @@
           "Audiovisual equipment",
           "High-speed Wi-Fi",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control",
           "Whiteboards or flip charts"
         ]
@@ -458,8 +482,8 @@
     {
       "hotel_name": "Majestic Manor Hotel",
       "image": "https://plus.unsplash.com/premium_photo-1661964225206-fd5d445a6edd?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 4,
-      "description": "A majestic hotel offering opulent accommodations and exceptional service.",
+      "star_rating": 3,
+      "description": "A majestic hotel offering exceptional service.",
       "guest_review_rating": 8.8,
       "event_management_rating": 9.1,
       "amenities": [
@@ -480,6 +504,7 @@
       "hotel_room": [
         {
           "type": "Luxury King Room",
+          "room_image": "https://images.unsplash.com/photo-1612320743558-020669ff20e8?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "40 sq m",
           "sleeps": 2,
           "bed_type": "1 King Bed",
@@ -487,6 +512,7 @@
         },
         {
           "type": "Executive Suite",
+          "room_image": "https://images.unsplash.com/photo-1630660664869-c9d3cc676880?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "60 sq m",
           "sleeps": 4,
           "bed_type": "1 King Bed, 1 Sofa Bed",
@@ -494,6 +520,7 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
           "sleeps": 6,
           "bed_type": "3 Double Beds",
@@ -507,16 +534,16 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control"
         ]
       }
     }, 
     {
-      "hotel_name": "Dublin Palace Hotel",
+      "hotel_name": "Temple Bar Hotel",
       "image": "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "star_rating": 4,
-      "description": "Luxurious hotel in the heart of Dublin offering unparalleled comfort and service.",
+      "star_rating": 5,
+      "description": "Luxurious hotel in the heart of Dublin offering unparalleled service.",
       "guest_review_rating": 9.2,
       "event_management_rating": 8.8,
       "amenities": [
@@ -532,18 +559,20 @@
         {"location": "Trinity College Dublin", "distance": "1.5 miles away"},
         {"location": "Guinness Storehouse", "distance": "2 miles away"},
         {"location": "Dublin Castle", "distance": "1 mile away"},
-        {"location": "Temple Bar", "distance": "0.8 miles away"}
+        {"location": "Croke Park Stadium", "distance": "2.2 miles away"}
       ],
       "hotel_room": [
         {
           "type": "Standard Double Room",
+          "room_image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "30 sq m",
           "sleeps": 2,
           "bed_type": "1 Double Bed",
-          "price_per_night": "150"
+          "price_per_night": "110"
         },
         {
           "type": "Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1629078691977-dc51747c0263?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "45 sq m",
           "sleeps": 4,
           "bed_type": "2 Double Beds",
@@ -551,9 +580,10 @@
         },
         {
           "type": "King Deluxe Suite",
+          "room_image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "size": "55 sq m",
-          "sleeps": 6,
-          "bed_type": "3 Double Beds",
+          "sleeps": 4,
+          "bed_type": "2 Double Beds",
           "price_per_night": "350"
         }
       ],
@@ -564,7 +594,7 @@
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
-          "Dedicated event planning staff",
+          "Event planning staff",
           "Climate control"
         ]
       }

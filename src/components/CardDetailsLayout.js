@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import RiuPlaza from "./images/riu-plaza-dublin.jpeg";
 import LogoImage from "./images/logo.svg";
 import tickCircle from "@iconify-icons/mdi/tick-circle";
+import { Link } from "react-router-dom";
 
 const validationSchema = yup.object({
   firstName: yup.string().required("First Name is required"),
@@ -73,6 +74,7 @@ export default function FlexGrow() {
 
   return (
     <>
+   
       <div
         style={{
           width: "100%",
@@ -81,6 +83,7 @@ export default function FlexGrow() {
           alignItems: "center",
         }}
       >
+        
         <div style={{ display: "flex", alignItems: "flex-start" }}>
           <div
             style={{
@@ -96,11 +99,12 @@ export default function FlexGrow() {
                 bgcolor: "#FFFFFF",
                 border: "2px solid #CACCD2",
                 borderRadius: 1,
+                maxWidth: "700px",
               }}
             >
               <div>
                 {" "}
-                <h3>Hotel Riu Plaza The Gresham Dublin</h3>
+                <h3>Temple Bar Hotel</h3>
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Icon
@@ -118,34 +122,15 @@ export default function FlexGrow() {
                   margin: "10px 0",
                 }}
               />
-              Want to discuss your reservation further? Call us at
-              1-800-123-4567
-              <br />
-              Your unique booking code is: <h4>MQ63893</h4>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <hr
-                  style={{
-                    borderTop: "1px solid #CACCD2",
-                    flexGrow: 1,
-                    margin: "10px 0",
-                  }}
-                />
-                <span style={{ margin: "0 10px" }}>OR</span>
-                <hr
-                  style={{
-                    borderTop: "1px solid #CACCD2",
-                    flexGrow: 1,
-                    margin: "10px 0",
-                  }}
-                />
-              </div>
+          
+             
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Icon
                   icon={tickCircle}
-                  style={{ color: "green", marginRight: "0.5rem" }}
+                  style={{ fontSize: "20px", color: "green", marginRight: "0.5rem" }}
                 />
-                <div>
-                  <h6>We never charge any card fees</h6>
+                <div style={{fontSize: "12px"}}>
+                  We never charge any card fees
                 </div>
               </div>
               <form onSubmit={formik.handleSubmit}>
@@ -317,6 +302,7 @@ export default function FlexGrow() {
                     marginTop: "1rem",
                   }}
                 >
+                   <Link to="/Confirmation" className="router-link">
                   <Button
                     color="primary"
                     variant="contained"
@@ -325,17 +311,18 @@ export default function FlexGrow() {
                   >
                     Confirm
                   </Button>
+                  </Link>
                 </div>
               </form>
             </Item>
           </div>
+          
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               p: 1,
               borderRadius: 1,
-              margin: "auto",
               paddingTop: "0px",
             }}
           >
@@ -357,8 +344,8 @@ export default function FlexGrow() {
                 }}
               >
                 <img
-                  src={RiuPlaza}
-                  alt="RiuPlaza"
+                  src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Temple Bar Hotel"
                   style={{
                     height: "187px",
                     border: "6px solid #FFFFFF",
@@ -367,12 +354,8 @@ export default function FlexGrow() {
                   }}
                 />
                 <div>
-                  <p className="info-title">
-                    Hotel Riu Plaza The Gresham Dublin
-                  </p>
-                  <p className="info-body">
-                    23 Upper O Connell Street, Dublin 2, Ireland
-                  </p>
+                  <p className="info-title">Temple Bar Hotel</p>
+                  <p className="info-body">123 Main Street, Dublin, Ireland</p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <div
@@ -382,9 +365,9 @@ export default function FlexGrow() {
                       borderRadius: "5px",
                     }}
                   >
-                    <h4 style={{ margin: "0", color: "#ffffff" }}>8.8</h4>
+                    <h4 style={{ margin: "0", color: "#ffffff" }}>9.2</h4>
                   </div>
-                  <h5 style={{ marginLeft: "0.5rem" }}>Very good</h5>
+                  <h5 style={{ marginLeft: "0.5rem" }}>Excellent</h5>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
@@ -392,7 +375,7 @@ export default function FlexGrow() {
                     alt="Logo"
                     style={{ height: "15px", marginRight: "0.5rem" }}
                   />
-                  <p className="info-body">1,207 reviews</p>
+                  <p className="info-body">1,204 reviews</p>
                 </div>
                 <Item
                   sx={{
@@ -416,7 +399,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Wednesday, April 17, 2024
+                      Friday, March 29, 2024
                     </p>
                   </div>
                   <div
@@ -438,7 +421,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, April 19, 2024
+                      Sunday, March 31, 2024
                     </p>
                   </div>
                   <div
@@ -464,18 +447,22 @@ export default function FlexGrow() {
                   >
                     <h5>Your Stay Breakdown</h5>
                     <div className="body-text">
-                      <p className="info-body">2 nights, 33 guests</p>
+                      <p className="info-body">2 nights, 14 guests</p>
                       <ul className="info-body" style={{ paddingLeft: "13px" }}>
-                        <li>Twin Room x3</li>
-                        <li>Double Room x6</li>
-                        <li>Single Room x1</li>
+                        <li>Standard Double Room x3</li>
+                        <li>Deluxe Suite x1</li>
+                        <li>King Deluxe Suite x1</li>
+                      </ul>
+                      <br />
+                      <p className="info-body">Extras:</p>
+                      <ul className="info-body" style={{ paddingLeft: "13px" }}>
                         <li>Function Room</li>
                       </ul>
                     </div>
                     <br></br>
                     <div style={{ textAlign: "right" }}>
                       <p className="info-body">Total:</p>
-                      <h4>€2,205.00</h4>
+                      <h4>€2,860.00</h4>
                     </div>
                   </Item>
                 </Item>

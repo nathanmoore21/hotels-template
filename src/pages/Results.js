@@ -17,10 +17,10 @@ function Results() {
   // Declare variable selectedAmenities and a function setSelectedAmenities to update it, initialised with an empty array
   // Initialising with an empty array allows it to store selected amenities; initially, no amenities are selected
   const [selectedAmenities, setSelectedAmenities] = useState([]);
-  const [selectedFRAmenities, setSelectedFRAmenities] = useState([]);
 
   // Declare variable filteredHotels and a function setFilteredHotels to update it, initialised with an empty array
   const [filteredHotels, setFilteredHotels] = useState([]);
+
   // Declare variable predefinedAmenities and initialise it with an array of predefined amenities to select from
   const predefinedAmenities = [
     "Complimentary Wi-Fi",
@@ -29,17 +29,7 @@ function Results() {
     "Room service",
     "Air conditioning",
     "Concierge service",
-  ];
-
-  // Declare variable and initialise it with an array of predefined function room amenities to select from
-  const predefinedFRAmenities = [
     "Audiovisual equipment",
-    "High-speed Wi-Fi",
-    "Flexible seating arrangements",
-    "Catering services",
-    "Dedicated event planning staff",
-    "Climate control",
-    "Test",
   ];
 
   // Use the useEffect hook to update the filteredHotels variable when sortBy or selectedAmenities change
@@ -103,17 +93,18 @@ function Results() {
   // Define a function to filter the hotels based on the selected amenities
   const filterHotels = (hotels) => {
     // If the hotels array is empty, return an empty array
-    // If the selectedAmenities array is empty, return the hotels array as is
-    // If the selectedAmenities array is not empty, filter the hotels based on the selected amenities
     if (!hotels || hotels.length === 0 || selectedAmenities.length === 0) {
       // Return the hotels array
       return hotels;
     }
+
     // Return a new array of hotels that include all the selected amenities
-    return hotels.filter((hotel) =>
-      // .every() is used to check if all the selected amenities are included in the hotel's amenities
-      selectedAmenities.every((amenity) => hotel.amenities.includes(amenity))
-    );
+    return hotels.filter((hotel) => {
+      // Check if the hotel contains all selected amenities
+      return selectedAmenities.every((amenity) =>
+        hotel.amenities.includes(amenity)
+      );
+    });
   };
 
   // Define a function to handle changes to the selected amenities
@@ -135,32 +126,13 @@ function Results() {
     });
   };
 
-  // Define a function to handle changes to the selected function room amenities
-  const handleFRAmenitiesChange = (e, amenity) => {
-    // isChecked is a boolean that is true if the checkbox is checked
-    const isChecked = e.target.checked;
-    // Update the selectedFRAmenities array based on the selected amenity
-    setSelectedFRAmenities((prevState) => {
-      // if the checkbox is checked, add the amenity to the array
-      if (isChecked) {
-        // return a new array with the selected amenity added
-        return [...prevState, amenity];
-      } else {
-        // else return an array when the selected amenity removed
-        return prevState.filter((item) => item !== amenity);
-      }
-    });
-  };
-
-  // Define a function to handle changes to the filter criteria
   const handleFilterChange = ({
     minPrice,
     maxPrice,
     guestRating,
     starRating,
   }) => {
-    // Filter hotels based on the price range, guest rating, and star rating
-    // .filter() is used to create a new array with all the elements
+    // Filter hotels based on the price range, guest rating, star rating, and selected amenities
     let filteredHotels = hotelData.filter((hotel) => {
       // const roomPrices is an array of prices for each room in the hotel
       const roomPrices = hotel.hotel_room.map((room) =>
@@ -201,10 +173,8 @@ function Results() {
         // === "" is used to check if the starRating is empty
         // || is the OR operator
         (starRating === "" || hotel.star_rating.toString() === starRating) &&
-        // .every() is used to check if all the selected amenities are included in the function room amenities
-        selectedFRAmenities.every((amenity) =>
-          hotel.function_room.amenities.includes(amenity)
-        )
+        // Check if the hotel contains all selected amenities
+        selectedAmenities.every((amenity) => hotel.amenities.includes(amenity))
       );
     });
 
@@ -219,7 +189,7 @@ function Results() {
   // Return the JSX for the Results component
   return (
     // Add a div with a background color of #FBF8F2
-    <div style={{ backgroundColor: "#FBF8F2" }}>
+    <div style={{ backgroundColor: "#FFFFFF" }}>
       {/* Add the ResponsiveAppBar component */}
       <ResponsiveAppBar />
       {/* Add padding to the top of the page to account for the fixed position of the app bar */}
@@ -246,9 +216,6 @@ function Results() {
                 selectedAmenities={selectedAmenities}
                 onChange={handleCheckboxChange}
                 onFilterChange={handleFilterChange}
-                predefinedFRAmenities={predefinedFRAmenities}
-                selectedFRAmenities={selectedFRAmenities}
-                onChangeFRAmenities={handleFRAmenitiesChange}
               />
             </div>
             <div

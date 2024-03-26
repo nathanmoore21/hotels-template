@@ -61,7 +61,7 @@ function SortDropdown({ onChange }) {
       </div>
       <FormControl style={{ marginLeft: "8px" }}>
         {/* Create the dropdown */}
-        <InputLabel id="sort-dropdown-label" style={{ fontSize: "14px" }}>
+        <InputLabel id="sort-dropdown-label" style={{ fontSize: "14px", backgroundColor: "transparent" }}>
           Sort By
         </InputLabel>
         <Select
@@ -73,13 +73,14 @@ function SortDropdown({ onChange }) {
           // Call the handleChange function when the value of the dropdown changes
           onChange={handleChange}
           style={{
-            borderRadius: "7px",
+            borderRadius: "9px",
             fontFamily: "Roboto, sans-serif",
             fontSize: "14px",
             letterSpacing: "0.3px",
             color: "#191E3A",
             cursor: "pointer",
-            backgroundColor: "#FFFFFF", // Set background color explicitly
+            backgroundColor: "transparent",
+            border: "#818494",
             padding: "4px 8px", // Reduced padding
             height: "43px", // Reduced height
             width: "252px",

@@ -11,7 +11,27 @@ function CardDetails() {
       <div style={{ paddingTop: "70px" }}>
         {" "}
         <StepperCard />
-        <CardDetailsLayout />
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            paddingBottom: "10px",
+            paddingTop: "10px",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-block",
+              fontWeight: "900",
+              fontSize: "16px",
+            }}
+          >
+            Your Unique Booking Code: MQ1234
+          </div>
+        </div>
+        <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
+          <CardDetailsLayout />
+        </div>
         <Footer />
       </div>
     </div>

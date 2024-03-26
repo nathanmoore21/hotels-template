@@ -1,28 +1,51 @@
-import React from "react";
-// Impor link to route around the site
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// Import the image
-import RiuPlaza from "./images/riu-plaza-dublin.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import amenitiesIcons from "./data/amenitiesIcons";
 
-// Create a component called HotelResult
-// hotel is passed in as a prop
-// ({ hotel }) is destructuring the hotel prop (getting what we know)
-// } = hotel; is destructuring the hotel object
 const HotelResult = ({ hotel }) => {
-  const {
-    //rename hotel_name to name
-    hotel_name: name,
-    description,
-    address,
-    image,
-    amenities,
-  } = hotel;
-  // Extract price_per_night from the first room of the hotel
-  const price = hotel.hotel_room[0].price_per_night;
+  const [isHeartClicked, setIsHeartClicked] = useState(false);
 
-  // Get the first three amenities
-  // Slice the amenities array to get the first three amenities
+  const handleHeartClick = () => {
+    setIsHeartClicked(!isHeartClicked);
+  };
+
+  const { hotel_name: name, description, address, image, amenities } = hotel;
+
+  const price = hotel.hotel_room[0].price_per_night;
   const amenitiesList = amenities.slice(0, 3);
+
+  const getRatingInfo = (rating) => {
+    if (rating >= 9.5) {
+      return {
+        backgroundColor: "#217952",
+        color: "#FFFFFF",
+        text: "Exceptional",
+      };
+    } else if (rating >= 9.4) {
+      return {
+        backgroundColor: "#217952",
+        color: "#FFFFFF",
+        text: "Wonderful",
+      };
+    } else if (rating >= 8.9) {
+      return {
+        backgroundColor: "#217952",
+        color: "#FFFFFF",
+        text: "Excellent",
+      };
+    } else if (rating >= 8.4) {
+      return {
+        backgroundColor: "#217952",
+        color: "#FFFFFF",
+        text: "Very Good",
+      };
+    } else {
+      return { backgroundColor: "#DFE0E4", color: "#191E3A", text: "Good" };
+    }
+  };
 
   return (
     <div
@@ -33,6 +56,7 @@ const HotelResult = ({ hotel }) => {
         display: "flex",
         backgroundColor: "white",
         borderRadius: "12px",
+        border: "1px solid #DFE0E4",
         position: "relative",
       }}
     >
@@ -42,6 +66,7 @@ const HotelResult = ({ hotel }) => {
           height: "14.5rem",
           marginRight: "1rem",
           overflow: "hidden",
+          position: "relative",
         }}
       >
         <img
@@ -52,71 +77,142 @@ const HotelResult = ({ hotel }) => {
             height: "100%",
             objectFit: "cover",
             border: "none",
+            borderTopLeftRadius: "12px",
+            borderBottomLeftRadius: "12px",
           }}
         />
-      </div>
-      <div>
-        {/* Add a link to the hotel page */}
-        {/* Use the hotel name as the link text */}
-        {/* Use the hotel name as the link path */}
-        <Link to={`/hotel/${name}`} style={{ textDecoration: "none" }}>
-          <h5>{name}</h5>
-        </Link>
-        <p className="icon-text">{address}</p>
-        <p>{description}</p>
-
-        {/* Display the first three amenities as a list */}
-        <ul>
-          {amenitiesList.map((amenity, index) => (
-            <li key={index}>{amenity}</li>
-          ))}
-        </ul>
-
-        <div style={{ display: "flex", marginBottom: "0.5rem" }}>
-          <div
-            style={{
-              marginRight: "1rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                marginRight: "0.5rem",
-                border: "1px solid black",
-                borderRadius: "4px",
-                padding: "0.2rem 0.5rem",
-              }}
-            >
-              {hotel.guest_review_rating}
-            </div>
-            Guest Rating
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                marginRight: "0.5rem",
-                border: "1px solid black",
-                borderRadius: "4px",
-                padding: "0.2rem 0.5rem",
-              }}
-            >
-              {hotel.event_management_rating}
-            </div>
-            Event Rating
-          </div>
-        </div>
-
-        <p
+        <div
           style={{
             position: "absolute",
-            bottom: "0",
-            right: "0",
-            padding: "1rem",
+            top: "10px",
+            right: "10px",
+            width: "30px",
+            height: "30px",
+            backgroundColor: "white",
+            borderRadius: "50%",
+            zIndex: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
+          onClick={handleHeartClick}
         >
-          from <h2>€{price}</h2> per night
-        </p>
+          <FontAwesomeIcon
+            icon={isHeartClicked ? solidHeart : regularHeart}
+            style={{ color: "#FF0000", fontSize: "20px" }}
+          />
+        </div>
+      </div>
+
+      <div style={{ margin: "5px" }}>
+        <Link
+          to={`/hotel/${name}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div style={{ fontWeight: "600", fontSize: "1.3rem", margin: 0 }}>
+            {name}
+          </div>
+
+          <div style={{ marginBottom: "0", fontSize: "0.8rem" }}>{address}</div>
+          <div style={{ marginTop: "1rem", fontSize: "0.8rem" }}>
+            {description}
+          </div>
+
+          {/* <ul style={{ listStyleType: "none", fontSize: "1.2em" }}>
+          {amenitiesList.map((amenity, index) => (
+            <li key={index} style={{ marginBottom: "5px" }}>
+              <FontAwesomeIcon
+                icon={amenitiesIcons[amenity]}
+                style={{ marginRight: "5px", marginLeft: "3px" }}
+              />
+              {amenity}
+            </li>
+          ))}
+        </ul> */}
+          <div style={{ marginTop: "1.5rem", fontSize: "0.8rem" }}>
+            Reserve now, pay later
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "0.7rem",
+            }}
+          >
+            <img
+              src="https://a.travel-assets.com/egds/marks/brands/hotels/loyalty.svg"
+              style={{ height: "20px", width: "20px", marginRight: "0.2rem" }}
+            ></img>
+            <div>Collect stamps</div>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              bottom: "1rem",
+              display: "flex",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div
+                style={{
+                  marginRight: "0.5rem",
+                  borderRadius: "4px",
+                  padding: "0.2rem 0.5rem",
+                  fontSize: "0.8rem",
+                  ...getRatingInfo(hotel.guest_review_rating),
+                }}
+              >
+                {hotel.guest_review_rating}
+              </div>
+              <div style={{ marginRight: "0.5rem", fontSize: "0.8rem" }}>
+                <strong>{getRatingInfo(hotel.guest_review_rating).text}</strong>
+                <br />
+                Guest Rating
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                marginLeft: "20px",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  marginRight: "0.5rem",
+                  borderRadius: "4px",
+                  padding: "0.2rem 0.5rem",
+                  fontSize: "0.8rem",
+                  ...getRatingInfo(hotel.event_management_rating),
+                }}
+              >
+                {hotel.event_management_rating}
+              </div>
+              <div style={{ marginRight: "0.5rem", fontSize: "0.8rem" }}>
+                <strong>
+                  {getRatingInfo(hotel.event_management_rating).text}
+                </strong>
+                <br />
+                Event Rating
+              </div>
+            </div>
+          </div>
+          <p
+            style={{
+              position: "absolute",
+              bottom: "0",
+              right: "0",
+              padding: "1rem",
+              marginBottom: "1px",
+              textAlign: "right",
+            }}
+          >
+            from <h2>€{price}</h2> per night
+          </p>
+        </Link>
       </div>
     </div>
   );

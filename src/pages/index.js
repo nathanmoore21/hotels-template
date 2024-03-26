@@ -15,12 +15,12 @@ function Index() {
         {/* <SearchBar /> */}
         <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
           {" "}
+          <h2>Where to?</h2>
           <Search />
         </div>{" "}
-        <HomePageGrid />
-        <Link to="/results" className="router-link">
-          Results
-        </Link>
+        <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
+          <HomePageGrid />
+        </div>
         <Footer />
       </div>
     </div>
