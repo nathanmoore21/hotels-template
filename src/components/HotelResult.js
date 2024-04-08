@@ -1,3 +1,4 @@
+// import relevant libraries and icons
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -5,19 +6,27 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import amenitiesIcons from "./data/amenitiesIcons";
 
+// create HotelResult that takes in a prop hotel
 const HotelResult = ({ hotel }) => {
+  // create state for isHeartClicked and setIsHeartClicked and set it to false (if the user wants to save the hotel)
   const [isHeartClicked, setIsHeartClicked] = useState(false);
 
+  // create function handleHeartClick that toggles the state of isHeartClicked
   const handleHeartClick = () => {
     setIsHeartClicked(!isHeartClicked);
   };
 
+  // destructure the hotel object to get the name, description, address, image, amenities, and price
   const { hotel_name: name, description, address, image, amenities } = hotel;
 
+  // get the price of the hotel
   const price = hotel.hotel_room[0].price_per_night;
+  // get the first 3 amenities of the hotel
   const amenitiesList = amenities.slice(0, 3);
 
+  // get the rating of the hotel
   const getRatingInfo = (rating) => {
+    // if the rating is greater than or equal to 9.5, return Exceptional and so on
     if (rating >= 9.5) {
       return {
         backgroundColor: "#217952",
@@ -43,6 +52,7 @@ const HotelResult = ({ hotel }) => {
         text: "Very Good",
       };
     } else {
+      // else return Good
       return { backgroundColor: "#DFE0E4", color: "#191E3A", text: "Good" };
     }
   };
@@ -70,8 +80,9 @@ const HotelResult = ({ hotel }) => {
         }}
       >
         <img
+          // display the image of the hotel
           src={image}
-          alt="Riu Plaza Dublin"
+          alt="hotel"
           style={{
             width: "100%",
             height: "100%",
@@ -95,8 +106,10 @@ const HotelResult = ({ hotel }) => {
             justifyContent: "center",
             alignItems: "center",
           }}
+          // when the user clicks on the heart icon, call the handleHeartClick function
           onClick={handleHeartClick}
         >
+          {/* // display the heart icon, if the heart is clicked, display the solid heart icon, else display the regular heart icon */}
           <FontAwesomeIcon
             icon={isHeartClicked ? solidHeart : regularHeart}
             style={{ color: "#FF0000", fontSize: "20px" }}
@@ -105,11 +118,17 @@ const HotelResult = ({ hotel }) => {
       </div>
 
       <div style={{ margin: "5px" }}>
+        {/* // when the user clicks on the hotel name, redirect the user to the hotel page in a new tab  */}
+        {/* // this saves the slected filters and replicates the real hotels.com site */}
         <Link
           to={`/hotel/${name}`}
+          target="_blank"
+          // noreferrer prevents the page from being able to access the window.opener property
+          rel="noopener noreferrer"
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <div style={{ fontWeight: "600", fontSize: "1.3rem", margin: 0 }}>
+            {/* // display the name, address, description of the hotel */}
             {name}
           </div>
 
@@ -130,7 +149,7 @@ const HotelResult = ({ hotel }) => {
           ))}
         </ul> */}
           <div style={{ marginTop: "1.5rem", fontSize: "0.8rem" }}>
-            Reserve now, pay later
+            Reserve now, pay later (31 days ? )
           </div>
 
           <div
@@ -161,6 +180,8 @@ const HotelResult = ({ hotel }) => {
                   borderRadius: "4px",
                   padding: "0.2rem 0.5rem",
                   fontSize: "0.8rem",
+                  // get the rating info of the hotel
+                  // if the rating is greater than or equal to 9.5, return Exceptional
                   ...getRatingInfo(hotel.guest_review_rating),
                 }}
               >
@@ -186,6 +207,8 @@ const HotelResult = ({ hotel }) => {
                   borderRadius: "4px",
                   padding: "0.2rem 0.5rem",
                   fontSize: "0.8rem",
+                  // get the rating info of the hotel
+                  // if the rating is greater than or equal to 9.5, return Exceptional
                   ...getRatingInfo(hotel.event_management_rating),
                 }}
               >
@@ -206,11 +229,14 @@ const HotelResult = ({ hotel }) => {
               bottom: "0",
               right: "0",
               padding: "1rem",
-              marginBottom: "1px",
+              marginBottom: "0px",
               textAlign: "right",
+              lineHeight: "1",
             }}
           >
-            from <h2>€{price}</h2> per night
+            from{" "}
+            <h2 style={{ marginTop: "0px", marginBottom: "0px" }}>€{price}</h2>{" "}
+            per night for <br /> each room
           </p>
         </Link>
       </div>

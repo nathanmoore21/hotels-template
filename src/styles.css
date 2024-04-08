@@ -1,7 +1,7 @@
 body {
   background-color: #f3f3f5;
   font-family: "Roboto", sans-serif;
-  font-weight: 400; 
+  font-weight: 400;
   font-size: 0.6875rem;
   letter-spacing: 0.12px;
   line-height: 1.5;
@@ -10,8 +10,8 @@ body {
 /* styles for h1 */
 h1 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 2rem; 
+  font-weight: 600;
+  font-size: 2rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -21,8 +21,8 @@ h1 {
 /* styles for h2 */
 h2 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 1.6875rem; 
+  font-weight: 600;
+  font-size: 1.6875rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -32,8 +32,8 @@ h2 {
 /* styles for h3 */
 h3 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 1.4375rem; 
+  font-weight: 600;
+  font-size: 1.4375rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -43,8 +43,8 @@ h3 {
 /* styles for h4 */
 h4 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 1.1875rem; 
+  font-weight: 600;
+  font-size: 1.1875rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -54,8 +54,8 @@ h4 {
 /* styles for h5 */
 h5 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 1.0625rem; 
+  font-weight: 600;
+  font-size: 1.0625rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -65,8 +65,8 @@ h5 {
 /* styles for h6 */
 h6 {
   font-family: "Roboto", sans-serif;
-  font-weight: 600; 
-  font-size: 0.75rem; 
+  font-weight: 600;
+  font-size: 0.75rem;
   letter-spacing: 0.1px;
   color: #191e3a;
   margin-top: 1%;
@@ -113,13 +113,14 @@ h6 {
   color: #191e3a;
 }
 
+/* styles for checkbox */
 .checkbox-label input[type="checkbox"] {
-  width: 18px; 
-  height: 18px; 
-  margin-right: 5px; 
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
 
-
+/* styles for radio */
 .radio-label {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -128,13 +129,14 @@ h6 {
   color: #191e3a;
   display: flex;
   align-items: center;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
 }
 
+/* styles for radio button */
 .radio-label input[type="radio"] {
-  width: 18px; 
-  height: 18px; 
-  margin-right: 5px; 
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
 
 /* styles for input fields */
@@ -213,17 +215,20 @@ button[type="submit"] {
 
 /* //////////////////////////////////////// Footer */
 
-.footer-columns {
+/* styles for footer */
+ .footer-columns {
   display: flex;
   width: 100%;
   margin-right: 430px;
   padding-top: 100px;
 }
 
+/* styles for footer column */
 .footer-column {
   flex: 1;
 }
 
+/* styles for footer title */
 .footer-title {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -234,6 +239,7 @@ button[type="submit"] {
   margin-bottom: 1%;
 }
 
+/* styles for footer links */
 .footer-column ul {
   list-style-type: none;
   padding: 0;
@@ -241,10 +247,12 @@ button[type="submit"] {
   margin-bottom: 8px;
 }
 
+/* styles for footer links */
 .footer-column li {
   margin-bottom: 8px;
 }
 
+/* styles for footer links */
 .footer-column ul li a {
   text-decoration: none;
   font-size: 0.875rem;
@@ -252,12 +260,14 @@ button[type="submit"] {
   margin-bottom: 10%;
 }
 
+/* styles for footer links */
 .footer-column ul li a:hover {
   text-decoration: underline;
 }
 
 /* //////////////////////////////////////// Router */
 
+/* styles for router link */
 .router-link {
   color: inherit;
   text-decoration: none;
@@ -265,23 +275,28 @@ button[type="submit"] {
 
 /* //////////////////////////////////////// Checkbox */
 
+/* styles for checkbox */
 .checkbox-label {
   font-size: 0.8rem;
   display: flex;
-  align-items: center;}
-
+  align-items: center;
+}
 
 /* ////////////////////// Search Form */
+
+/* styles for search form */
 .search-form {
   display: flex;
   flex-wrap: wrap;
 }
 
+/* styles for search form group */
 .search-form-group {
-  flex: 1 1 auto; 
+  flex: 1 1 auto;
   margin-right: 20px;
 }
 
+/* styles for search field label */
 .search-field-label {
   display: block;
   font-family: "Roboto", sans-serif;
@@ -292,15 +307,17 @@ button[type="submit"] {
   margin-bottom: 5px;
 }
 
+/* styles for search field */
 .search-field {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif; 
+  font-family: "Roboto", sans-serif;
 }
 
+/* styles for search button */
 .search-button {
   margin-top: 20px;
   padding: 10px 20px;
@@ -311,11 +328,12 @@ button[type="submit"] {
   cursor: pointer;
 }
 
+/* styles for search button hover */
 .search-button:hover {
   background-color: #0056b3;
 }
 
+/* styles for search button active */
 .rmdp-input {
   width: 20.9375rem !important;
 }
-

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import icons from "@fortawesome/free-solid-svg-icons";
 import {
   faMoon,
   faTag,
@@ -18,13 +19,19 @@ import {
   faCampground,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import hotelData from "../components/data/hotel-data.json";
+// access the hotel data
+import hotelData from "./data/hotel-data.json";
+// import the Link component to allow for navigation
 import { Link } from "react-router-dom";
 
+// Create the HomePageGrid component
 export default function HomePageGrid() {
+  // Slice the hotel data to get the first 4 hotels which will be called trendingHotels
   const trendingHotels = hotelData.slice(0, 4);
 
+  // Create a function to get the rating info based on the rating and add some text
   const getRatingInfo = (rating) => {
+    // If the rating is greater than or equal to 9.5, return Exceptional and so on
     if (rating >= 9.5) {
       return {
         text: "Exceptional",
@@ -46,6 +53,7 @@ export default function HomePageGrid() {
     }
   };
 
+  // Create the styles for the HomePageGrid component
   const containerStyle = {
     width: "80%",
     margin: "0 auto",
@@ -137,11 +145,16 @@ export default function HomePageGrid() {
 
   const iconSize = "2rem";
 
+  // Create an array of circles to be displayed as icons
   const circles = [
     {
+      // text is the text to be displayed below the icon
       text: "Spa",
+      // icon is the icon to be displayed
       icon: (
+        // Link to the home page
         <Link to="/">
+          {/* FontAwesomeIcon component to display the icon */}
           <FontAwesomeIcon
             icon={faSpa}
             style={{ fontSize: iconSize, color: iconColor }}
@@ -275,7 +288,11 @@ export default function HomePageGrid() {
     // index is the index of the current circle
     .map((circle, index) => (
       <div key={index} style={{ textAlign: "center" }}>
+        {/* // circleStyle is the style for the circle div */}
+        {/* // circleTextStyle is the style for the text below the icon */}
         <div style={circleStyle}>{circle.icon}</div>
+        {/* // circle.text is the text to be displayed below the icon */}
+        {/* // circleTextStyle is the style for the text below the icon */}
         <div style={circleTextStyle}>{circle.text}</div>
       </div>
     ));
@@ -283,11 +300,12 @@ export default function HomePageGrid() {
   return (
     <>
       <div style={{ width: "100%" }}>
+        {/* create a banner for the home page */}
         <div style={boxStyle}>
           {/* Section 1 */}
           <div style={firstHeadingBoxStyle}>
             <h2 style={firstHeadingTextStyle}>
-              Find and book your perfect stay
+              Find and book your perfect group stay
             </h2>
           </div>
 
@@ -295,21 +313,23 @@ export default function HomePageGrid() {
           <div style={sectionBoxStyle}>
             <FontAwesomeIcon icon={faMoon} style={sectionIconStyle} />
             <h2 style={sectionTextStyle}>
-              Earn rewards on every night you stay
+              Mix and match rooms to suit your preferences
             </h2>
           </div>
 
           {/* Section 3 */}
           <div style={sectionBoxStyle}>
             <FontAwesomeIcon icon={faTag} style={sectionIconStyle} />
-            <h2 style={sectionTextStyle}>Save more with member prices</h2>
+            <h2 style={sectionTextStyle}>
+              Share the cost, each room covers their own share
+            </h2>
           </div>
 
           {/* Section 4 */}
           <div style={sectionBoxStyle}>
             <FontAwesomeIcon icon={faCalendarDays} style={sectionIconStyle} />
             <h2 style={sectionTextStyle}>
-              Free cancellation options if plans change
+              Flexible room check-in and check-out dates
             </h2>
           </div>
         </div>
@@ -427,6 +447,7 @@ export default function HomePageGrid() {
         >
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <img
+              // import images from unsplash
               src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Japan"
               style={{

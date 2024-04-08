@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0887a0e2.css",
+    "main.js": "/static/js/main.9e0e58bc.js",
+    "static/media/map1.png": "/static/media/map1.8586bc6e1630484847f4.png",
+    "static/media/functionroom.png": "/static/media/functionroom.aa2867780645370636fd.png",
+    "static/media/riu-plaza-dublin.jpeg": "/static/media/riu-plaza-dublin.c1747126d2e777bb3674.jpeg",
+    "static/media/twinRoom.png": "/static/media/twinRoom.1feed7e4a0c612a70384.png",
+    "static/media/logo.svg": "/static/media/logo.2c0f6e1de4fdcc1e9e28f36da138c09c.svg",
+    "index.html": "/index.html",
+    "main.0887a0e2.css.map": "/static/css/main.0887a0e2.css.map",
+    "main.9e0e58bc.js.map": "/static/js/main.9e0e58bc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0887a0e2.css",
+    "static/js/main.9e0e58bc.js"
+  ]
+}

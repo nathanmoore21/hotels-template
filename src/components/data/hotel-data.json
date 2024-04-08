@@ -8,8 +8,8 @@
       "event_management_rating": 8.8,
       "amenities": [
         "Complimentary Wi-Fi",
-        "Mini-fridge",
-        "Iron and ironing board",
+        "Pool",
+        "Airport shuttle included",
         "Room service",
         "Air conditioning",
         "Concierge service"
@@ -48,9 +48,9 @@
         }
       ],
       "function_room": {
-        "price_per_day": "500",
+        "price_per_day": "1000",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
@@ -71,7 +71,7 @@
         "Coffee maker",
         "Premium bath amenities",
         "Room service",
-        "USB charging ports",
+        "Pool",
         "On-site fitness center"
       ],
       "address": "456 Park Avenue, Dublin, Ireland",
@@ -170,7 +170,7 @@
       "function_room": {
         "price_per_day": "400",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "Flexible seating arrangements",
           "Climate control",
           "Whiteboards or flip charts",
@@ -188,10 +188,10 @@
       "event_management_rating": 9.2,
       "amenities": [
         "Flat-screen TV",
-        "Mini-fridge",
+        "Pool",
         "Coffee maker",
         "In-room safe",
-        "Iron and ironing board",
+        "Airport shuttle included",
         "Bottled water"
       ],
       "address": "101 Hilltop Avenue, Dublin, Ireland",
@@ -230,7 +230,7 @@
       "function_room": {
         "price_per_day": "700",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
@@ -290,7 +290,7 @@
       "function_room": {
         "price_per_day": "550",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "Flexible seating arrangements",
           "Catering services",
           "Event planning staff",
@@ -350,7 +350,7 @@
       "function_room": {
         "price_per_day": "600",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "Flexible seating arrangements",
           "Event planning staff",
           "Climate control",
@@ -369,7 +369,7 @@
       "amenities": [
         "Flat-screen TV",
         "Coffee maker",
-        "Iron and ironing board",
+        "Airport shuttle included",
         "Hairdryer",
         "Room service",
         "Work desk"
@@ -410,7 +410,7 @@
       "function_room": {
         "price_per_day": "700",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
@@ -428,9 +428,9 @@
       "event_management_rating": 8.3,
       "amenities": [
         "Complimentary Wi-Fi",
-        "Mini-fridge",
+        "Pool",
         "Coffee maker",
-        "Iron and ironing board",
+        "Airport shuttle included",
         "Daily housekeeping service",
         "Room service"
       ],
@@ -470,7 +470,7 @@
       "function_room": {
         "price_per_day": "500",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Catering services",
           "Event planning staff",
@@ -530,7 +530,7 @@
       "function_room": {
         "price_per_day": "800",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",
@@ -548,8 +548,8 @@
       "event_management_rating": 8.8,
       "amenities": [
         "Complimentary Wi-Fi",
-        "Mini-fridge",
-        "Iron and ironing board",
+        "Pool",
+        "Airport shuttle included",
         "Room service",
         "Air conditioning",
         "Concierge service"
@@ -590,7 +590,7 @@
       "function_room": {
         "price_per_day": "500",
         "amenities": [
-          "Audiovisual equipment",
+          "Audio-visual equipment",
           "High-speed Wi-Fi",
           "Flexible seating arrangements",
           "Catering services",

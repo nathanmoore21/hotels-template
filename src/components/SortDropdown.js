@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import hotelData from "../components/data/hotel-data.json";
+import React, { useState, useEffect } from "react"; // Import the useState and useEffect hooks
+import FormControl from "@mui/material/FormControl"; // Import the FormControl component
+import InputLabel from "@mui/material/InputLabel"; // Import the InputLabel component
+import MenuItem from "@mui/material/MenuItem"; // Import the MenuItem component
+import Select from "@mui/material/Select"; // Import the Select component
+import hotelData from "./data/hotel-data.json"; // Import the hotelData JSON object
 
 // Create the SortDropdown component
 // onChange is a function that is passed as a prop to the SortDropdown component
@@ -61,7 +61,10 @@ function SortDropdown({ onChange }) {
       </div>
       <FormControl style={{ marginLeft: "8px" }}>
         {/* Create the dropdown */}
-        <InputLabel id="sort-dropdown-label" style={{ fontSize: "14px", backgroundColor: "transparent" }}>
+        <InputLabel
+          id="sort-dropdown-label"
+          style={{ fontSize: "14px", backgroundColor: "transparent" }}
+        >
           Sort By
         </InputLabel>
         <Select
@@ -81,15 +84,31 @@ function SortDropdown({ onChange }) {
             cursor: "pointer",
             backgroundColor: "transparent",
             border: "#818494",
-            padding: "4px 8px", // Reduced padding
-            height: "43px", // Reduced height
+            padding: "4px 8px",
+            height: "43px",
             width: "252px",
           }}
         >
           {/* Create the dropdown options */}
           <MenuItem value="Recommended">Recommended</MenuItem>
-          <MenuItem value="priceLowToHigh">Price: Low to High</MenuItem>
-          <MenuItem value="priceHighToLow">Price: High to Low</MenuItem>
+          <MenuItem value="priceLowToHigh">
+            Hotel Room Price: Low to High
+          </MenuItem>
+          <MenuItem value="priceHighToLow">
+            Hotel Room Price: High to Low
+          </MenuItem>
+          <MenuItem value="functionRoomPriceLowToHigh">
+            Function Room Price: Low to High
+          </MenuItem>
+          <MenuItem value="functionRoomPriceHighToLow">
+            Function Room Price: High to Low
+          </MenuItem>
+          <MenuItem value="guestRatingHighToLow">
+            Guest Rating: High to Low
+          </MenuItem>
+          <MenuItem value="guestRatingLowToHigh">
+            Guest Rating: Low to High
+          </MenuItem>
         </Select>
       </FormControl>
     </div>

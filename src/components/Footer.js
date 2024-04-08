@@ -4,9 +4,7 @@ import React from "react";
 const Footer = () => {
   return (
     // Add the footer content
-    <div
-      style={{ display: "flex", justifyContent: "center" }}
-    >
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <footer style={{ backgroundColor: "transparent" }}>
         <div className="footer-columns">
           <div className="footer-column">
@@ -128,7 +126,10 @@ const Footer = () => {
             <div className="footer-title">Support & FAQs</div>
             <ul>
               <li>
-                <a href="/">Your booking</a>
+                <a href="/payments">Your booking</a>
+              </li>
+              <li>
+                <a href="/guestcarddetails">Guest Booking</a>
               </li>
               <li>
                 <a href="/">FAQs</a>

@@ -1,7 +1,7 @@
 import * as React from "react"; // * as React is used to import the entire React library
-import Stepper from "@mui/joy/Stepper";
-import Step from "@mui/joy/Step";
-import StepIndicator from "@mui/joy/StepIndicator";
+import Stepper from "@mui/joy/Stepper"; // Import the Stepper component
+import Step from "@mui/joy/Step"; // Import the Step component
+import StepIndicator from "@mui/joy/StepIndicator"; // Import the StepIndicator component
 
 // Create the IndicatorTopStepper component
 export default function IndicatorTopStepper() {

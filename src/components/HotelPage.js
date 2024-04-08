@@ -1,20 +1,19 @@
+// import relevant libraries and components
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
-import RiuPlaza from "./images/riu-plaza-dublin.jpeg";
 import { Icon } from "@iconify/react";
 import starIcon from "@iconify/icons-ion/ios-star";
 import checkmarkIcon from "@iconify/icons-ion/checkmark";
-import mapImage from "./images/map1.png";
-import { Icon as IconifyIcon } from "@iconify/react";
 import locationIcon from "@iconify-icons/mdi/map-marker";
-import functionRoomImage from "./images/functionroom.png";
-import twinRoomImage from "./images/twinRoom.png";
-import Button from "@mui/material/Button";
+import Button from "@material-ui/core/Button";
+import { Icon as IconifyIcon } from "@iconify/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBabyCarriage,
+  faChildReaching,
   faArrowLeft,
   faGreaterThan,
   faExpand,
@@ -24,26 +23,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faShoppingBasket,
-  faAngleUp,
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+// import amenitiesIcons so we can access the icons from file
 import amenitiesIcons from "./data/amenitiesIcons";
 
+// Create the HotelPage component
 const HotelPage = ({ hotels }) => {
+  // Get the name parameter from the URL
+  // useParams is a hook that creates a dynamic URL parameter
   const { name } = useParams();
-
   // Find the hotel with the matching name
   // Decode the name using decodeURIComponent
   const hotel = hotels.find(
     (hotel) => hotel["hotel_name"] === decodeURIComponent(name)
   );
 
+  // Add a function to handle the next button click, (flase by default)
+  const [nextClicked, setNextClicked] = useState(false);
+
+  // Add a function to handle the next button click
+  // .every() checks if all values in the object are 0
+  // if 0 is found, set nextClicked to true
+  const handleNextClick = () => {
+    if (Object.values(selectedRooms).every((quantity) => quantity === 0)) {
+      setNextClicked(true);
+      return;
+    }
+    // Redirect to the next page
+    window.location.href = "/YourDetails";
+  };
+
+  // useState to store the selected rooms
   const [selectedRooms, setSelectedRooms] = useState({});
+  // set group booking to false by default (will the use require a function room)
   const [groupBooking, setGroupBooking] = useState(false);
+  // set expanded to false by default
   const [expanded, setExpanded] = useState(false);
+  // set activeLink to #overview by default
   const [activeLink, setActiveLink] = useState("#overview");
+  // set isHeartClicked to false by default (will the user save the hotel)
   const [isHeartClicked, setIsHeartClicked] = useState(false);
 
   // Add functions to handle adding and removing rooms
@@ -65,6 +85,8 @@ const HotelPage = ({ hotels }) => {
   const handleRemoveRoom = (room) => {
     setSelectedRooms((prevRooms) => {
       const updatedRooms = { ...prevRooms };
+      // || 0 is used to default to 0 if the room is not in the object
+      // - 1 is used to decrease the quantity, 0 is the minimum value
       updatedRooms[room.type] = Math.max((updatedRooms[room.type] || 0) - 1, 0);
       return updatedRooms;
     });
@@ -123,6 +145,7 @@ const HotelPage = ({ hotels }) => {
     if (groupBooking && functionRoomData) {
       totalPrice += parseFloat(functionRoomData.price_per_day);
     }
+    // toFixed(2) is used to round the total to 2 decimal places
     return totalPrice.toFixed(2);
   };
 
@@ -139,28 +162,38 @@ const HotelPage = ({ hotels }) => {
     setGroupBooking(value);
   };
 
+  // Get the hotel image
   const image = hotel.image;
 
+  // Add a function to get the rating color
   const getRatingColor = (rating) => {
+    // If the rating is greater than or equal to 8, return green
     if (rating >= 8) {
       return { backgroundColor: "#217952", color: "#FFFFFF" };
     } else {
+      // Otherwise, return grey
       return { backgroundColor: "#DFE0E4", color: "#191E3A" };
     }
   };
 
+  // Add a function to handle the heart click
   const handleHeartClick = () => {
+    // Toggle the isHeartClicked state
     setIsHeartClicked(!isHeartClicked);
   };
 
+  // Add a function to handle the basket click (currently not used in the project)
   const handleClick = (link) => {
+    // Set the active link
     setActiveLink(link);
   };
 
   const collapsedWidth = "150px";
   const expandedWidth = "220px";
 
+  // Create the Basket component, which is currently not used in the project
   const Basket = ({
+    // Pass the props to the Basket component
     totalRooms,
     totalPrice,
     totalGuests,
@@ -170,6 +203,7 @@ const HotelPage = ({ hotels }) => {
   }) => {
     return (
       <div>
+        {/* // If the basket is expanded, add a div to cover the screen */}
         {expanded && (
           <div
             style={{
@@ -199,12 +233,15 @@ const HotelPage = ({ hotels }) => {
               backgroundColor: expanded ? "white" : "transparent",
               borderRadius: expanded ? "10px" : "50%",
               padding: expanded ? "20px" : 0,
+              // If the basket is expanded, add a box shadow
               boxShadow: expanded ? "0px 4px 10px rgba(0, 0, 0, 0.1)" : "none",
               cursor: "pointer",
               display: "flex",
             }}
+            // onClick the toggleExpanded function
             onClick={toggleExpanded}
           >
+            {/* // If the basket is expanded, show the close icon */}
             {expanded ? (
               <div
                 style={{
@@ -259,7 +296,7 @@ const HotelPage = ({ hotels }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    €{totalPrice * 2}
+                    {/* // Multiply the total price by 2 */}€{totalPrice * 2}
                   </span>
                 </div>
                 <div
@@ -299,9 +336,11 @@ const HotelPage = ({ hotels }) => {
                       fontWeight: "bold",
                     }}
                   >
+                    {/* // If groupBooking is true, show Yes, else show No */}
                     {groupBooking ? "Yes" : "No"}
                   </span>
                 </div>
+                {/* link to your details */}
                 <Link
                   to="/YourDetails"
                   className="router-link"
@@ -318,6 +357,7 @@ const HotelPage = ({ hotels }) => {
                 </Link>
               </div>
             ) : (
+              // If the basket is not expanded, show the basket icon
               <div
                 style={{
                   width: "80px",
@@ -342,6 +382,7 @@ const HotelPage = ({ hotels }) => {
     );
   };
 
+  // Add a function to toggle the expanded state
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
@@ -396,6 +437,7 @@ const HotelPage = ({ hotels }) => {
                 display: "inline-flex",
                 alignItems: "center",
               }}
+              // onClick the handleHeartClick function
               onClick={handleHeartClick}
             >
               <div style={{ marginRight: "8px" }}>
@@ -405,11 +447,13 @@ const HotelPage = ({ hotels }) => {
                 />
               </div>
               <span style={{ color: "#191E3A", fontSize: "14px" }}>
+                {/* // If isHeartClicked is true, show Saved, else show Save (the hotel) */}
                 {isHeartClicked ? "Saved" : "Save"}
               </span>
             </div>
           </div>
 
+          {/* // Add the hotel image, name, star rating, and description */}
           <img
             src={image}
             alt="Hotel"
@@ -428,14 +472,18 @@ const HotelPage = ({ hotels }) => {
               borderBottom: "2px solid #DFE0E4",
             }}
           >
+            {/* // add a small menu for the hotel page */}
             <div style={{ padding: "5px" }}>
               <Link
                 to="#overview"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
+                  // If the active link is #overview, use #1169E0, else use #191E3A
                   color: activeLink === "#overview" ? "#1169E0" : "#191E3A",
+                  // If the active link is #overview, use bold, else use normal
                   fontWeight: activeLink === "#overview" ? "bold" : "normal",
+                  // If the active link is #overview, use 2px solid #1169E0, else use 2px solid transparent
                   borderBottom:
                     activeLink === "#overview"
                       ? "2px solid #1169E0"
@@ -443,6 +491,7 @@ const HotelPage = ({ hotels }) => {
                   paddingBottom: "20px",
                   fontSize: "14px",
                 }}
+                // onClick the handleClick function with #overview (which is the active link when the page is loaded)
                 onClick={() => handleClick("#overview")}
               >
                 Overview
@@ -560,6 +609,7 @@ const HotelPage = ({ hotels }) => {
                   marginBottom: "0px",
                 }}
               >
+                {/* // Add the hotel name */}
                 {hotel["hotel_name"]}
               </h2>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -586,6 +636,7 @@ const HotelPage = ({ hotels }) => {
                   marginTop: "2px",
                 }}
               >
+                {/* // Add the hotel description */}
                 {hotel["description"]}
               </p>
               <div
@@ -606,17 +657,8 @@ const HotelPage = ({ hotels }) => {
                     color: "#217952",
                   }}
                 />
-                <span>Fully Refundable</span>
-                <Icon
-                  icon={checkmarkIcon}
-                  style={{
-                    fontSize: "18px",
-                    marginRight: "5px",
-                    marginLeft: "10px",
-                    color: "#217952",
-                  }}
-                />
-                <span>Reserve now, Pay later</span>
+                {/* pay within 31 days, since it is a large booking, the hotel can't wait until last minute incase the party cancel */}
+                <span>Reserve now, Pay within 31 days</span>
               </div>
               <div style={{ display: "flex", marginBottom: "0.5rem" }}>
                 <div
@@ -633,6 +675,7 @@ const HotelPage = ({ hotels }) => {
                       borderRadius: "4px",
                       padding: "0.2rem 0.5rem",
                       fontSize: "12px",
+                      // Use the getRatingColor function to get the color based on the rating
                       ...getRatingColor(hotel.guest_review_rating),
                     }}
                   >
@@ -654,6 +697,7 @@ const HotelPage = ({ hotels }) => {
                       borderRadius: "4px",
                       padding: "0.2rem 0.5rem",
                       fontSize: "12px",
+                      // Use the getRatingColor function to get the color based on the rating
                       ...getRatingColor(hotel.event_management_rating),
                     }}
                   >
@@ -703,6 +747,7 @@ const HotelPage = ({ hotels }) => {
                   marginTop: "0px",
                 }}
               >
+                {/* // Map through the amenities and display them */}
                 {hotel.amenities.map((amenity, index) => (
                   <div
                     key={index}
@@ -713,10 +758,12 @@ const HotelPage = ({ hotels }) => {
                       alignItems: "center",
                     }}
                   >
+                    {/* // Use the amenitiesIcons object to get the icon */}
                     <FontAwesomeIcon
                       icon={amenitiesIcons[amenity]}
                       style={{ marginRight: "5px", marginLeft: "3px" }}
                     />
+                    {/* // Add the amenity */}
                     <span>{amenity}</span>
                   </div>
                 ))}
@@ -734,7 +781,11 @@ const HotelPage = ({ hotels }) => {
                   to="#"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  See all
+                  See all{" "}
+                  <FontAwesomeIcon
+                    icon={faGreaterThan}
+                    style={{ fontSize: "9px" }}
+                  />
                 </Link>
               </div>
             </div>
@@ -761,6 +812,7 @@ const HotelPage = ({ hotels }) => {
                 What's Around
               </p>
 
+              {/* // Add a map to show the (FAKE) location of the hotel */}
               <iframe
                 width="325"
                 height="auto"
@@ -769,6 +821,7 @@ const HotelPage = ({ hotels }) => {
                   borderRadius: "12px",
                   marginBottom: "10px",
                 }}
+                // Use the Google Maps Embed API to show the map of the hotel (a fake location)
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9527.511181835902!2d-6.284163838527213!3d53.34544372355672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e9cb559ea73%3A0x2600c7a819c83012!2sTemple%20Bar%2C%20Dublin%2C%20Ireland!5e0!3m2!1sen!2sus!4v1710941241962!5m2!1sen!2sus"
                 allowFullScreen=""
                 aria-hidden="false"
@@ -788,6 +841,7 @@ const HotelPage = ({ hotels }) => {
               </p>
 
               <ul style={{ listStyle: "none", padding: 0, marginTop: "10px" }}>
+                {/* // Map through the nearby locations and display them */}
                 {hotel.nearby.map((item, index) => (
                   <div
                     key={index}
@@ -801,6 +855,7 @@ const HotelPage = ({ hotels }) => {
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
+                      {/* // Use the locationIcon to show the location icon */}
                       <IconifyIcon
                         icon={locationIcon}
                         style={{ fontSize: "20px", marginRight: "5px" }}
@@ -815,10 +870,11 @@ const HotelPage = ({ hotels }) => {
           </div>
         </div>
       </div>
+      <br />
 
       {/* FUNCTION ROOM INFO */}
       <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
-        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Group Booking</h1>{" "}
+        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Function Room</h1>{" "}
         <div
           style={{
             display: "flex",
@@ -838,12 +894,13 @@ const HotelPage = ({ hotels }) => {
             </p>
             <p
               style={{
-                fontSize: "12px",
+                fontSize: "13px",
                 fontWeight: "lighter",
                 fontStyle: "italic",
                 marginTop: "0px",
               }}
             >
+              {/* // display the price per day for the function room */}
               Additional €{functionRoomData?.price_per_day} a day
             </p>
             <div>
@@ -863,6 +920,8 @@ const HotelPage = ({ hotels }) => {
                   border: groupBooking ? "none" : "2px solid #EBEBEB",
                   cursor: "pointer",
                 }}
+                // onClick the handleGroupBookingSelection function with true
+                // true means the user requires the function room
                 onClick={() => handleGroupBookingSelection(true)}
               >
                 Yes
@@ -879,12 +938,13 @@ const HotelPage = ({ hotels }) => {
                   border: groupBooking ? "2px solid #EBEBEB" : "none",
                   cursor: "pointer",
                 }}
+                // onClick the handleGroupBookingSelection function with false
+                // false means the user does not require the function room
                 onClick={() => handleGroupBookingSelection(false)}
               >
                 No
               </button>
             </div>
-
             <div
               style={{
                 display: "grid",
@@ -892,6 +952,7 @@ const HotelPage = ({ hotels }) => {
                 gridGap: "10px",
               }}
             >
+              {/* // Map through the amenities and display them */}
               {functionRoomData?.amenities.map((amenity, index) => (
                 <div
                   key={index}
@@ -910,6 +971,94 @@ const HotelPage = ({ hotels }) => {
                 </div>
               ))}
             </div>
+            <div style={{ fontSize: "13px" }}>
+              <div
+                style={{
+                  fontSize: "13px",
+                  fontWeight: "600",
+                  marginTop: "20px",
+                  marginBottom: "5px",
+                }}
+              >
+                {/* // display some important information about the function room */}
+                Whats included in the price?
+              </div>
+              <ul style={{ marginTop: "0" }}>
+                <li style={{ marginBottom: "5px" }}>
+                  Catering Service: Enjoy our diverse menu, customized to
+                  dietary needs.
+                </li>
+                <li style={{ marginBottom: "5px" }}>
+                  Staff Assistance: Our friendly team ensures a smooth event
+                  from setup to service.
+                </li>
+                <li style={{ marginBottom: "0px" }}>
+                  Customised Setup: Personalise your event space to perfection
+                  with our flexible options.
+                </li>
+              </ul>
+            </div>
+            <div
+              style={{
+                fontSize: "15px",
+                color: "#191E3A",
+                marginTop: "20px",
+                marginBottom: "20px",
+                textAlign: "center",
+              }}
+            >
+              <hr />
+              <i>
+                "The dedicated team not only provided the necessary equipment
+                and amenities but also set up the function room according to our
+                specifications, allowing us to focus on enjoying our event to
+                the fullest."
+              </i>{" "}
+              - John Doe
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div
+                style={{
+                  marginRight: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "15px",
+                }}
+              >
+                <div
+                  style={{
+                    marginRight: "0.5rem",
+                    borderRadius: "4px",
+                    padding: "0.2rem 0.5rem",
+                    fontSize: "15px",
+                    // Use the getRatingColor function to get the color based on the rating
+                    ...getRatingColor(hotel.event_management_rating),
+                  }}
+                >
+                  {hotel.event_management_rating}
+                </div>
+                Event Rating
+              </div>
+              <div
+                style={{
+                  fontWeight: "medium",
+                  fontSize: "13px",
+                  color: "#1169E0",
+                  marginTop: "2px",
+                }}
+              >
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  See all function room reviews{" "}
+                  <FontAwesomeIcon
+                    icon={faGreaterThan}
+                    style={{ fontSize: "9px" }}
+                  />
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div
@@ -923,11 +1072,97 @@ const HotelPage = ({ hotels }) => {
               }}
             >
               <img
-                src={functionRoomImage}
+                src="https://images.unsplash.com/photo-1620735692151-26a7e0748429?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Function Room"
+                style={{
+                  width: "100%",
+                  height: "630px",
+                  clipPath: "polygon(15% 0, 100% 0%, 100% 100%, 0% 100%)",
+                  verticalAlign: "top",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="rooms-section"></div>
+      <br />
+
+      {/* KIDS CLUB INFO */}
+      <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
+        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
+          {" "}
+          {hotel["hotel_name"]} is Kid Friendly!
+        </h1>{" "}
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "20px 0 0 20px",
+          }}
+        >
+          <div style={{ width: "50%", marginLeft: "15px", fontSize: "13px" }}>
+            <p
+              style={{
+                fontSize: "17px",
+                fontWeight: "600",
+                marginBottom: "5px",
+              }}
+            >
+              Keep your little ones entertained and safe while you enjoy your
+              stay.{" "}
+            </p>
+            <p
+              style={{
+                fontSize: "13px",
+                fontWeight: "lighter",
+                fontStyle: "italic",
+                marginTop: "0px",
+              }}
+            >
+              Kids Daycare is included in the total cost, simply add their name,
+              age and other relevant information at checkout.
+            </p>
+
+            <div>
+              If you child is aged from 2-12, let them join in on:{" "}
+              <ul style={{ marginTop: "0" }}>
+                <li>Creative arts and crafts activities</li>
+                <li>Interactive games and toys</li>
+                <li>Storytime and educational activities</li>
+                <li>Healthy snacks and meals</li>
+                <li>Experienced and caring staff</li>
+              </ul>
+            </div>
+            <hr />
+            <div style={{ textAlign: "center" }}>
+              <b>Opening Hours:</b> Monday to Friday: 9:00 AM - 7:00 PM
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <b>Phone Number:</b> (585) 572-9237
+            </div>
+          </div>
+
+          <div
+            style={{ width: "70%", marginRight: "0px", marginBottom: "0px" }}
+          >
+            <div
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                width: "100%",
+              }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Function Room"
                 style={{
                   width: "100%",
                   clipPath: "polygon(15% 0, 100% 0%, 100% 100%, 0% 100%)",
+                  verticalAlign: "top",
+                  maxHeight: "325px",
+                  objectFit: "cover",
                 }}
               />
             </div>
@@ -949,12 +1184,17 @@ const HotelPage = ({ hotels }) => {
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
           Available rooms for your stay
         </h1>{" "}
+        {/* // Map through the hotel rooms and display them */}
         {hotel.hotel_room.map((room, index) => (
           <div
             key={index}
             style={{
+              // Display the rooms in a row
               display: "inline-block",
+              // Set the width to 32.33% (3 rooms in a row)
               width: "32.33%",
+              // Set the margin to 1.6% (to create space between the rooms)
+              // If the index is not 0, set the marginLeft to 1.6%, else set it to 0
               marginLeft: index !== 0 ? "1.6%" : 0,
               verticalAlign: "top",
             }}
@@ -992,6 +1232,7 @@ const HotelPage = ({ hotels }) => {
                 <ul
                   style={{ listStyle: "none", padding: 0, marginLeft: "15px" }}
                 >
+                  {/* // Add the room details */}
                   <li style={{ marginBottom: "10px", fontSize: "16px" }}>
                     <FontAwesomeIcon
                       icon={faExpand}
@@ -1013,6 +1254,20 @@ const HotelPage = ({ hotels }) => {
                     />
                     {room.bed_type}
                   </li>
+                  <li style={{ marginBottom: "10px", fontSize: "16px" }}>
+                    <FontAwesomeIcon
+                      icon={faBabyCarriage}
+                      style={{ fontSize: "16px", marginRight: "9px" }}
+                    />
+                    Bedside Cot Available
+                  </li>
+                  <li style={{ marginBottom: "10px", fontSize: "16px" }}>
+                    <FontAwesomeIcon
+                      icon={faChildReaching}
+                      style={{ fontSize: "16px", marginRight: "12px" }}
+                    />
+                    Suitable for Children
+                  </li>
                   <li
                     style={{
                       textAlign: "right",
@@ -1022,7 +1277,7 @@ const HotelPage = ({ hotels }) => {
                     }}
                   >
                     {" "}
-                    €{room.price_per_night}.00
+                    {/* // Add the price per night */}€{room.price_per_night}.00
                     <div style={{ fontSize: "11px", marginTom: "0px" }}>
                       per night
                     </div>
@@ -1049,7 +1304,7 @@ const HotelPage = ({ hotels }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {" "}
+                  {/* // adding and removing rooms */}{" "}
                   <button
                     style={{
                       width: "30px",
@@ -1062,6 +1317,7 @@ const HotelPage = ({ hotels }) => {
                       border: "1px solid #1169E0",
                       cursor: "pointer",
                     }}
+                    // onClick the handleRemoveRoom function with the room
                     onClick={() => handleRemoveRoom(room)}
                   >
                     -
@@ -1073,6 +1329,8 @@ const HotelPage = ({ hotels }) => {
                       margin: "0 20px",
                     }}
                   >
+                    {/* // Display the number of rooms selected, the minimum is 0 */}
+                    {/* // || 0 means if selectedRooms[room.type] is undefined, use 0 */}
                     {selectedRooms[room.type] || 0}
                   </span>
                   <button
@@ -1087,6 +1345,7 @@ const HotelPage = ({ hotels }) => {
                       border: "1px solid #1169E0",
                       cursor: "pointer",
                     }}
+                    // onClick the handleAddRoom function with the room
                     onClick={() => handleAddRoom(room)}
                   >
                     +
@@ -1104,9 +1363,12 @@ const HotelPage = ({ hotels }) => {
                   Total:
                   <div style={{ fontSize: "19px", fontWeight: "600" }}>
                     €
+                    {/* // If the room is selected, show the total price for the room */}
                     {selectedRooms[room.type]
-                      ? selectedRooms[room.type] * room.price_per_night + ".00"
-                      : "0.00"}
+                      ? // show the total price for the room
+                        selectedRooms[room.type] * room.price_per_night + ".00"
+                      : // Else, show 0.00
+                        "0.00"}
                   </div>
                 </div>
               </div>
@@ -1122,10 +1384,166 @@ const HotelPage = ({ hotels }) => {
           whiteSpace: "nowrap",
         }}
       >
-        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Checkout</h1>{" "}
+        {/* // basket */}
+        <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
+          Your Stay with {hotel["hotel_name"]}
+        </h1>
+        <div
+          style={{
+            display: "flex",
+            marginTop: "20px",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "13px",
+            border: "1px solid #DFE0E4",
+            position: "relative",
+          }}
+        >
+          <img
+            src={image}
+            alt="Hotel"
+            style={{
+              width: "60%",
+              height: "auto",
+              marginBottom: "0",
+              verticalAlign: "top",
+              borderTopLeftRadius: "13px",
+              borderBottomLeftRadius: "13px",
+              marginRight: "20px",
+              maxHeight: "450px",
+              objectFit: "cover",
+            }}
+          />
+          <div style={{ paddingRight: "20px", width: "40%" }}>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "18px",
+                marginTop: "7px",
+                fontWeight: "300",
+              }}
+            >
+              <h1> Ready to Checkout?</h1>
+            </div>
+            <hr style={{ borderTop: "2px solid #1169e0", width: "100%" }} />
+            <div style={{ fontSize: "14px" }}>
+              <p style={{ marginBottom: "3px" }}>
+                Check In Date: <b>Friday, March 29, 2024</b> (3:00p.m){" "}
+              </p>
+              <p style={{ marginTop: "0px" }}>
+                Check Out Date: <b>Sunday, March 31, 2024</b> (noon)
+              </p>
+              <p>
+                <FontAwesomeIcon
+                  icon={faUsers}
+                  style={{ marginRight: "4px" }}
+                />
+                {/* // Display the total guests */}2 nights, {getTotalGuests()}{" "}
+                guests{" "}
+              </p>
+              <div style={{ display: "flex", marginBottom: "0.5rem" }}>
+                <div
+                  style={{
+                    marginRight: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "15px",
+                  }}
+                >
+                  <div
+                    style={{
+                      marginRight: "0.5rem",
+                      borderRadius: "4px",
+                      padding: "0.2rem 0.5rem",
+                      fontSize: "15px",
+                      // Use the getRatingColor function to get the color based on the rating
+                      ...getRatingColor(hotel.guest_review_rating),
+                    }}
+                  >
+                    {/* // Display the guest review rating */}
+                    {hotel.guest_review_rating}
+                  </div>
+                  Guest Rating
+                </div>
+
+                <img
+                  src="https://1000logos.net/wp-content/uploads/2020/10/Hotels-com-Logo.jpg"
+                  alt="Hotels.com logo"
+                  style={{ width: "40%", height: "30px", objectFit: "cover" }}
+                />
+              </div>
+              <p style={{ marginBottom: "0px" }}>Rooms Selected: </p>
+              <ul style={{ margin: "0px" }}>
+                {
+                  // Check if there are no selected rooms or all selected room quantities are zero
+                  Object.entries(selectedRooms).length === 0 ||
+                  Object.values(selectedRooms).every(
+                    (quantity) => quantity === 0
+                  ) ? (
+                    // If true, render a list item with the text "No rooms selected"
+                    <li>No rooms selected</li>
+                  ) : (
+                    // If false, map over selected rooms, filter out rooms with zero quantity, and render each selected room with its quantity
+                    Object.entries(selectedRooms)
+                      .filter(([roomType, quantity]) => quantity > 0)
+                      .map(([roomType, quantity]) => (
+                        <li key={roomType}>
+                          {/* // Display the room type and quantity */}
+                          {roomType} x{quantity}
+                        </li>
+                      ))
+                  )
+                }
+              </ul>
+
+              <p style={{ marginBottom: "0px" }}>Extras Selected:</p>
+
+              <ul style={{ margin: "0px" }}>
+                <li>
+                  {/* // Display the function room if groupBooking is true, else display "No Extras Selected" */}
+                  {groupBooking ? "Function Room Added" : "No Extras Selected"}
+                </li>
+              </ul>
+              <div style={{ textAlign: "right", lineHeight: "1" }}>
+                <p className="info-body">Total for 2 nights:</p>
+                <h4 style={{ fontSize: "24px" }}>€{getTotalPrice() * 2}.00</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              color="primary"
+              variant="contained"
+              type="submit"
+              style={{ marginTop: "1rem" }}
+              // onClick the handleNextClick function
+              onClick={handleNextClick}
+            >
+              Next
+            </Button>
+          </div>
+          {/* // If nextClicked is true and all selected rooms have a quantity of 0, display an error message */}
+          {nextClicked &&
+            Object.values(selectedRooms).every(
+              (quantity) => quantity === 0
+            ) && (
+              <p
+                style={{
+                  color: "#E71E42",
+                  fontWeight: "bold",
+                  fontSize: "14px",
+                  textAlign: "right",
+                }}
+              >
+                Please select at least one room.
+              </p>
+            )}
+        </div>
       </div>
-      {/* BASKET */}
-      <Basket
+      {/* OLD BASKET */}
+      {/* <Basket
         // Pass in the total rooms, total price, total guests, group booking, toggleExpanded, and expanded
         totalRooms={getTotalRooms()}
         totalPrice={getTotalPrice()}
@@ -1133,7 +1551,7 @@ const HotelPage = ({ hotels }) => {
         groupBooking={groupBooking}
         toggleExpanded={toggleExpanded}
         expanded={expanded}
-      />
+      /> */}
 
       <Footer />
     </div>

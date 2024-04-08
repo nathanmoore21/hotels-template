@@ -1,34 +1,24 @@
-// import React, { useState, useEffect } from "react";
+// import * as React from "react";
 // import PropTypes from "prop-types";
 // import Box from "@mui/material/Box";
-// import { Icon } from "@iconify/react";
-// import bedIcon from "@iconify-icons/mdi/bed";
-// import { useFormik } from "formik";
-// import * as yup from "yup";
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";
+// import { Icon } from "@iconify/react";
+// import bedIcon from "@iconify-icons/mdi/bed";
+// import wifiIcon from "@iconify-icons/mdi/wifi";
+// import gymIcon from "@iconify-icons/mdi/dumbbell";
+// import noSmokingIcon from "@iconify-icons/mdi/smoking-off";
 // import { Link } from "react-router-dom";
-// import DatePicker from "react-multi-date-picker";
+
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
-//   faAngleDown,
-//   faAngleUp,
-//   faExpand,
-//   faUsers,
-//   faBed,
+//   faWifi,
+//   faBowlFood,
+//   faBellConcierge,
 // } from "@fortawesome/free-solid-svg-icons";
-// import hotelData from "./data/hotel-data.json";
 
 // import RiuPlaza from "./images/riu-plaza-dublin.jpeg";
 // import LogoImage from "./images/logo.svg";
-
-// const validationSchema = yup.object({
-//   firstName: yup.string().required("First Name is required"),
-//   email: yup
-//     .string()
-//     .email("Enter a valid email")
-//     .required("Email is required"),
-// });
 
 // function Item(props) {
 //   const { sx, ...other } = props;
@@ -65,98 +55,36 @@
 //   ]),
 // };
 
-// export default function FlexGrow() {
-//   const formik = useFormik({
-//     initialValues: {
-//       firstName: localStorage.getItem("firstName") || "",
-//       email: localStorage.getItem("email") || "",
-//     },
-//     validationSchema: validationSchema,
-//     onSubmit: (values) => {
-//       alert(JSON.stringify(values, null, 2));
-//     },
+// export default function Form() {
+//   const [formValues, setFormValues] = React.useState({
+//     firstName: "",
+//     lastName: "",
+//     email: "",
+//     phoneNumber: "",
 //   });
 
-//   useEffect(() => {
-//     localStorage.setItem("firstName", formik.values.firstName);
-//     localStorage.setItem("email", formik.values.email);
-//   }, [formik.values.firstName, formik.values.email]);
-
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [showSecondFields, setShowSecondFields] = useState(false);
-
-//   const [expandSpecialRequests, setExpandSpecialRequests] = useState(false);
-//   const [expandAccessibilityRequests, setExpandAccessibilityRequests] =
-//     useState(false);
-//   const [expandArrival, setExpandArrival] = useState(false);
-//   const [specialRequestMessage, setSpecialRequestMessage] = useState("");
-//   const [selectedAccessibilityRequests, setSelectedAccessibilityRequests] =
-//     useState([]);
-//   const [checkInDate, setCheckInDate] = useState(() => {
-//     const storedDate = localStorage.getItem("checkInDate");
-//     return storedDate ? new Date(JSON.parse(storedDate)) : null;
-//   });
-
-//   const [checkOutDate, setCheckOutDate] = useState(() => {
-//     const storedDate = localStorage.getItem("checkOutDate");
-//     return storedDate ? new Date(JSON.parse(storedDate)) : null;
-//   });
-
-//   const accessibilityOptions = [
-//     "Wheelchair accessible (may have limitations)",
-//     "Wheelchair accessible parking",
-//     "Wheelchair-accessible concierge desk",
-//     "Wheelchair-accessible lounge",
-//     "Wheelchair-accessible meeting spaces/business center",
-//     "Wheelchair-accessible on-site restaurant",
-//     "Wheelchair-accessible registration desk",
-//   ];
-
-//   const handleCheckboxChange = (value) => {
-//     const isSelected = selectedAccessibilityRequests.includes(value);
-//     let updatedSelection = [];
-//     if (isSelected) {
-//       updatedSelection = selectedAccessibilityRequests.filter(
-//         (item) => item !== value
-//       );
-//     } else {
-//       updatedSelection = [...selectedAccessibilityRequests, value];
+//   React.useEffect(() => {
+//     const storedValues = localStorage.getItem("formValues");
+//     if (storedValues) {
+//       setFormValues(JSON.parse(storedValues));
 //     }
-//     setSelectedAccessibilityRequests(updatedSelection);
-//     localStorage.setItem(
-//       "selectedAccessibilityRequests",
-//       JSON.stringify(updatedSelection)
-//     );
+//   }, []);
+
+//   React.useEffect(() => {
+//     localStorage.setItem("formValues", JSON.stringify(formValues));
+//   }, [formValues]);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormValues((prevValues) => ({
+//       ...prevValues,
+//       [name]: value,
+//     }));
 //   };
 
-//   useEffect(() => {
-//     const storedSelection = localStorage.getItem(
-//       "selectedAccessibilityRequests"
-//     );
-//     if (storedSelection) {
-//       setSelectedAccessibilityRequests(JSON.parse(storedSelection));
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem("checkInDate", JSON.stringify(checkInDate));
-//   }, [checkInDate]);
-
-//   useEffect(() => {
-//     localStorage.setItem("checkOutDate", JSON.stringify(checkOutDate));
-//   }, [checkOutDate]);
-
-//   useEffect(() => {
-//     const storedMessage = localStorage.getItem("specialRequestMessage");
-//     if (storedMessage) {
-//       setSpecialRequestMessage(storedMessage);
-//     }
-//   }, []);
-
-//   const handleSpecialRequestChange = (e) => {
-//     const message = e.target.value;
-//     setSpecialRequestMessage(message);
-//     localStorage.setItem("specialRequestMessage", message);
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log(formValues);
 //   };
 
 //   return (
@@ -166,7 +94,6 @@
 //           width: "100%",
 //           display: "flex",
 //           justifyContent: "center",
-//           alignItems: "center",
 //         }}
 //       >
 //         <div style={{ display: "flex", alignItems: "flex-start" }}>
@@ -184,11 +111,26 @@
 //                 bgcolor: "#FFFFFF",
 //                 border: "2px solid #CACCD2",
 //                 borderRadius: 1,
-//                 maxWidth: "600px",
+//                 maxWidth: "610px",
+//                 minWidth: "610px",
 //               }}
 //             >
+//               <h4 style={{marginBottom: "0px"}}>Your Unique Booking Code: MQ1234</h4>
+//               <p style={{marginTop: "0px", marginBottom: "4px"}}>Want to discuss your booking before you confirm? Call us on{" 555-123-4567 "}</p>
+//             </Item>
+//             <Item
+//               sx={{
+//                 flexGrow: 2,
+//                 p: 1,
+//                 bgcolor: "#FFFFFF",
+//                 border: "2px solid #CACCD2",
+//                 borderRadius: 1,
+
+//                 maxWidth: "610px",
+//                 minWidth: "610px",              }}
+//             >
 //               <div>
-//                 <h3>Hotel Riu Plaza The Gresham Dublin</h3>
+//                 <h3>Temple Bar Hotel</h3>
 //               </div>
 //               <div style={{ display: "flex", alignItems: "center" }}>
 //                 <Icon
@@ -196,833 +138,274 @@
 //                   style={{ fontSize: "1.1875rem", marginRight: "8px" }}
 //                 />
 //                 <h4 style={{ fontSize: "1.1875rem", margin: "0" }}>
-//                   Step 2: Room Details
+//                   Step 1: Your Details
 //                 </h4>
 //               </div>
-//               <hr style={{ width: "100%", borderColor: "#CACCD2", borderWidth: "1px", borderStyle: "solid" }} />
-
-
-//               <div
+//               <hr
 //                 style={{
-//                   display: "flex",
-//                   alignItems: "stretch",
-//                   width: "99%",
-//                   height: "auto",
-//                   background: "#ffffff",
-//                   borderRadius: "13px",
-//                   border: "1px solid #DFE0E4",
-//                   marginBottom: "10px", // Added margin: 0
-//                   paddingBottom: "0px !important",
+//                   borderTop: "1px solid #CACCD2",
+//                   width: "100%",
+//                   margin: "10px 0",
 //                 }}
-//               >
-//                 <div style={{ width: "35%", marginRight: "10px" }}>
-//                   <img
-//                     src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-//                     alt="Twin Room"
-//                     style={{
-//                       width: "100%",
-//                       height: "auto", // Changed height to auto
-//                       borderTopLeftRadius: "13px",
-//                       borderBottomLeftRadius: "13px",
-//                       clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
-//                       verticalAlign: "bottom", // Add this line
-//                     }}
+//               />
+//               <div>
+//                 <h5>Property Highlights</h5>
+//                 <div className="CO1-icon-text">
+//                   <FontAwesomeIcon
+//                     icon={faWifi}
+//                     style={{ marginRight: "0.5rem" }}
 //                   />
-//                 </div>
-//                 <div style={{ width: "65%" }}>
-//                   <h2
-//                     style={{
-//                       fontSize: "18px",
-//                       fontWeight: "300",
-//                       marginBottom: "10px",
-//                     }}
-//                   >
-//                     Standard Double Room
-//                   </h2>
-//                   <ul
-//                     style={{
-//                       listStyle: "none",
-//                       padding: 0,
-//                       margin: 0,
-//                       fontWeight: "100",
-//                       fontSize: "11px",
-//                     }}
-//                   >
-//                     {" "}
-//                     {/* Removed marginBottom: 0 */}
-//                     <li style={{ marginBottom: "0px" }}>
-//                       <FontAwesomeIcon
-//                         icon={faExpand}
-//                         style={{
-//                           fontSize: "13px",
-//                           marginLeft: "2px",
-//                           marginRight: "4px",
-//                         }}
-//                       />{" "}
-//                       30 sq m
-//                     </li>
-//                     <li style={{ marginBottom: "0px" }}>
-//                       <FontAwesomeIcon
-//                         icon={faUsers}
-//                         style={{ marginRight: "3px" }}
-//                       />{" "}
-//                       Sleeps 2
-//                     </li>
-//                     <li style={{ marginBottom: "0px", fontSize: "11px" }}>
-//                       <FontAwesomeIcon
-//                         icon={faBed}
-//                         style={{ marginRight: "7px" }}
-//                       />
-//                       1 Double Bed
-//                     </li>
-//                     <li
-//                       style={{
-//                         marginBottom: "0px",
-//                         textAlign: "right",
-//                         marginRight: "10px",
-//                         fontSize: "16px",
-//                         marginBottom: "0px",
-//                       }}
-//                     >
-//                       €110.00
-//                       <div style={{ fontSize: "11px", marginTop: "0px" }}>
-//                         per night
-//                       </div>
-//                     </li>
-//                   </ul>
+//                   Complimentary Wi-Fi
+//                   <FontAwesomeIcon
+//                     icon={faBowlFood}
+//                     style={{ marginRight: "0.5rem", marginLeft: "0.8rem" }}
+//                   />
+//                   Mini-fridge
+//                   <FontAwesomeIcon
+//                     icon={faBellConcierge}
+//                     style={{ marginRight: "0.5rem", marginLeft: "0.8rem" }}
+//                   />
+//                   Room Service
 //                 </div>
 //               </div>
-
-//               <form onSubmit={formik.handleSubmit}>
-
-
-
-
-
-
-
-
-//                 <div style={{ display: "flex", flexDirection: "column" }}>
-//                   {/* Other content remains the same */}
-//                   <div>
-//                     {/* First guest fields */}
-//                     <div style={{ display: "flex", alignItems: "center" }}>
-//                       <div
-//                         style={{
-//                           width: "30px",
-//                           height: "30px",
-//                           borderRadius: "50%",
-//                           border: "1px solid #1169E0",
-//                           display: "flex",
-//                           justifyContent: "center",
-//                           alignItems: "center",
-//                           marginRight: "8px",
-//                           color: "#191E3A",
-//                           fontSize: "1rem",
-//                         }}
-//                       >
-//                         1
-//                       </div>
-//                       <TextField
-//                         style={{ marginRight: "1rem", width: "40%"}}
-//                         id="firstName"
-//                         name="firstName"
-//                         placeholder="Guest Name"
-//                         value={formik.values.firstName}
-//                         onChange={formik.handleChange}
-//                         onBlur={formik.handleBlur}
-//                         error={
-//                           formik.touched.firstName &&
-//                           Boolean(formik.errors.firstName)
-//                         }
-//                       />
-//                       <TextField
-//                         id="email"
-//                         name="email"
-//                         placeholder="Guest Email"
-//                         value={formik.values.email}
-//                         onChange={formik.handleChange}
-//                         onBlur={formik.handleBlur}
-//                         error={
-//                           formik.touched.email && Boolean(formik.errors.email)
-//                         }
-//                         style={{ marginRight: "1rem", width: "40%" }}
-//                       />
-//                       <div
-//                         style={{
-//                           display: "flex",
-//                           alignItems: "center",
-//                           cursor: "pointer",
-//                         }}
-//                         onClick={() => setShowSecondFields(!showSecondFields)}
-//                       >
-//                         <FontAwesomeIcon
-//                           icon={showSecondFields ? faAngleUp : faAngleDown}
-//                         />
-//                       </div>
-//                     </div>
-//                     {/* Toggle button for second guest fields */}
-
-//                     {/* Second guest fields */}
-//                     {showSecondFields && (
-//                       <div style={{ display: "flex", alignItems: "center", marginTop: "0.5rem" }}>
-//                         <div
-//                           style={{
-//                             width: "30px",
-//                             height: "30px",
-//                             borderRadius: "50%",
-//                             border: "1px solid #ffffff",
-//                             display: "flex",
-//                             justifyContent: "center",
-//                             alignItems: "center",
-//                             marginRight: "8px",
-//                             color: "#ffffff",
-//                             fontSize: "1rem",
-//                           }}
-//                         >
-//                           1
-//                         </div>
-//                         <TextField
-//                         style={{ marginRight: "1rem", width: "40%" }}
-//                         id="secondFirstName"
-//                           name="secondFirstName"
-//                           placeholder="Second Guest Name"
-//                           value={formik.values.secondFirstName}
-//                           onChange={formik.handleChange}
-//                           onBlur={formik.handleBlur}
-//                           error={
-//                             formik.touched.secondFirstName &&
-//                             Boolean(formik.errors.secondFirstName)
-//                           }
-//                         />
-//                         <TextField
-//                           id="secondEmail"
-//                           name="secondEmail"
-//                           placeholder="Second Guest Email"
-//                           value={formik.values.secondEmail}
-//                           onChange={formik.handleChange}
-//                           onBlur={formik.handleBlur}
-//                           error={
-//                             formik.touched.secondEmail &&
-//                             Boolean(formik.errors.secondEmail)
-//                           }
-//                           style={{ marginRight: "1rem", width: "40%" }}
-
-//                         />
-//                       </div>
-//                     )}
-//                   </div>
+//               <form onSubmit={handleSubmit}>
+//                 <h5 className="field-label">
+//                   First Name <span className="required-indicator">*</span>
+//                 </h5>
+//                 <TextField
+//                   id="firstName"
+//                   name="firstName"
+//                   value={formValues.firstName}
+//                   onChange={handleChange}
+//                   required
+//                   InputProps={{
+//                     className: "input-field",
+//                   }}
+//                 />
+//                 <h5 className="field-label">
+//                   Last Name <span className="required-indicator">*</span>
+//                 </h5>
+//                 <TextField
+//                   id="lastName"
+//                   name="lastName"
+//                   value={formValues.lastName}
+//                   onChange={handleChange}
+//                   required
+//                   InputProps={{
+//                     className: "input-field",
+//                   }}
+//                 />
+//                 <h5 className="field-label">
+//                   Email Address <span className="required-indicator">*</span>
+//                 </h5>
+//                 <TextField
+//                   id="email"
+//                   name="email"
+//                   type="email"
+//                   value={formValues.email}
+//                   onChange={handleChange}
+//                   required
+//                   InputProps={{
+//                     className: "input-field",
+//                   }}
+//                 />
+//                 <h5 className="field-label">
+//                   Phone Number <span className="required-indicator">*</span>
+//                 </h5>
+//                 <TextField
+//                   id="phoneNumber"
+//                   name="phoneNumber"
+//                   value={formValues.phoneNumber}
+//                   onChange={handleChange}
+//                   required
+//                   InputProps={{
+//                     className: "input-field",
+//                   }}
+//                 />
+//                 <div style={{ marginTop: "1rem" }}>
+//                   <label className="checkbox-label">
+//                     <input type="checkbox" />
+//                     Check this box if you would not like to receive Hotels.com
+//                     special deals email newsletter that contains great hotel
+//                     promotions.
+//                   </label>
 //                 </div>
-
-//                 <div>
-//                   {/* Dropdown Menu */}
-//                   <div
-//                     style={{
-//                       textDecoration: "none",
-//                       cursor: "pointer",
-//                       fontSize: "12px",
-//                       fontWeight: "normal",
-//                       color: "#1169E0",
-//                       marginLeft: "2.5rem",
-//                       marginBottom: "1px",
-//                       marginTop: "0.3rem",
-//                     }}
-//                     onClick={() => setIsOpen(!isOpen)}
-//                   >
-//                     Booking Preferences{" "}
-//                     <FontAwesomeIcon icon={isOpen ? faAngleUp : faAngleDown} />
-//                   </div>
-//                   {isOpen && (
-//                     <ul
-//                       style={{
-//                         listStyleType: "none",
-//                         marginTop: "0",
-//                         paddingLeft: 0,
-//                       }}
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "flex-end",
+//                     marginTop: "1rem",
+//                   }}
+//                 >
+//                   <Link to="/RoomDetails" className="router-link">
+//                     <Button
+//                       color="primary"
+//                       variant="contained"
+//                       type="submit"
+//                       style={{ marginLeft: "1rem" }}
 //                     >
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() =>
-//                           setExpandSpecialRequests(!expandSpecialRequests)
-//                         }
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Any special requests?{" "}
-//                           <FontAwesomeIcon
-//                             icon={
-//                               expandSpecialRequests ? faAngleUp : faAngleDown
-//                             }
-//                           />
-//                         </span>
-//                         {expandSpecialRequests && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <p
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 fontSize: "11px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               Please include details of your special request and
-//                               we’ll forward it to the property. Please note,
-//                               your request is not guaranteed and if you don’t
-//                               hear back from the property, you may want to
-//                               contact them directly to confirm.
-//                             </p>
-//                             <TextField
-//                               id="specialRequests"
-//                               name="specialRequests"
-//                               variant="outlined"
-//                               fullWidth
-//                               multiline
-//                               rows={4}
-//                               InputProps={{ style: { fontSize: "12px" } }}
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 width: "90%",
-//                               }}
-//                               value={specialRequestMessage}
-//                               onChange={handleSpecialRequestChange} // Update this line
-//                             />
-//                           </div>
-//                         )}
-//                       </li>
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() =>
-//                           setExpandAccessibilityRequests(
-//                             !expandAccessibilityRequests
-//                           )
-//                         }
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Any accessibility requests?{" "}
-//                           <FontAwesomeIcon
-//                             icon={
-//                               expandAccessibilityRequests
-//                                 ? faAngleUp
-//                                 : faAngleDown
-//                             }
-//                           />
-//                         </span>
-//                         {expandAccessibilityRequests && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <p
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 fontSize: "11px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               Please choose the accessibility options you
-//                               require and we’ll forward your request to the
-//                               property. Please note, your request is not
-//                               guaranteed and if you don’t hear back from the
-//                               property, you may want to contact them directly to
-//                               confirm.{" "}
-//                             </p>
-//                             <div
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0px",
-//                                 fontSize: "12px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               {accessibilityOptions.map((option) => (
-//                                 <li key={option}>
-//                                   <input
-//                                     type="checkbox"
-//                                     value={option}
-//                                     onChange={(e) =>
-//                                       handleCheckboxChange(e.target.value)
-//                                     }
-//                                     checked={selectedAccessibilityRequests.includes(
-//                                       option
-//                                     )}
-//                                   />
-//                                   {option}
-//                                 </li>
-//                               ))}
-//                             </div>
-//                           </div>
-//                         )}
-//                       </li>
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() => setExpandArrival(!expandArrival)}
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Will this guest be arriving on the same day?{" "}
-//                           <FontAwesomeIcon
-//                             icon={expandArrival ? faAngleUp : faAngleDown}
-//                           />
-//                         </span>
-//                         {expandArrival && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <div
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0px",
-//                                 fontSize: "12px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               <p
-//                                 style={{
-//                                   marginTop: "0rem",
-//                                   fontSize: "11px",
-//                                   fontWeight: "100",
-//                                 }}
-//                               >
-//                                 Please include details of your date change for
-//                                 this guest and we’ll forward it to the property.
-//                                 Please note, your request is not guaranteed and
-//                                 if you don’t hear back from the property, you
-//                                 may want to contact them directly to confirm.
-//                               </p>
-//                               <div>Check In:</div>
-//                               <DatePicker
-//                                 format="DD MMM, YYYY"
-//                                 value={checkInDate}
-//                                 onChange={(value) => setCheckInDate(value)}
-//                                 style={{ marginRight: "1rem" }}
-//                               />
-//                               <div style={{ marginTop: "10px" }}>
-//                                 Check Out:
-//                               </div>
-//                               <DatePicker
-//                                 format="DD MMM, YYYY"
-//                                 value={checkOutDate}
-//                                 onChange={(value) => setCheckOutDate(value)}
-//                               />
-//                             </div>
-//                           </div>
-//                         )}
-//                       </li>
-//                     </ul>
-//                   )}
-
-//                   <ul>
-//                     {formik.touched.firstName && formik.errors.firstName && (
-//                       <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-//                         {formik.errors.firstName}
-//                       </li>
-//                     )}
-//                     {formik.touched.email && formik.errors.email && (
-//                       <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-//                         {formik.errors.email}
-//                       </li>
-//                     )}
-//                   </ul>
-
-
-//                   <div style={{ display: "flex", flexDirection: "column" }}>
-//                   {/* Other content remains the same */}
-//                   <div>
-//                     {/* First guest fields */}
-//                     <div style={{ display: "flex", alignItems: "center" }}>
-//                       <div
-//                         style={{
-//                           width: "30px",
-//                           height: "30px",
-//                           borderRadius: "50%",
-//                           border: "1px solid #1169E0",
-//                           display: "flex",
-//                           justifyContent: "center",
-//                           alignItems: "center",
-//                           marginRight: "8px",
-//                           color: "#191E3A",
-//                           fontSize: "1rem",
-//                         }}
-//                       >
-//                         2
-//                       </div>
-//                       <TextField
-//                         style={{ marginRight: "1rem", width: "40%"}}
-//                         id="firstName"
-//                         name="firstName"
-//                         placeholder="Guest Name"
-//                         value={formik.values.firstName}
-//                         onChange={formik.handleChange}
-//                         onBlur={formik.handleBlur}
-//                         error={
-//                           formik.touched.firstName &&
-//                           Boolean(formik.errors.firstName)
-//                         }
-//                       />
-//                       <TextField
-//                         id="email"
-//                         name="email"
-//                         placeholder="Guest Email"
-//                         value={formik.values.email}
-//                         onChange={formik.handleChange}
-//                         onBlur={formik.handleBlur}
-//                         error={
-//                           formik.touched.email && Boolean(formik.errors.email)
-//                         }
-//                         style={{ marginRight: "1rem", width: "40%" }}
-//                       />
-//                       <div
-//                         style={{
-//                           display: "flex",
-//                           alignItems: "center",
-//                           cursor: "pointer",
-//                         }}
-//                         onClick={() => setShowSecondFields(!showSecondFields)}
-//                       >
-//                         <FontAwesomeIcon
-//                           icon={showSecondFields ? faAngleUp : faAngleDown}
-//                         />
-//                       </div>
-//                     </div>
-//                     {/* Toggle button for second guest fields */}
-
-//                     {/* Second guest fields */}
-//                     {showSecondFields && (
-//                       <div style={{ display: "flex", alignItems: "center", marginTop: "0.5rem" }}>
-//                         <div
-//                           style={{
-//                             width: "30px",
-//                             height: "30px",
-//                             borderRadius: "50%",
-//                             border: "1px solid #ffffff",
-//                             display: "flex",
-//                             justifyContent: "center",
-//                             alignItems: "center",
-//                             marginRight: "8px",
-//                             color: "#ffffff",
-//                             fontSize: "1rem",
-//                           }}
-//                         >
-//                           2
-//                         </div>
-//                         <TextField
-//                         style={{ marginRight: "1rem", width: "40%" }}
-//                         id="secondFirstName"
-//                           name="secondFirstName"
-//                           placeholder="Second Guest Name"
-//                           value={formik.values.secondFirstName}
-//                           onChange={formik.handleChange}
-//                           onBlur={formik.handleBlur}
-//                           error={
-//                             formik.touched.secondFirstName &&
-//                             Boolean(formik.errors.secondFirstName)
-//                           }
-//                         />
-//                         <TextField
-//                           id="secondEmail"
-//                           name="secondEmail"
-//                           placeholder="Second Guest Email"
-//                           value={formik.values.secondEmail}
-//                           onChange={formik.handleChange}
-//                           onBlur={formik.handleBlur}
-//                           error={
-//                             formik.touched.secondEmail &&
-//                             Boolean(formik.errors.secondEmail)
-//                           }
-//                           style={{ marginRight: "1rem", width: "40%" }}
-
-//                         />
-//                       </div>
-//                     )}
-//                   </div>
-//                 </div>
-
-//                 <div>
-//                   {/* Dropdown Menu */}
-//                   <div
-//                     style={{
-//                       textDecoration: "none",
-//                       cursor: "pointer",
-//                       fontSize: "12px",
-//                       fontWeight: "normal",
-//                       color: "#1169E0",
-//                       marginLeft: "2.5rem",
-//                       marginBottom: "1px",
-//                       marginTop: "0.3rem",
-//                     }}
-//                     onClick={() => setIsOpen(!isOpen)}
-//                   >
-//                     Booking Preferences{" "}
-//                     <FontAwesomeIcon icon={isOpen ? faAngleUp : faAngleDown} />
-//                   </div>
-//                   {isOpen && (
-//                     <ul
-//                       style={{
-//                         listStyleType: "none",
-//                         marginTop: "0",
-//                         paddingLeft: 0,
-//                       }}
-//                     >
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() =>
-//                           setExpandSpecialRequests(!expandSpecialRequests)
-//                         }
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Any special requests?{" "}
-//                           <FontAwesomeIcon
-//                             icon={
-//                               expandSpecialRequests ? faAngleUp : faAngleDown
-//                             }
-//                           />
-//                         </span>
-//                         {expandSpecialRequests && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <p
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 fontSize: "11px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               Please include details of your special request and
-//                               we’ll forward it to the property. Please note,
-//                               your request is not guaranteed and if you don’t
-//                               hear back from the property, you may want to
-//                               contact them directly to confirm.
-//                             </p>
-//                             <TextField
-//                               id="specialRequests"
-//                               name="specialRequests"
-//                               variant="outlined"
-//                               fullWidth
-//                               multiline
-//                               rows={4}
-//                               InputProps={{ style: { fontSize: "12px" } }}
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 width: "90%",
-//                               }}
-//                               value={specialRequestMessage}
-//                               onChange={handleSpecialRequestChange} // Update this line
-//                             />
-//                           </div>
-//                         )}
-//                       </li>
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() =>
-//                           setExpandAccessibilityRequests(
-//                             !expandAccessibilityRequests
-//                           )
-//                         }
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Any accessibility requests?{" "}
-//                           <FontAwesomeIcon
-//                             icon={
-//                               expandAccessibilityRequests
-//                                 ? faAngleUp
-//                                 : faAngleDown
-//                             }
-//                           />
-//                         </span>
-//                         {expandAccessibilityRequests && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <p
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0rem",
-//                                 fontSize: "11px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               Please choose the accessibility options you
-//                               require and we’ll forward your request to the
-//                               property. Please note, your request is not
-//                               guaranteed and if you don’t hear back from the
-//                               property, you may want to contact them directly to
-//                               confirm.{" "}
-//                             </p>
-//                             <div
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0px",
-//                                 fontSize: "12px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               {accessibilityOptions.map((option) => (
-//                                 <li key={option}>
-//                                   <input
-//                                     type="checkbox"
-//                                     value={option}
-//                                     onChange={(e) =>
-//                                       handleCheckboxChange(e.target.value)
-//                                     }
-//                                     checked={selectedAccessibilityRequests.includes(
-//                                       option
-//                                     )}
-//                                   />
-//                                   {option}
-//                                 </li>
-//                               ))}
-//                             </div>
-//                           </div>
-//                         )}
-//                       </li>
-//                       <li
-//                         style={{ marginTop: "4px", cursor: "pointer" }}
-//                         onClick={() => setExpandArrival(!expandArrival)}
-//                       >
-//                         <span
-//                           style={{
-//                             textDecoration: "none",
-//                             cursor: "pointer",
-//                             fontSize: "11px",
-//                             fontWeight: "normal",
-//                             color: "#1169E0",
-//                             marginLeft: "3.5rem",
-//                           }}
-//                         >
-//                           Will this guest be arriving on the same day?{" "}
-//                           <FontAwesomeIcon
-//                             icon={expandArrival ? faAngleUp : faAngleDown}
-//                           />
-//                         </span>
-//                         {expandArrival && (
-//                           <div onClick={(e) => e.stopPropagation()}>
-//                             <div
-//                               style={{
-//                                 marginLeft: "3.5rem",
-//                                 marginTop: "0px",
-//                                 fontSize: "12px",
-//                                 fontWeight: "100",
-//                               }}
-//                             >
-//                               <p
-//                                 style={{
-//                                   marginTop: "0rem",
-//                                   fontSize: "11px",
-//                                   fontWeight: "100",
-//                                 }}
-//                               >
-//                                 Please include details of your date change for
-//                                 this guest and we’ll forward it to the property.
-//                                 Please note, your request is not guaranteed and
-//                                 if you don’t hear back from the property, you
-//                                 may want to contact them directly to confirm.
-//                               </p>
-//                               <div>Check In:</div>
-//                               <DatePicker
-//                                 format="DD MMM, YYYY"
-//                                 value={checkInDate}
-//                                 onChange={(value) => setCheckInDate(value)}
-//                                 style={{ marginRight: "1rem" }}
-//                               />
-//                               <div style={{ marginTop: "10px" }}>
-//                                 Check Out:
-//                               </div>
-//                               <DatePicker
-//                                 format="DD MMM, YYYY"
-//                                 value={checkOutDate}
-//                                 onChange={(value) => setCheckOutDate(value)}
-//                               />
-//                             </div>
-//                           </div>
-//                         )}
-//                       </li>
-//                     </ul>
-//                   )}
-
-//                   <ul>
-//                     {formik.touched.firstName && formik.errors.firstName && (
-//                       <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-//                         {formik.errors.firstName}
-//                       </li>
-//                     )}
-//                     {formik.touched.email && formik.errors.email && (
-//                       <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-//                         {formik.errors.email}
-//                       </li>
-//                     )}
-//                   </ul>
-//                   <hr style={{ width: "95%", borderColor: "#CACCD2", borderWidth: "1px", borderStyle: "solid" }} />
-// </div>
-
-
-
-
-
-
-//                   {/* Submit Button */}
-//                   <div
-//                     style={{
-//                       display: "flex",
-//                       justifyContent: "flex-end",
-//                       marginTop: "1rem",
-//                     }}
-//                   >
-//                     <Link to="/CardDetails" className="router-link">
-//                       <Button
-//                         color="primary"
-//                         variant="contained"
-//                         type="submit"
-//                         style={{ marginLeft: "1rem" }}
-//                       >
-//                         Next
-//                       </Button>
-//                     </Link>
-//                   </div>
+//                       Next
+//                     </Button>
+//                   </Link>
 //                 </div>
 //               </form>
 //             </Item>
 //           </div>
-
 //         </div>
+
+//         <Box
+//           sx={{
+//             display: "flex",
+//             flexDirection: "column",
+//             p: 1,
+//             borderRadius: 1,
+//             margin: "auto",
+//             paddingTop: "0px",
+//           }}
+//         >
+//           <Item
+//             sx={{
+//               flexGrow: 3,
+//               p: 1,
+//               bgcolor: "#FFFFFF",
+//               border: "2px solid #CACCD2",
+//               borderRadius: 1,
+//             }}
+//           >
+//             <Item
+//               sx={{
+//                 bgcolor: "#F3F3F5",
+//                 p: 1,
+//                 border: "2px solid #CACCD2",
+//                 borderRadius: 1,
+//               }}
+//             >
+//               <img
+//                 src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+//                 alt="Temple Bar Hotel"
+//                 style={{
+//                   height: "187px",
+//                   border: "6px solid #FFFFFF",
+//                   borderRadius: "1px",
+//                   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+//                 }}
+//               />
+//               <div>
+//                 <p className="info-title">Temple Bar Hotel</p>
+//                 <p className="info-body">123 Main Street, Dublin, Ireland</p>
+//               </div>
+//               <div style={{ display: "flex", alignItems: "center" }}>
+//                 <div
+//                   style={{
+//                     backgroundColor: "#217952",
+//                     padding: "0.5rem",
+//                     borderRadius: "5px",
+//                   }}
+//                 >
+//                   <h4 style={{ margin: "0", color: "#ffffff" }}>9.2</h4>
+//                 </div>
+//                 <h5 style={{ marginLeft: "0.5rem" }}>Excellent</h5>
+//               </div>
+//               <div style={{ display: "flex", alignItems: "center" }}>
+//                 <img
+//                   src={LogoImage}
+//                   alt="Logo"
+//                   style={{ height: "15px", marginRight: "0.5rem" }}
+//                 />
+//                 <p className="info-body">1,204 reviews</p>
+//               </div>
+//               <Item
+//                 sx={{
+//                   flexGrow: 2,
+//                   bgcolor: "#FFFFFF",
+//                   border: "2px solid #217952",
+//                   borderRadius: 1,
+//                   display: "flex",
+//                   flexDirection: "column",
+//                   justifyContent: "center",
+//                   alignItems: "flex-start",
+//                   padding: "1rem",
+//                 }}
+//               >
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "space-between",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <p className="info-body">Check-in</p>
+//                   <p className="info-body" style={{ fontWeight: 600 }}>
+//                     Friday, March 29, 2024
+//                   </p>
+//                 </div>
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "space-between",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <p className="info-body"></p>
+//                   <p className="info-body">(3:00pm)</p>
+//                 </div>
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "space-between",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <p className="info-body">Check-out</p>
+//                   <p className="info-body" style={{ fontWeight: 600 }}>
+//                     Sunday, March 31, 2024
+//                   </p>
+//                 </div>
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "space-between",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <p className="info-body"></p>
+//                   <p className="info-body">(noon)</p>
+//                 </div>
+//                 <Item
+//                   sx={{
+//                     bgcolor: "#FFFFFF",
+//                     width: "80%",
+//                     margin: "auto",
+
+//                     border: "2px solid #217952",
+//                     borderRadius: 1,
+//                     padding: "1rem",
+//                   }}
+//                 >
+//                   <h5>Your Stay Breakdown</h5>
+//                   <div className="body-text">
+//                     <p className="info-body">2 nights, 14 guests</p>
+//                     <ul className="info-body" style={{ paddingLeft: "13px" }}>
+//                       <li>Standard Double Room x3</li>
+//                       <li>Deluxe Suite x1</li>
+//                       <li>King Deluxe Suite x1</li>
+//                     </ul>
+//                     <br />
+//                     <p className="info-body">Extras:</p>
+//                     <ul className="info-body" style={{ paddingLeft: "13px" }}>
+//                       <li>Function Room</li>
+//                     </ul>
+//                   </div>
+//                   <br></br>
+//                   <div style={{ textAlign: "right" }}>
+//                     <p className="info-body">Total:</p>
+//                     <h4>€2,860.00</h4>
+//                   </div>
+//                 </Item>
+//               </Item>
+//             </Item>
+//           </Item>
+//         </Box>
 //       </div>
 //     </>
 //   );

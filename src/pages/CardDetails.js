@@ -1,38 +1,22 @@
-import React from "react";
-import ResponsiveAppBar from "../components/ResponsiveAppBar";
-import StepperCard from "../components/StepperCard";
-import CardDetailsLayout from "../components/CardDetailsLayout";
-import Footer from "../components/Footer";
+import React from "react"; // Import the React library
+import ResponsiveAppBar from "../components/ResponsiveAppBar"; // Import the ResponsiveAppBar component
+import StepperCard from "../components/StepperCard"; // Import the StepperCard component
+import CardDetailsLayout from "../components/CardDetailsLayout"; // Import the CardDetailsLayout component
+import Footer from "../components/Footer"; // Import the Footer component
 
+// Define the CardDetails component
 function CardDetails() {
   return (
     <div>
+      {/* // ResponsiveAppBar component */}
       <ResponsiveAppBar />
       <div style={{ paddingTop: "70px" }}>
-        {" "}
+        {/* // StepperCard component */}
         <StepperCard />
-        <div
-          style={{
-            width: "100%",
-            textAlign: "center",
-            paddingBottom: "10px",
-            paddingTop: "10px",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-block",
-              fontWeight: "900",
-              fontSize: "16px",
-            }}
-          >
-            Your Unique Booking Code: MQ1234
-          </div>
-        </div>
         <div style={{ width: "80%", margin: "0 auto", paddingBottom: "30px" }}>
+          {/* // CardDetailsLayout component */}
           <CardDetailsLayout />
         </div>
-        {/* footer */}
         <Footer />
       </div>
     </div>

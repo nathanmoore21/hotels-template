@@ -1,33 +1,71 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import { Icon } from "@iconify/react";
-import bedIcon from "@iconify-icons/mdi/bed";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import DatePicker from "react-multi-date-picker";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from "react"; // import useState and useEffect hooks
+import PropTypes from "prop-types"; // import PropTypes
+import Box from "@mui/material/Box"; // import Box component from Material-UI
+import { Icon } from "@iconify/react"; // import Icon component from Iconify
+import bedIcon from "@iconify-icons/mdi/bed"; // import bedIcon from Material Design Icons
+import { useFormik } from "formik"; // import useFormik hook from formik
+import * as yup from "yup"; // import yup for form validation
+import TextField from "@mui/material/TextField"; // import TextField component from Material-UI
+import Button from "@mui/material/Button"; // import Button component from Material-UI
+import { Link } from "react-router-dom"; // import Link component from react-router-dom
+import DatePicker from "react-multi-date-picker"; // import DatePicker component from react-multi-date-picker
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // import FontAwesomeIcon component from @fortawesome/react-fontawesome
 import {
   faAngleDown,
   faAngleUp,
+  faPlus,
   faExpand,
   faUsers,
   faBed,
-} from "@fortawesome/free-solid-svg-icons";
-import LogoImage from "./images/logo.svg";
+  faWifi,
+  faPersonChalkboard,
+  faChair,
+  faCalendar,
+  faTag,
+  faBellConcierge,
+} from "@fortawesome/free-solid-svg-icons"; // import necessary icons from @fortawesome/free-solid-svg-icons
+import LogoImage from "./images/logo.svg"; // import LogoImage from images folder
 
+// create validationSchema using yup
 const validationSchema = yup.object({
-  firstName: yup.string().required("First Name is required"),
-  email: yup
+  // create validationSchema for the form
+  // firstName, firstEmail (and so on) are required
+  // yup.string is used to validate the input as a string
+  firstName: yup.string().required("Guest Name is required"),
+  firstEmail: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+
+  thirdFirstName: yup.string().required("Guest Name is required"),
+  thirdEmail: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+
+  fifthFirstName: yup.string().required("Guest Name is required"),
+  fifthEmail: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+
+  seventhFirstName: yup.string().required("Guest Name is required"),
+  seventhEmail: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+
+  eleventhFirstName: yup.string().required("Guest Name is required"),
+  eleventhEmail: yup
     .string()
     .email("Enter a valid email")
     .required("Email is required"),
 });
 
+// create Item component that takes in props
 function Item(props) {
+  // sx means style
+  // ...other means other props
   const { sx, ...other } = props;
   return (
     <Box
@@ -52,7 +90,9 @@ function Item(props) {
   );
 }
 
+// set propTypes for Item component
 Item.propTypes = {
+  // sx prop can be an array of functions, objects, or booleans, a function, or an object
   sx: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
@@ -62,8 +102,11 @@ Item.propTypes = {
   ]),
 };
 
+// create FlexGrow component
 export default function FlexGrow() {
+  // create formik object using useFormik hook
   const formik = useFormik({
+    // initialValues for the form
     initialValues: {
       firstName: localStorage.getItem("firstName") || "",
       firstEmail: localStorage.getItem("firstEmail") || "",
@@ -94,16 +137,29 @@ export default function FlexGrow() {
       fourteenthFirstName: localStorage.getItem("fourteenthFirstName") || "",
       fourteenthEmail: localStorage.getItem("fourteenthEmail") || "",
     },
+    // validationSchema for the form
     validationSchema: validationSchema,
+    // onSubmit function for the form
     onSubmit: (values) => {
+      // alert the form values
+      // convert the values object to a JSON string
+      // null means no replacer function, which is used to filter the properties of the object
+      // 2 is the number of spaces to indent the nested objects
       alert(JSON.stringify(values, null, 2));
     },
   });
 
-  useEffect(() => {
-    localStorage.setItem("firstName", formik.values.firstName);
-    localStorage.setItem("firstEmail", formik.values.firstEmail);
-  }, [formik.values.firstName, formik.values.firstEmail]);
+  // useEffect hook to store form values in localStorage
+  // .setItem() method sets the value of the specified Storage Object item
+  // formik.values.firstName is the value of the firstName field in the form
+  useEffect(
+    () => {
+      localStorage.setItem("firstName", formik.values.firstName);
+      localStorage.setItem("firstEmail", formik.values.firstEmail);
+    },
+    // formik.values.firstName and formik.values.firstEmail are the dependencies of the useEffect hook
+    [formik.values.firstName, formik.values.firstEmail]
+  );
 
   useEffect(() => {
     localStorage.setItem("secondFirstName", formik.values.secondFirstName);
@@ -176,36 +232,62 @@ export default function FlexGrow() {
     localStorage.setItem("fourteenthEmail", formik.values.fourteenthEmail);
   }, [formik.values.fourteenthFirstName, formik.values.fourteenthEmail]);
 
+  // FUNCTION ROOM
+  // expand function request for that booking
+  const [FRRequestMessage, setFRRequestMessage] = useState("");
+
   //STANDARD ROOM ONE
+  // useState hook to create a boolean state variable
+  // setSR1IsOpen is a function that will be used to expand the add. info. menu for that room
   const [SR1isOpen, setSR1IsOpen] = useState(false);
+  // setSR1ShowExtraFields is a function that will be used to show all fields (guest) for that room
   const [SR1showExtraFields, setSR1ShowExtraFields] = useState(false);
+  // expand special requests for that room
   const [SR1expandSpecialRequests, setSR1ExpandSpecialRequests] =
     useState(false);
+  // expand kids requests for that room
+  const [SR1expandKidsRequests, setSR1ExpandKidsRequests] = useState(false);
+  // expand kids request message for that room
+  const [SR1kidsRequestMessage, setSR1KidsRequestMessage] = useState("");
+  // expand accessibility requests for that room
   const [SR1expandAccessibilityRequests, setSR1ExpandAccessibilityRequests] =
     useState(false);
+  // expand arrival for that room
   const [SR1expandArrival, setSR1ExpandArrival] = useState(false);
+  // special special request message for that room
   const [SR1specialRequestMessage, setSR1SpecialRequestMessage] = useState("");
+  // selected accessibility requests for that room
   const [
     SR1selectedAccessibilityRequests,
     setSR1SelectedAccessibilityRequests,
   ] = useState([]);
+  // check-in date for that room
+  // save to local storage
+  // get the date from local storage and display it
+  // new Date() creates a new date object
+  // : null means if there is no date, set it to null
   const [SR1checkInDate, setSR1CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("SR1checkInDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : null;
   });
+  // check-out date for that room
   const [SR1checkOutDate, setSR1CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("SR1checkOutDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : null;
   });
 
+  // save the check-in date to local storage
   useEffect(() => {
     localStorage.setItem("SR1checkInDate", JSON.stringify(SR1checkInDate));
   }, [SR1checkInDate]);
 
+  // save the check-out date to local storage
   useEffect(() => {
     localStorage.setItem("SR1checkOutDate", JSON.stringify(SR1checkOutDate));
   }, [SR1checkOutDate]);
 
+  // get the special request message from local storage
+  // [] means run once the page loads
   useEffect(() => {
     const storedMessage = localStorage.getItem("SR1specialRequestMessage");
     if (storedMessage) {
@@ -213,11 +295,44 @@ export default function FlexGrow() {
     }
   }, []);
 
+  // handle special request change
   const handleSR1SpecialRequestChange = (e) => {
     const message = e.target.value;
     setSR1SpecialRequestMessage(message);
     localStorage.setItem("SR1specialRequestMessage", message);
   };
+
+  // get the kids request message from local storage
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("SR1kidsRequestMessage");
+    if (storedMessage) {
+      setSR1KidsRequestMessage(storedMessage);
+    }
+  }, []);
+
+  // handle kids request change
+  const handleSR1KidsRequestChange = (e) => {
+    const message = e.target.value;
+    setSR1KidsRequestMessage(message);
+    localStorage.setItem("SR1kidsRequestMessage", message);
+  };
+
+  // get the function room request message from local storage
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("FRRequestMessage");
+    if (storedMessage) {
+      setFRRequestMessage(storedMessage);
+    }
+  }, []);
+
+  // handle function room request change
+  const handleFRRequestChange = (e) => {
+    const message = e.target.value;
+    setFRRequestMessage(message);
+    localStorage.setItem("FRRequestMessage", message);
+  };
+
+  // accessibility options for that (all) room/s
   const SR1accessibilityOptions = [
     "Wheelchair accessible (may have limitations)",
     "Wheelchair accessible parking",
@@ -228,28 +343,37 @@ export default function FlexGrow() {
     "Wheelchair-accessible registration desk",
   ];
 
+  // Function to handle the change in SR1 checkbox
   const handleSR1CheckboxChange = (value) => {
+    // Check if the value is already in the selected accessibility requests
     const isSelected = SR1selectedAccessibilityRequests.includes(value);
+    // If the value is already selected, remove it from the selection
     let updatedSelection = [];
     if (isSelected) {
       updatedSelection = SR1selectedAccessibilityRequests.filter(
         (item) => item !== value
       );
     } else {
+      // If the value is not selected, add it to the selection
       updatedSelection = [...SR1selectedAccessibilityRequests, value];
     }
+    // Update the state with the new selection
     setSR1SelectedAccessibilityRequests(updatedSelection);
     localStorage.setItem(
+      // Store the updated selection in local storage
       "SR1selectedAccessibilityRequests",
       JSON.stringify(updatedSelection)
     );
   };
 
+  // Effect hook to load the selected accessibility requests from local storage when the page loads
   useEffect(() => {
+    // Retrieve the stored selection from local storage
     const storedSelection = localStorage.getItem(
       "SR1selectedAccessibilityRequests"
     );
     if (storedSelection) {
+      // If there is a stored selection, set the state with the retrieved value
       setSR1SelectedAccessibilityRequests(JSON.parse(storedSelection));
     }
   }, []);
@@ -259,6 +383,8 @@ export default function FlexGrow() {
   const [SR2showExtraFields, setSR2ShowExtraFields] = useState(false);
   const [SR2expandSpecialRequests, setSR2ExpandSpecialRequests] =
     useState(false);
+  const [SR2expandKidsRequests, setSR2ExpandKidsRequests] = useState(false);
+  const [SR2kidsRequestMessage, setSR2KidsRequestMessage] = useState("");
   const [SR2expandAccessibilityRequests, setSR2ExpandAccessibilityRequests] =
     useState(false);
   const [SR2expandArrival, setSR2ExpandArrival] = useState(false);
@@ -295,6 +421,18 @@ export default function FlexGrow() {
     const message = e.target.value;
     setSR2SpecialRequestMessage(message);
     localStorage.setItem("SR2specialRequestMessage", message);
+  };
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("SR2kidsRequestMessage");
+    if (storedMessage) {
+      setSR2KidsRequestMessage(storedMessage);
+    }
+  }, []);
+
+  const handleSR2KidsRequestChange = (e) => {
+    const message = e.target.value;
+    setSR2KidsRequestMessage(message);
+    localStorage.setItem("SR2kidsRequestMessage", message);
   };
   const SR2accessibilityOptions = [
     "Wheelchair accessible (may have limitations)",
@@ -337,6 +475,8 @@ export default function FlexGrow() {
   const [SR3showExtraFields, setSR3ShowExtraFields] = useState(false);
   const [SR3expandSpecialRequests, setSR3ExpandSpecialRequests] =
     useState(false);
+  const [SR3expandKidsRequests, setSR3ExpandKidsRequests] = useState(false);
+  const [SR3kidsRequestMessage, setSR3KidsRequestMessage] = useState("");
   const [SR3expandAccessibilityRequests, setSR3ExpandAccessibilityRequests] =
     useState(false);
   const [SR3expandArrival, setSR3ExpandArrival] = useState(false);
@@ -373,6 +513,18 @@ export default function FlexGrow() {
     const message = e.target.value;
     setSR3SpecialRequestMessage(message);
     localStorage.setItem("SR3specialRequestMessage", message);
+  };
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("SR3kidsRequestMessage");
+    if (storedMessage) {
+      setSR3KidsRequestMessage(storedMessage);
+    }
+  }, []);
+
+  const handleSR3KidsRequestChange = (e) => {
+    const message = e.target.value;
+    setSR3KidsRequestMessage(message);
+    localStorage.setItem("SR3kidsRequestMessage", message);
   };
   const SR3accessibilityOptions = [
     "Wheelchair accessible (may have limitations)",
@@ -415,6 +567,8 @@ export default function FlexGrow() {
   const [DS1showExtraFields, setDS1ShowExtraFields] = useState(false);
   const [DS1expandSpecialRequests, setDS1ExpandSpecialRequests] =
     useState(false);
+  const [DS1expandKidsRequests, setDS1ExpandKidsRequests] = useState(false);
+  const [DS1kidsRequestMessage, setDS1KidsRequestMessage] = useState("");
   const [DS1expandAccessibilityRequests, setDS1ExpandAccessibilityRequests] =
     useState(false);
   const [DS1expandArrival, setDS1ExpandArrival] = useState(false);
@@ -451,6 +605,18 @@ export default function FlexGrow() {
     const message = e.target.value;
     setDS1SpecialRequestMessage(message);
     localStorage.setItem("DS1specialRequestMessage", message);
+  };
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("DS1kidsRequestMessage");
+    if (storedMessage) {
+      setDS1KidsRequestMessage(storedMessage);
+    }
+  }, []);
+
+  const handleDS1KidsRequestChange = (e) => {
+    const message = e.target.value;
+    setDS1KidsRequestMessage(message);
+    localStorage.setItem("DS1kidsRequestMessage", message);
   };
   const DS1accessibilityOptions = [
     "Wheelchair accessible (may have limitations)",
@@ -493,6 +659,8 @@ export default function FlexGrow() {
   const [KDS1showExtraFields, setKDS1ShowExtraFields] = useState(false);
   const [KDS1expandSpecialRequests, setKDS1ExpandSpecialRequests] =
     useState(false);
+  const [KDS1expandKidsRequests, setKDS1ExpandKidsRequests] = useState(false);
+  const [KDS1kidsRequestMessage, setKDS1KidsRequestMessage] = useState("");
   const [KDS1expandAccessibilityRequests, setKDS1ExpandAccessibilityRequests] =
     useState(false);
   const [KDS1expandArrival, setKDS1ExpandArrival] = useState(false);
@@ -531,6 +699,18 @@ export default function FlexGrow() {
     setKDS1SpecialRequestMessage(message);
     localStorage.setItem("KDS1specialRequestMessage", message);
   };
+  useEffect(() => {
+    const storedMessage = localStorage.getItem("KDS1kidsRequestMessage");
+    if (storedMessage) {
+      setKDS1KidsRequestMessage(storedMessage);
+    }
+  }, []);
+
+  const handleKDS1KidsRequestChange = (e) => {
+    const message = e.target.value;
+    setKDS1KidsRequestMessage(message);
+    localStorage.setItem("KDS1kidsRequestMessage", message);
+  };
   const KDS1accessibilityOptions = [
     "Wheelchair accessible (may have limitations)",
     "Wheelchair accessible parking",
@@ -567,6 +747,71 @@ export default function FlexGrow() {
     }
   }, []);
 
+  //FORM VALIDATION
+  // State to track form validity, initially set to false
+  const [isFormValid, setIsFormValid] = React.useState(false);
+  // useEffect hook to check if all required fields are filled
+  React.useEffect(
+    () => {
+      // Check if all required fields are filled
+      // trim() removes whitespace from both ends of a string
+      // !== "" checks if the string is not empty
+      const isFirstNameValid = formik.values.firstName.trim() !== "";
+      const isFirstEmailValid = formik.values.firstEmail.trim() !== "";
+
+      const isThirdFirstNameValid = formik.values.thirdFirstName.trim() !== "";
+      const isThirdEmailValid = formik.values.thirdEmail.trim() !== "";
+
+      const isFifthFirstNameValid = formik.values.fifthFirstName.trim() !== "";
+      const isFifthEmailValid = formik.values.fifthEmail.trim() !== "";
+
+      const isSexenthFirstNameValid =
+        formik.values.seventhFirstName.trim() !== "";
+      const isSeventhEmailValid = formik.values.seventhEmail.trim() !== "";
+
+      const isEleventhFirstNameValid =
+        formik.values.eleventhFirstName.trim() !== "";
+      const isEleventhEmailValid = formik.values.eleventhEmail.trim() !== "";
+
+      // Set the form validity state
+      // form is valid if all fields are filled
+      // && is the logical AND operator
+      setIsFormValid(
+        isFirstNameValid &&
+          isFirstEmailValid &&
+          isThirdFirstNameValid &&
+          isThirdEmailValid &&
+          isFifthFirstNameValid &&
+          isFifthEmailValid &&
+          isSexenthFirstNameValid &&
+          isSeventhEmailValid &&
+          isEleventhFirstNameValid &&
+          isEleventhEmailValid
+      );
+    },
+    // [formik.values] is the dependency array which means React will re-run the effect if any of the values in the dependency array change.
+    [formik.values]
+  );
+  // Function to handle form submission
+  // e is the event object
+  // const handleSubmit = (e) => {
+  //   // prevent the default form submission behavior
+  //   e.preventDefault();
+  //   // Check if the form is valid
+  //   if (isFormValid) {
+  //   }
+  // };
+
+  // function to determin what room the lead booker is staying in
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleCheckboxChange = (option) => {
+    // Check if the selected option is what is currently selected
+    // If it is, set the selected option to null which will unselect it
+    // If it's different, set the selected option to the clicked option
+    setSelectedOption(selectedOption === option ? null : option);
+  };
+
   return (
     <>
       <div
@@ -592,7 +837,122 @@ export default function FlexGrow() {
                 bgcolor: "#FFFFFF",
                 border: "2px solid #CACCD2",
                 borderRadius: 1,
-                maxWidth: "600px",
+                maxWidth: "610px",
+                minWidth: "610px",
+              }}
+            >
+              <h4 style={{ marginBottom: "0px" }}>
+                Your Unique Booking Code: MQ1234
+              </h4>
+              <p style={{ marginTop: "0px", marginBottom: "4px" }}>
+                Want to discuss your booking before you confirm? Call us on
+                {" 555-123-4567 "}
+              </p>
+            </Item>
+
+            <Item
+              sx={{
+                display: "flex",
+                flexGrow: 2,
+                p: 1,
+                bgcolor: "#ffffff",
+                border: "2px solid",
+                borderRadius: 1,
+                maxWidth: "610px",
+                minWidth: "610px",
+              }}
+            >
+              <div
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#F6F6F6",
+                  color: "#191E3A",
+                  margin: "0 5px",
+                  padding: 10,
+                  borderRadius: 5,
+                  textAlign: "right",
+                  fontSize: "12px",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faCalendar}
+                  style={{
+                    width: "30%",
+                    marginRight: "10px",
+                    fontSize: "38px",
+                    color: "#1169E0",
+                  }}
+                />
+                <div style={{ flex: "70%" }}>
+                  Flexible check-in & check-out dates for each room
+                </div>
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#F6F6F6",
+                  color: "#191E3A",
+                  margin: "0 5px",
+                  padding: 10,
+                  borderRadius: 5,
+                  textAlign: "right",
+                  fontSize: "12px",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faTag}
+                  style={{
+                    width: "30%",
+                    marginRight: "10px",
+                    fontSize: "38px",
+                    color: "#1169E0",
+                  }}
+                />
+                <div style={{ flex: "70%" }}>
+                  Share the cost, each room covers their own share
+                </div>
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#F6F6F6",
+                  color: "#191E3A",
+                  margin: "0 5px",
+                  padding: 10,
+                  borderRadius: 5,
+                  textAlign: "right",
+                  fontSize: "12px",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faBellConcierge}
+                  style={{
+                    width: "30%",
+                    marginRight: "10px",
+                    fontSize: "38px",
+                    color: "#1169E0",
+                  }}
+                />
+                <div style={{ flex: "70%" }}>
+                  Secure your share to reserve the rooms for 31 days
+                </div>
+              </div>
+            </Item>
+            <Item
+              sx={{
+                flexGrow: 2,
+                p: 1,
+                bgcolor: "#FFFFFF",
+                border: "2px solid #CACCD2",
+                borderRadius: 1,
+                maxWidth: "610px",
+                minWidth: "610px",
               }}
             >
               <div>
@@ -615,6 +975,7 @@ export default function FlexGrow() {
                 }}
               />
 
+              {/* bedrooms */}
               <div
                 style={{
                   display: "flex",
@@ -624,7 +985,6 @@ export default function FlexGrow() {
                   background: "#ffffff",
                   borderRadius: "13px",
                   border: "1px solid #DFE0E4",
-                  marginBottom: "10px", 
                   paddingBottom: "0px !important",
                 }}
               >
@@ -634,11 +994,11 @@ export default function FlexGrow() {
                     alt="Twin Room"
                     style={{
                       width: "100%",
-                      height: "auto", 
+                      height: "auto",
                       borderTopLeftRadius: "13px",
                       borderBottomLeftRadius: "13px",
                       clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
-                      verticalAlign: "bottom", 
+                      verticalAlign: "bottom",
                     }}
                   />
                 </div>
@@ -703,7 +1063,28 @@ export default function FlexGrow() {
                   </ul>
                 </div>
               </div>
+              <div>
+                <input
+                  // The checkbox is checked if the selected option is 1
+                  type="checkbox"
+                  id="option1"
+                  // The checkbox is checked if the selected option is 1
+                  checked={selectedOption === 1}
+                  // When the checkbox is clicked, call the handleCheckboxChange function with the value 1
+                  onChange={() => handleCheckboxChange(1)}
+                  // The checkbox is disabled if the selected option is not null and not 1
+                  disabled={selectedOption !== null && selectedOption !== 1}
+                  style={{ marginBottom: "10px" }}
+                />
+                <label
+                  htmlFor="option1"
+                  style={{ fontWeight: "100", fontSize: "12px" }}
+                >
+                  I will be staying in the Standard Double Room
+                </label>
+              </div>
 
+              {/* // Formik form for the first room */}
               <form onSubmit={formik.handleSubmit}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div>
@@ -725,22 +1106,39 @@ export default function FlexGrow() {
                         1
                       </div>
                       <TextField
-                        style={{ marginRight: "1rem", width: "40%" }}
+                        // id is a unique identifier for the input field
                         id="firstName"
+                        // name is the key of the value in the formik values object
                         name="firstName"
-                        placeholder="Guest Name"
+                        // The placeholder text for the input field
+                        placeholder="Guest Name (Required)"
+                        // The value of the input field is the value in the formik values object
                         value={formik.values.firstName}
+                        // The onChange event handler updates the formik values object
                         onChange={formik.handleChange}
+                        // The onBlur event handler updates the formik touched object
                         onBlur={formik.handleBlur}
+                        // The error prop is true if the field has been touched and there is an error
                         error={
                           formik.touched.firstName &&
                           Boolean(formik.errors.firstName)
                         }
+                        // The helperText is the error message if there is an error
+                        helperText={
+                          formik.touched.firstName && formik.errors.firstName
+                        }
+                        // The Input prop is used to style the input field
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
+                        style={{ marginRight: "1rem", width: "40%" }}
                       />
                       <TextField
                         id="firstEmail"
                         name="firstEmail"
-                        placeholder="Guest Email"
+                        placeholder="Guest Email (Required)"
                         value={formik.values.firstEmail}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -748,6 +1146,14 @@ export default function FlexGrow() {
                           formik.touched.firstEmail &&
                           Boolean(formik.errors.firstEmail)
                         }
+                        helperText={
+                          formik.touched.firstEmail && formik.errors.firstEmail
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
                         style={{ marginRight: "1rem", width: "40%" }}
                       />
 
@@ -757,16 +1163,19 @@ export default function FlexGrow() {
                           alignItems: "center",
                           cursor: "pointer",
                         }}
+                        // When the div is clicked, the showExtraFields state is toggled
                         onClick={() =>
                           setSR1ShowExtraFields(!SR1showExtraFields)
                         }
                       >
                         <FontAwesomeIcon
-                          icon={SR1showExtraFields ? faAngleUp : faAngleDown}
+                          // if the showExtraFields state is true, show the up arrow, otherwise show the plus icon
+                          icon={SR1showExtraFields ? faAngleUp : faPlus}
                         />
                       </div>
                     </div>
 
+                    {/* // If the showExtraFields state is true, show the extra fields */}
                     {SR1showExtraFields && (
                       <div
                         style={{
@@ -814,18 +1223,6 @@ export default function FlexGrow() {
                   </div>
                 </div>
 
-                <ul>
-                  {formik.touched.firstName && formik.errors.firstName && (
-                    <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                      {formik.errors.firstName}
-                    </li>
-                  )}
-                  {formik.touched.firstEmail && formik.errors.firstEmail && (
-                    <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                      {formik.errors.firstEmail}
-                    </li>
-                  )}
-                </ul>
                 <div>
                   <div
                     style={{
@@ -835,16 +1232,19 @@ export default function FlexGrow() {
                       fontWeight: "normal",
                       color: "#1169E0",
                       marginLeft: "2.5rem",
-                      marginBottom: "1rem",
+                      marginBottom: "0.5rem",
                       marginTop: "0.3rem",
                     }}
+                    // When the div is clicked, the SR1isOpen state is toggled, which is used for additional information
                     onClick={() => setSR1IsOpen(!SR1isOpen)}
                   >
-                    Booking Preferences{" "}
+                    Additional Information{" "}
                     <FontAwesomeIcon
+                      // If the add. info. state is true, show the up arrow, otherwise show the down arrow
                       icon={SR1isOpen ? faAngleUp : faAngleDown}
                     />
                   </div>
+                  {/* // If the additional information state is true, show the additional information */}
                   {SR1isOpen && (
                     <ul
                       style={{
@@ -856,6 +1256,7 @@ export default function FlexGrow() {
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
                         onClick={() =>
+                          // When the div is clicked, the special requests state is toggled
                           setSR1ExpandSpecialRequests(!SR1expandSpecialRequests)
                         }
                       >
@@ -872,11 +1273,14 @@ export default function FlexGrow() {
                           Any special requests?{" "}
                           <FontAwesomeIcon
                             icon={
+                              // If the special requests state is true, show the up arrow, otherwise show the down arrow
                               SR1expandSpecialRequests ? faAngleUp : faAngleDown
                             }
                           />
                         </span>
                         {SR1expandSpecialRequests && (
+                          // If the special requests state is true, show the special requests input field
+                          // e.stopPropagation() stops the click event from affecting parent elements.
                           <div onClick={(e) => e.stopPropagation()}>
                             <p
                               style={{
@@ -893,19 +1297,28 @@ export default function FlexGrow() {
                               contact them directly to confirm.
                             </p>
                             <TextField
+                              // id is a unique identifier for the input field
                               id="SR1specialRequests"
+                              // name is the key of the value in the formik values object
                               name="SR1specialRequests"
                               variant="outlined"
+                              // fullWidth makes the input field take up the full width of the parent container
                               fullWidth
+                              // multiline allows the input field to have multiple lines
                               multiline
+                              // rows is the number of rows the input field will have
                               rows={4}
+                              // The InputProps prop is used to style the input field
                               InputProps={{ style: { fontSize: "12px" } }}
+                              // The style prop is used to style the input field
                               style={{
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 width: "90%",
                               }}
+                              // The value of the input field is the value in the formik values object
                               value={SR1specialRequestMessage}
+                              // The onChange event handler updates the formik values object
                               onChange={handleSR1SpecialRequestChange}
                             />
                           </div>
@@ -913,6 +1326,7 @@ export default function FlexGrow() {
                       </li>
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
+                        // When the div is clicked, the accessibility requests state is toggled
                         onClick={() =>
                           setSR1ExpandAccessibilityRequests(
                             !SR1expandAccessibilityRequests
@@ -932,13 +1346,16 @@ export default function FlexGrow() {
                           Any accessibility requests?{" "}
                           <FontAwesomeIcon
                             icon={
+                              // If the accessibility requests state is true, show the up arrow, otherwise show the down arrow
                               SR1expandAccessibilityRequests
                                 ? faAngleUp
                                 : faAngleDown
                             }
                           />
                         </span>
+                        {/* // If the accessibility requests state is true, show the accessibility requests options */}
                         {SR1expandAccessibilityRequests && (
+                          // e.stopPropagation() stops the click event from affecting parent elements.
                           <div onClick={(e) => e.stopPropagation()}>
                             <p
                               style={{
@@ -963,18 +1380,24 @@ export default function FlexGrow() {
                                 fontWeight: "100",
                               }}
                             >
+                              {/* // Map over the accessibility options and create a checkbox for each option */}
                               {SR1accessibilityOptions.map((option) => (
+                                // The key is a unique identifier for the list item
                                 <li key={option}>
                                   <input
                                     type="checkbox"
+                                    // The value of the checkbox is the option
                                     value={option}
+                                    // The onChange event handler calls the handleCheckboxChange function with the option
                                     onChange={(e) =>
                                       handleSR1CheckboxChange(e.target.value)
                                     }
+                                    // The checked prop is true if the selected accessibility requests include the option
                                     checked={SR1selectedAccessibilityRequests.includes(
                                       option
                                     )}
                                   />
+                                  {/* // The label is the list of options */}
                                   {option}
                                 </li>
                               ))}
@@ -982,8 +1405,74 @@ export default function FlexGrow() {
                           </div>
                         )}
                       </li>
+
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          // When the div is clicked, the kids requests state is toggled
+                          setSR1ExpandKidsRequests(!SR1expandKidsRequests)
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Kids club request?{" "}
+                          <FontAwesomeIcon
+                            icon={
+                              // If the kids requests state is true, show the up arrow, otherwise show the down arrow
+                              SR1expandKidsRequests ? faAngleUp : faAngleDown
+                            }
+                          />
+                        </span>
+                        {SR1expandKidsRequests && (
+                          // If the kids requests state is true, show the kids requests input field
+                          // e.stopPropagation() stops the click event from affecting parent elements.
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <p
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                fontSize: "11px",
+                                fontWeight: "100",
+                              }}
+                            >
+                              Please include any necessary information about
+                              your child such as their name, age, and dietary
+                              information, and we’ll forward it to the property.
+                              Please note, your request is not guaranteed, and
+                              if you don’t hear back from the property, you may
+                              want to contact them directly to confirm.
+                            </p>
+                            <TextField
+                              id="SR1kidsRequests"
+                              name="SR1kidsRequests"
+                              variant="outlined"
+                              fullWidth
+                              multiline
+                              rows={4}
+                              InputProps={{ style: { fontSize: "12px" } }}
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                width: "90%",
+                              }}
+                              value={SR1kidsRequestMessage}
+                              onChange={handleSR1KidsRequestChange}
+                            />
+                          </div>
+                        )}
+                      </li>
+
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
+                        // When the div is clicked, the arrival state is toggled
                         onClick={() => setSR1ExpandArrival(!SR1expandArrival)}
                       >
                         <span
@@ -998,10 +1487,13 @@ export default function FlexGrow() {
                         >
                           Will this guest be arriving on the same day?{" "}
                           <FontAwesomeIcon
+                            // If the arrival state is true, show the up arrow, otherwise show the down arrow
                             icon={SR1expandArrival ? faAngleUp : faAngleDown}
                           />
                         </span>
                         {SR1expandArrival && (
+                          // If the arrival state is true, show the arrival input fields
+                          // e.stopPropagation() stops the click event from affecting parent elements.
                           <div onClick={(e) => e.stopPropagation()}>
                             <div
                               style={{
@@ -1025,9 +1517,13 @@ export default function FlexGrow() {
                                 may want to contact them directly to confirm.
                               </p>
                               <div>Check In:</div>
+                              {/* // The DatePicker component is used to select a date */}
+                              {/* // DD MMM, YYYY is the format of the date */}
                               <DatePicker
                                 format="DD MMM, YYYY"
+                                // The value of the DatePicker is the check in date
                                 value={SR1checkInDate}
+                                // The onChange event handler updates the check in date
                                 onChange={(value) => setSR1CheckInDate(value)}
                                 style={{ marginRight: "1rem" }}
                               />
@@ -1037,6 +1533,7 @@ export default function FlexGrow() {
                               <DatePicker
                                 format="DD MMM, YYYY"
                                 value={SR1checkOutDate}
+                                // The onChange event handler updates the check out date
                                 onChange={(value) => setSR1CheckOutDate(value)}
                               />
                             </div>
@@ -1068,10 +1565,9 @@ export default function FlexGrow() {
                         2
                       </div>
                       <TextField
-                        style={{ marginRight: "1rem", width: "40%" }}
                         id="thirdFirstName"
                         name="thirdFirstName"
-                        placeholder="Guest Name"
+                        placeholder="Guest Name (Required)"
                         value={formik.values.thirdFirstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1079,11 +1575,21 @@ export default function FlexGrow() {
                           formik.touched.thirdFirstName &&
                           Boolean(formik.errors.thirdFirstName)
                         }
+                        helperText={
+                          formik.touched.thirdFirstName &&
+                          formik.errors.thirdFirstName
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
+                        style={{ marginRight: "1rem", width: "40%" }}
                       />
                       <TextField
                         id="thirdEmail"
                         name="thirdEmail"
-                        placeholder="Guest Email"
+                        placeholder="Guest Email (Required)"
                         value={formik.values.thirdEmail}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1091,6 +1597,14 @@ export default function FlexGrow() {
                           formik.touched.thirdEmail &&
                           Boolean(formik.errors.thirdEmail)
                         }
+                        helperText={
+                          formik.touched.thirdEmail && formik.errors.thirdEmail
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
                         style={{ marginRight: "1rem", width: "40%" }}
                       />
 
@@ -1105,7 +1619,7 @@ export default function FlexGrow() {
                         }
                       >
                         <FontAwesomeIcon
-                          icon={SR2showExtraFields ? faAngleUp : faAngleDown}
+                          icon={SR2showExtraFields ? faAngleUp : faPlus}
                         />
                       </div>
                     </div>
@@ -1156,19 +1670,6 @@ export default function FlexGrow() {
                     )}
                   </div>
                 </div>
-                <ul>
-                  {formik.touched.thirdFirstName &&
-                    formik.errors.thirdFirstName && (
-                      <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                        {formik.errors.thirdFirstName}
-                      </li>
-                    )}
-                  {formik.touched.thirdEmail && formik.errors.thirdEmail && (
-                    <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                      {formik.errors.thirdEmail}
-                    </li>
-                  )}
-                </ul>
 
                 <div>
                   <div
@@ -1179,12 +1680,12 @@ export default function FlexGrow() {
                       fontWeight: "normal",
                       color: "#1169E0",
                       marginLeft: "2.5rem",
-                      marginBottom: "1rem",
+                      marginBottom: "0.5rem",
                       marginTop: "0.3rem",
                     }}
                     onClick={() => setSR2IsOpen(!SR2isOpen)}
                   >
-                    Booking Preferences{" "}
+                    Additional Information{" "}
                     <FontAwesomeIcon
                       icon={SR2isOpen ? faAngleUp : faAngleDown}
                     />
@@ -1328,6 +1829,65 @@ export default function FlexGrow() {
                       </li>
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          setSR2ExpandKidsRequests(!SR2expandKidsRequests)
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Kids club request?{" "}
+                          <FontAwesomeIcon
+                            icon={
+                              SR2expandKidsRequests ? faAngleUp : faAngleDown
+                            }
+                          />
+                        </span>
+                        {SR2expandKidsRequests && (
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <p
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                fontSize: "11px",
+                                fontWeight: "100",
+                              }}
+                            >
+                              Please include any necessary information about
+                              your child such as their name, age, and dietary
+                              information, and we’ll forward it to the property.
+                              Please note, your request is not guaranteed, and
+                              if you don’t hear back from the property, you may
+                              want to contact them directly to confirm.
+                            </p>
+                            <TextField
+                              id="SR2kidsRequests"
+                              name="SR2kidsRequests"
+                              variant="outlined"
+                              fullWidth
+                              multiline
+                              rows={4}
+                              InputProps={{ style: { fontSize: "12px" } }}
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                width: "90%",
+                              }}
+                              value={SR2kidsRequestMessage}
+                              onChange={handleSR2KidsRequestChange}
+                            />
+                          </div>
+                        )}
+                      </li>
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
                         onClick={() => setSR2ExpandArrival(!SR2expandArrival)}
                       >
                         <span
@@ -1411,10 +1971,9 @@ export default function FlexGrow() {
                         3
                       </div>
                       <TextField
-                        style={{ marginRight: "1rem", width: "40%" }}
                         id="fifthFirstName"
                         name="fifthFirstName"
-                        placeholder="Guest Name"
+                        placeholder="Guest Name (Required)"
                         value={formik.values.fifthFirstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1422,11 +1981,21 @@ export default function FlexGrow() {
                           formik.touched.fifthFirstName &&
                           Boolean(formik.errors.fifthFirstName)
                         }
+                        helperText={
+                          formik.touched.fifthFirstName &&
+                          formik.errors.fifthFirstName
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
+                        style={{ marginRight: "1rem", width: "40%" }}
                       />
                       <TextField
                         id="fifthEmail"
                         name="fifthEmail"
-                        placeholder="Guest Email"
+                        placeholder="Guest Email (Required)"
                         value={formik.values.fifthEmail}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1434,6 +2003,14 @@ export default function FlexGrow() {
                           formik.touched.fifthEmail &&
                           Boolean(formik.errors.fifthEmail)
                         }
+                        helperText={
+                          formik.touched.fifthEmail && formik.errors.fifthEmail
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
                         style={{ marginRight: "1rem", width: "40%" }}
                       />
 
@@ -1448,7 +2025,7 @@ export default function FlexGrow() {
                         }
                       >
                         <FontAwesomeIcon
-                          icon={SR3showExtraFields ? faAngleUp : faAngleDown}
+                          icon={SR3showExtraFields ? faAngleUp : faPlus}
                         />
                       </div>
                     </div>
@@ -1500,19 +2077,6 @@ export default function FlexGrow() {
                   </div>
                 </div>
 
-                <ul>
-                  {formik.touched.fifthFirstName &&
-                    formik.errors.fifthFirstName && (
-                      <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                        {formik.errors.fifthFirstName}
-                      </li>
-                    )}
-                  {formik.touched.fifthEmail && formik.errors.fifthEmail && (
-                    <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                      {formik.errors.fifthEmail}
-                    </li>
-                  )}
-                </ul>
                 <div>
                   <div
                     style={{
@@ -1522,12 +2086,12 @@ export default function FlexGrow() {
                       fontWeight: "normal",
                       color: "#1169E0",
                       marginLeft: "2.5rem",
-                      marginBottom: "1rem",
+                      marginBottom: "0.5rem",
                       marginTop: "0.3rem",
                     }}
                     onClick={() => setSR3IsOpen(!SR3isOpen)}
                   >
-                    Booking Preferences{" "}
+                    Additional Information{" "}
                     <FontAwesomeIcon
                       icon={SR3isOpen ? faAngleUp : faAngleDown}
                     />
@@ -1593,7 +2157,7 @@ export default function FlexGrow() {
                                 width: "90%",
                               }}
                               value={SR3specialRequestMessage}
-                              onChange={handleSR3SpecialRequestChange} 
+                              onChange={handleSR3SpecialRequestChange}
                             />
                           </div>
                         )}
@@ -1671,6 +2235,65 @@ export default function FlexGrow() {
                       </li>
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          setSR3ExpandKidsRequests(!SR3expandKidsRequests)
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Kids club request?{" "}
+                          <FontAwesomeIcon
+                            icon={
+                              SR3expandKidsRequests ? faAngleUp : faAngleDown
+                            }
+                          />
+                        </span>
+                        {SR3expandKidsRequests && (
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <p
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                fontSize: "11px",
+                                fontWeight: "100",
+                              }}
+                            >
+                              Please include any necessary information about
+                              your child such as their name, age, and dietary
+                              information, and we’ll forward it to the property.
+                              Please note, your request is not guaranteed, and
+                              if you don’t hear back from the property, you may
+                              want to contact them directly to confirm.
+                            </p>
+                            <TextField
+                              id="SR3kidsRequests"
+                              name="SR3kidsRequests"
+                              variant="outlined"
+                              fullWidth
+                              multiline
+                              rows={4}
+                              InputProps={{ style: { fontSize: "12px" } }}
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                width: "90%",
+                              }}
+                              value={SR3kidsRequestMessage}
+                              onChange={handleSR3KidsRequestChange}
+                            />
+                          </div>
+                        )}
+                      </li>
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
                         onClick={() => setSR3ExpandArrival(!SR3expandArrival)}
                       >
                         <span
@@ -1743,8 +2366,8 @@ export default function FlexGrow() {
                     background: "#ffffff",
                     borderRadius: "13px",
                     border: "1px solid #DFE0E4",
-                    marginBottom: "10px", 
                     paddingBottom: "0px !important",
+                    marginTop: "1.5rem",
                   }}
                 >
                   <div style={{ width: "35%", marginRight: "10px" }}>
@@ -1753,11 +2376,11 @@ export default function FlexGrow() {
                       alt="Deluxe Suite"
                       style={{
                         width: "100%",
-                        height: "auto", 
+                        height: "auto",
                         borderTopLeftRadius: "13px",
                         borderBottomLeftRadius: "13px",
                         clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
-                        verticalAlign: "bottom", 
+                        verticalAlign: "bottom",
                       }}
                     />
                   </div>
@@ -1822,6 +2445,22 @@ export default function FlexGrow() {
                     </ul>
                   </div>
                 </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="option2"
+                    checked={selectedOption === 2}
+                    onChange={() => handleCheckboxChange(2)}
+                    disabled={selectedOption !== null && selectedOption !== 2}
+                    style={{ marginBottom: "10px" }}
+                  />
+                  <label
+                    htmlFor="option2"
+                    style={{ fontWeight: "100", fontSize: "12px" }}
+                  >
+                    I will be staying in the Deluxe Suite
+                  </label>
+                </div>
                 {/* //////////////////////////DELUXE SUITE ONE////////////////////////// */}
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div>
@@ -1846,7 +2485,7 @@ export default function FlexGrow() {
                         style={{ marginRight: "1rem", width: "40%" }}
                         id="seventhFirstName"
                         name="seventhFirstName"
-                        placeholder="Guest Name"
+                        placeholder="Guest Name (Required)"
                         value={formik.values.seventhFirstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1854,11 +2493,20 @@ export default function FlexGrow() {
                           formik.touched.seventhFirstName &&
                           Boolean(formik.errors.seventhFirstName)
                         }
+                        helperText={
+                          formik.touched.seventhFirstName &&
+                          formik.errors.seventhFirstName
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
                       />
                       <TextField
                         id="seventhEmail"
                         name="seventhEmail"
-                        placeholder="Guest Email"
+                        placeholder="Guest Email (Required)"
                         value={formik.values.seventhEmail}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -1866,6 +2514,15 @@ export default function FlexGrow() {
                           formik.touched.seventhEmail &&
                           Boolean(formik.errors.seventhEmail)
                         }
+                        helperText={
+                          formik.touched.seventhEmail &&
+                          formik.errors.seventhEmail
+                        }
+                        Input={{
+                          classes: {
+                            input: "input-field",
+                          },
+                        }}
                         style={{ marginRight: "1rem", width: "40%" }}
                       />
 
@@ -1880,7 +2537,7 @@ export default function FlexGrow() {
                         }
                       >
                         <FontAwesomeIcon
-                          icon={DS1showExtraFields ? faAngleUp : faAngleDown}
+                          icon={DS1showExtraFields ? faAngleUp : faPlus}
                         />
                       </div>
                     </div>
@@ -2021,20 +2678,6 @@ export default function FlexGrow() {
                   </div>
                 </div>
 
-                <ul>
-                  {formik.touched.seventhFirstName &&
-                    formik.errors.seventhFirstName && (
-                      <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                        {formik.errors.seventhFirstName}
-                      </li>
-                    )}
-                  {formik.touched.seventhEmail &&
-                    formik.errors.seventhEmail && (
-                      <li style={{ color: "#D42F2F", fontWeight: "normal" }}>
-                        {formik.errors.seventhEmail}
-                      </li>
-                    )}
-                </ul>
                 <div>
                   <div
                     style={{
@@ -2044,12 +2687,12 @@ export default function FlexGrow() {
                       fontWeight: "normal",
                       color: "#1169E0",
                       marginLeft: "2.5rem",
-                      marginBottom: "1rem",
+                      marginBottom: "0.5rem",
                       marginTop: "0.3rem",
                     }}
                     onClick={() => setDS1IsOpen(!DS1isOpen)}
                   >
-                    Booking Preferences{" "}
+                    Additional Information{" "}
                     <FontAwesomeIcon
                       icon={DS1isOpen ? faAngleUp : faAngleDown}
                     />
@@ -2115,7 +2758,7 @@ export default function FlexGrow() {
                                 width: "90%",
                               }}
                               value={DS1specialRequestMessage}
-                              onChange={handleDS1SpecialRequestChange} 
+                              onChange={handleDS1SpecialRequestChange}
                             />
                           </div>
                         )}
@@ -2193,6 +2836,65 @@ export default function FlexGrow() {
                       </li>
                       <li
                         style={{ marginTop: "4px", cursor: "pointer" }}
+                        onClick={() =>
+                          setDS1ExpandKidsRequests(!DS1expandKidsRequests)
+                        }
+                      >
+                        <span
+                          style={{
+                            textDecoration: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "normal",
+                            color: "#1169E0",
+                            marginLeft: "3.5rem",
+                          }}
+                        >
+                          Kids club request?{" "}
+                          <FontAwesomeIcon
+                            icon={
+                              DS1expandKidsRequests ? faAngleUp : faAngleDown
+                            }
+                          />
+                        </span>
+                        {DS1expandKidsRequests && (
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <p
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                fontSize: "11px",
+                                fontWeight: "100",
+                              }}
+                            >
+                              Please include any necessary information about
+                              your child such as their name, age, and dietary
+                              information, and we’ll forward it to the property.
+                              Please note, your request is not guaranteed, and
+                              if you don’t hear back from the property, you may
+                              want to contact them directly to confirm.
+                            </p>
+                            <TextField
+                              id="DS1kidsRequests"
+                              name="DS1kidsRequests"
+                              variant="outlined"
+                              fullWidth
+                              multiline
+                              rows={4}
+                              InputProps={{ style: { fontSize: "12px" } }}
+                              style={{
+                                marginLeft: "3.5rem",
+                                marginTop: "0rem",
+                                width: "90%",
+                              }}
+                              value={DS1kidsRequestMessage}
+                              onChange={handleDS1KidsRequestChange}
+                            />
+                          </div>
+                        )}
+                      </li>
+                      <li
+                        style={{ marginTop: "4px", cursor: "pointer" }}
                         onClick={() => setDS1ExpandArrival(!DS1expandArrival)}
                       >
                         <span
@@ -2265,8 +2967,8 @@ export default function FlexGrow() {
                     background: "#ffffff",
                     borderRadius: "13px",
                     border: "1px solid #DFE0E4",
-                    marginBottom: "10px", 
                     paddingBottom: "0px !important",
+                    marginTop: "1.5rem",
                   }}
                 >
                   <div style={{ width: "35%", marginRight: "10px" }}>
@@ -2275,11 +2977,11 @@ export default function FlexGrow() {
                       alt="King Deluxe Suite"
                       style={{
                         width: "100%",
-                        height: "auto", 
+                        height: "auto",
                         borderTopLeftRadius: "13px",
                         borderBottomLeftRadius: "13px",
                         clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
-                        verticalAlign: "bottom", 
+                        verticalAlign: "bottom",
                       }}
                     />
                   </div>
@@ -2344,8 +3046,24 @@ export default function FlexGrow() {
                     </ul>
                   </div>
                 </div>
-
-                {/* //////////////////////////DELUXE SUITE ONE////////////////////////// */}
+                <div>
+                  {" "}
+                  <input
+                    type="checkbox"
+                    id="option3"
+                    checked={selectedOption === 3}
+                    onChange={() => handleCheckboxChange(3)}
+                    disabled={selectedOption !== null && selectedOption !== 3}
+                    style={{ marginBottom: "10px" }}
+                  />
+                  <label
+                    htmlFor="option3"
+                    style={{ fontWeight: "100", fontSize: "12px" }}
+                  >
+                    I will be staying in the King Deluxe Suite
+                  </label>
+                </div>
+                {/* //////////////////////////KING DELUXE SUITE ONE////////////////////////// */}
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div>
                     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -2371,7 +3089,7 @@ export default function FlexGrow() {
                             style={{ marginRight: "1rem", width: "40%" }}
                             id="eleventhFirstName"
                             name="eleventhFirstName"
-                            placeholder="Guest Name"
+                            placeholder="Guest Name (Required)"
                             value={formik.values.eleventhFirstName}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -2379,11 +3097,20 @@ export default function FlexGrow() {
                               formik.touched.eleventhFirstName &&
                               Boolean(formik.errors.eleventhFirstName)
                             }
+                            helperText={
+                              formik.touched.eleventhFirstName &&
+                              formik.errors.eleventhFirstName
+                            }
+                            Input={{
+                              classes: {
+                                input: "input-field",
+                              },
+                            }}
                           />
                           <TextField
                             id="eleventhEmail"
                             name="eleventhEmail"
-                            placeholder="Guest Email"
+                            placeholder="Guest Email (Required)"
                             value={formik.values.eleventhEmail}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -2391,6 +3118,15 @@ export default function FlexGrow() {
                               formik.touched.eleventhEmail &&
                               Boolean(formik.errors.eleventhEmail)
                             }
+                            helperText={
+                              formik.touched.eleventhEmail &&
+                              formik.errors.eleventhEmail
+                            }
+                            Input={{
+                              classes: {
+                                input: "input-field",
+                              },
+                            }}
                             style={{ marginRight: "1rem", width: "40%" }}
                           />
 
@@ -2405,9 +3141,7 @@ export default function FlexGrow() {
                             }
                           >
                             <FontAwesomeIcon
-                              icon={
-                                KDS1showExtraFields ? faAngleUp : faAngleDown
-                              }
+                              icon={KDS1showExtraFields ? faAngleUp : faPlus}
                             />
                           </div>
                         </div>
@@ -2548,24 +3282,6 @@ export default function FlexGrow() {
                       </div>
                     </div>
 
-                    <ul>
-                      {formik.touched.eleventhFirstName &&
-                        formik.errors.eleventhFirstName && (
-                          <li
-                            style={{ color: "#D42F2F", fontWeight: "normal" }}
-                          >
-                            {formik.errors.eleventhFirstName}
-                          </li>
-                        )}
-                      {formik.touched.eleventhEmail &&
-                        formik.errors.eleventhEmail && (
-                          <li
-                            style={{ color: "#D42F2F", fontWeight: "normal" }}
-                          >
-                            {formik.errors.eleventhEmail}
-                          </li>
-                        )}
-                    </ul>
                     <div>
                       <div
                         style={{
@@ -2575,12 +3291,12 @@ export default function FlexGrow() {
                           fontWeight: "normal",
                           color: "#1169E0",
                           marginLeft: "2.5rem",
-                          marginBottom: "1rem",
+                          marginBottom: "0.5rem",
                           marginTop: "0rem",
                         }}
                         onClick={() => setKDS1IsOpen(!KDS1isOpen)}
                       >
-                        Booking Preferences{" "}
+                        Additional Information{" "}
                         <FontAwesomeIcon
                           icon={KDS1isOpen ? faAngleUp : faAngleDown}
                         />
@@ -2650,7 +3366,7 @@ export default function FlexGrow() {
                                     width: "90%",
                                   }}
                                   value={KDS1specialRequestMessage}
-                                  onChange={handleKDS1SpecialRequestChange} 
+                                  onChange={handleKDS1SpecialRequestChange}
                                 />
                               </div>
                             )}
@@ -2731,6 +3447,68 @@ export default function FlexGrow() {
                           <li
                             style={{ marginTop: "4px", cursor: "pointer" }}
                             onClick={() =>
+                              setKDS1ExpandKidsRequests(!KDS1expandKidsRequests)
+                            }
+                          >
+                            <span
+                              style={{
+                                textDecoration: "none",
+                                cursor: "pointer",
+                                fontSize: "11px",
+                                fontWeight: "normal",
+                                color: "#1169E0",
+                                marginLeft: "3.5rem",
+                              }}
+                            >
+                              Kids club request?{" "}
+                              <FontAwesomeIcon
+                                icon={
+                                  KDS1expandKidsRequests
+                                    ? faAngleUp
+                                    : faAngleDown
+                                }
+                              />
+                            </span>
+                            {KDS1expandKidsRequests && (
+                              <div onClick={(e) => e.stopPropagation()}>
+                                <p
+                                  style={{
+                                    marginLeft: "3.5rem",
+                                    marginTop: "0rem",
+                                    fontSize: "11px",
+                                    fontWeight: "100",
+                                  }}
+                                >
+                                  Please include any necessary information about
+                                  your child such as their name, age, and
+                                  dietary information, and we’ll forward it to
+                                  the property. Please note, your request is not
+                                  guaranteed, and if you don’t hear back from
+                                  the property, you may want to contact them
+                                  directly to confirm.
+                                </p>
+                                <TextField
+                                  id="KDS1kidsRequests"
+                                  name="KDS1kidsRequests"
+                                  variant="outlined"
+                                  fullWidth
+                                  multiline
+                                  rows={4}
+                                  InputProps={{ style: { fontSize: "12px" } }}
+                                  style={{
+                                    marginLeft: "3.5rem",
+                                    marginTop: "0rem",
+                                    width: "90%",
+                                  }}
+                                  value={KDS1kidsRequestMessage}
+                                  onChange={handleKDS1KidsRequestChange}
+                                />
+                              </div>
+                            )}
+                          </li>
+                          <li
+                            style={{ marginTop: "4px", cursor: "pointer" }}
+                            onClick={() =>
                               setKDS1ExpandArrival(!KDS1expandArrival)
                             }
                           >
@@ -2801,6 +3579,137 @@ export default function FlexGrow() {
                         </ul>
                       )}
                     </div>
+
+                    {/* //////////////////////////////////////////////FUNCTION ROOM////////////////////////////////////////////// */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "stretch",
+                        width: "99%",
+                        height: "auto",
+                        background: "#ffffff",
+                        borderRadius: "13px",
+                        border: "1px solid #DFE0E4",
+                        marginBottom: "10px",
+                        paddingBottom: "0px !important",
+                        marginTop: "1.5rem",
+                      }}
+                    >
+                      <div style={{ width: "35%", marginRight: "10px" }}>
+                        <img
+                          // img from unsplash
+                          src="https://images.unsplash.com/photo-1620735692151-26a7e0748429?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="Function Room"
+                          style={{
+                            width: "100%",
+                            height: "135px",
+                            borderTopLeftRadius: "13px",
+                            borderBottomLeftRadius: "13px",
+                            clipPath: "polygon(0 0, 100% 0, 82% 100%, 0% 100%)",
+                            verticalAlign: "bottom",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                      <div style={{ width: "65%" }}>
+                        <h2
+                          style={{
+                            fontSize: "18px",
+                            fontWeight: "300",
+                            marginBottom: "10px",
+                          }}
+                        >
+                          Function Room
+                        </h2>
+                        <ul
+                          style={{
+                            listStyle: "none",
+                            padding: 0,
+                            margin: 0,
+                            fontWeight: "100",
+                            fontSize: "11px",
+                          }}
+                        >
+                          {" "}
+                          <li style={{ marginBottom: "0px" }}>
+                            <FontAwesomeIcon
+                              icon={faPersonChalkboard}
+                              style={{
+                                fontSize: "13px",
+                                marginLeft: "2px",
+                                marginRight: "4px",
+                              }}
+                            />{" "}
+                            Audio-visual equipment
+                          </li>
+                          <li
+                            style={{ marginBottom: "0px", marginLeft: "1px" }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faWifi}
+                              style={{ marginRight: "6px" }}
+                            />{" "}
+                            High-speed Wi-Fi
+                          </li>
+                          <li
+                            style={{
+                              marginBottom: "0px",
+                              fontSize: "11px",
+                              marginLeft: "3px",
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faChair}
+                              style={{ marginRight: "11px" }}
+                            />
+                            Flexible seating arrangements
+                          </li>
+                          <li
+                            style={{
+                              marginBottom: "0px",
+                              textAlign: "right",
+                              marginRight: "10px",
+                              fontSize: "16px",
+                            }}
+                          >
+                            €500.00
+                            <div style={{ fontSize: "11px", marginTop: "0px" }}>
+                              per day
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "0rem",
+                        fontSize: "13px",
+                        fontWeight: "100",
+                      }}
+                    >
+                      Please include any necessary information about your event
+                      and we’ll forward it to the property. Please note, if you
+                      don’t hear back from the property, you may want to contact
+                      them directly to confirm.
+                    </p>
+                    <TextField
+                      // text field for function room requests
+                      id="FRRequests"
+                      name="FRRequests"
+                      variant="outlined"
+                      fullWidth
+                      multiline
+                      rows={4}
+                      InputProps={{ style: { fontSize: "12px" } }}
+                      style={{
+                        marginTop: "0rem",
+                        width: "100%",
+                      }}
+                      value={FRRequestMessage}
+                      onChange={handleFRRequestChange}
+                    />
+
+                    <hr />
                     {/* Submit Button */}
                     <div
                       style={{
@@ -2809,16 +3718,43 @@ export default function FlexGrow() {
                         marginTop: "1rem",
                       }}
                     >
-                      <Link to="/CardDetails" className="router-link">
+                      <div
+                        style={{
+                          textAlign: "right",
+                          fontWeight: "100",
+                          fontSize: "11px",
+                          marginRight: "15px",
+                        }}
+                      >
+                        <i>
+                          *<b>Note:</b> Once you confirm the booking, each guest
+                          will receive an email requesting payment for their
+                          share. Those without emails provided are assumed
+                          covered by other room guests.*
+                        </i>
+                      </div>
+                      {/* // if form is valid, link to card details page. */}
+                      {isFormValid ? (
+                        <Link to="/CardDetails" className="router-link">
+                          <Button
+                            color="primary"
+                            variant="contained"
+                            type="submit"
+                          >
+                            Next
+                          </Button>
+                        </Link>
+                      ) : (
+                        // else (if the form is not valid), disable the button
                         <Button
+                          disabled
                           color="primary"
                           variant="contained"
                           type="submit"
-                          style={{ marginLeft: "1rem" }}
                         >
                           Next
                         </Button>
-                      </Link>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -2826,6 +3762,7 @@ export default function FlexGrow() {
             </Item>
           </div>
 
+          {/* // Right component, which is breakdown of the booking information */}
           <Box
             sx={{
               display: "flex",
