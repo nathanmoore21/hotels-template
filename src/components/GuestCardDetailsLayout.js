@@ -16,12 +16,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faTag } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = yup.object({
-  firstName: yup.string().required("First Name is required"),
-  lastName: yup.string().required("Last Name is required"),
-  cardNumber: yup.string().required("Card Number is required"),
-  expiryMonth: yup.string().required("Expiry Month is Required"),
-  expiryYear: yup.string().required("Expiry Year is Required"),
-  securityCode: yup.string().required("Security Code is required"),
+  firstName: yup
+    .string()
+    .required("First Name is required")
+    // Only allow letters in the first name
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
+  lastName: yup
+    .string()
+    .required("Last Name is required")
+    // Only allow letters in the last name
+    .matches(/^[A-Za-z]+$/, "Please enter a valid Last Name"),
+  cardNumber: yup
+    .string()
+    .required("Card Number is required")
+    // Only allow 16 digits in the card number
+    .matches(/^\d{16}$/, "Please enter a valid Card Number"),
+  expiryMonth: yup
+    .string()
+    .required("Expiry Month is Required")
+    // Only allow 2 digits in the expiry month
+    .matches(/^\d{2}$/, "Please enter a valid Expiry Month"),
+  expiryYear: yup
+    .string()
+    .required("Expiry Year is Required")
+    // Only allow 4 digits in the expiry year
+    .matches(/^\d{4}$/, "Please enter a valid Expiry Year"),
+  securityCode: yup
+    .string()
+    .required("Security Code is required")
+    // Only allow 3 digits in the security code
+    .matches(/^\d{3}$/, "Please enter a valid Security Code"),
 });
 
 function Item(props) {
@@ -74,7 +98,9 @@ export default function FlexGrow() {
       alert(JSON.stringify(values, null, 2));
     },
   });
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  // State to check if the form is valid
+  // This is used to disable the submit button if the form is not valid
+  const [isFormValid, setIsFormValid] = React.useState(true);
 
   React.useEffect(() => {
     const isFirstNameValid = formik.values.firstName.trim() !== "";
@@ -89,13 +115,24 @@ export default function FlexGrow() {
         isCardNumberValid &&
         isExpiryMonthlValid &&
         isExpiryYearValid &&
-        isSecurityCodeValid
+        isSecurityCodeValid &&
+        !formik.touched.firstName &&
+        !formik.touched.lastName &&
+        !formik.touched.cardNumber &&
+        !formik.touched.expiryMonth &&
+        !formik.touched.expiryYear &&
+        !formik.touched.securityCode
     );
-  }, [formik.values]);
+  }, [formik.values, formik.touched]);
+
+  React.useEffect(() => {
+    setIsFormValid(formik.isValid);
+  }, [formik.isValid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isFormValid) {
+    if (formik.isValid) {
+      formik.submitForm();
     }
   };
 
@@ -132,7 +169,7 @@ export default function FlexGrow() {
                 Your Unique Booking Code: MQ1234
               </h4>
               <p style={{ marginTop: "0px", marginBottom: "4px" }}>
-                Want to discuss your booking before you confirm? Call us on
+                Want to discuss your booking before you pay? Call us on
                 {" 555-123-4567 "}
               </p>
             </Item>
@@ -381,7 +418,7 @@ export default function FlexGrow() {
                     </div>
                   )}
                 </div>
-
+                {/* // security code */}
                 <div>
                   <h5 className="field-label">
                     Security code <span className="required-indicator">*</span>
@@ -407,7 +444,7 @@ export default function FlexGrow() {
                       },
                     }}
                     style={{ width: "50px" }}
-                    FormHelperTextProps={{ style: { width: "150px" } }}
+                    FormHelperTextProps={{ style: { width: "250px" } }}
                   />
                 </div>
                 <div style={{ marginTop: "1rem" }}>
@@ -421,8 +458,7 @@ export default function FlexGrow() {
                       textAlign: "center",
                     }}
                   >
-                    Your card won’t be charged the full price - only your share
-                    of the booking.
+                    You will only be charged for your share of the booking.
                   </div>
                 </div>
                 {/* Submit Button */}
@@ -433,26 +469,23 @@ export default function FlexGrow() {
                     marginTop: "1rem",
                   }}
                 >
-                  {isFormValid ? (
-                    <Link to="/Confirmation" className="router-link">
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        style={{ width: "auto" }}
-                      >
-                        Confirm & Send Emails
-                      </Button>
-                    </Link>
-                  ) : (
+                  {!formik.isValid ||
+                  Object.keys(formik.touched).length === 0 ||
+                  Object.keys(formik.errors).length > 0 ? (
                     <Button
-                      disabled
                       color="primary"
                       variant="contained"
                       type="submit"
+                      disabled
                     >
                       Confirm
                     </Button>
+                  ) : (
+                    <Link to="/GuestConfirmation" className="router-link">
+                      <Button color="primary" variant="contained" type="submit">
+                        Confirm
+                      </Button>
+                    </Link>
                   )}
                 </div>
               </form>
@@ -514,7 +547,7 @@ export default function FlexGrow() {
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={LogoImage}
-                    alt="Logo"
+                    alt="Hotels.com Logo"
                     style={{ height: "15px", marginRight: "0.5rem" }}
                   />
                   <p className="info-body">1,204 reviews</p>
@@ -541,7 +574,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, March 29, 2024
+                      Friday, May 10, 2024
                     </p>
                   </div>
                   <div
@@ -563,7 +596,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Sunday, March 31, 2024
+                      Sunday, May 12, 2024
                     </p>
                   </div>
                   <div

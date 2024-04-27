@@ -1,10 +1,10 @@
 // import relevant libraries and icons
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import amenitiesIcons from "./data/amenitiesIcons";
+import React, { useState } from "react"; // Import the React and useState hooks
+import { Link } from "react-router-dom"; // Import the Link component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Import the solid heart icon
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Import the regular heart icon
+import amenitiesIcons from "./data/amenitiesIcons"; // Import the amenitiesIcons object
 
 // create HotelResult that takes in a prop hotel
 const HotelResult = ({ hotel }) => {
@@ -82,7 +82,7 @@ const HotelResult = ({ hotel }) => {
         <img
           // display the image of the hotel
           src={image}
-          alt="hotel"
+          alt="Hotel Image"
           style={{
             width: "100%",
             height: "100%",
@@ -149,7 +149,7 @@ const HotelResult = ({ hotel }) => {
           ))}
         </ul> */}
           <div style={{ marginTop: "1.5rem", fontSize: "0.8rem" }}>
-            Reserve now, pay later (31 days ? )
+            Reserve now, pay later.
           </div>
 
           <div
@@ -163,7 +163,7 @@ const HotelResult = ({ hotel }) => {
               src="https://a.travel-assets.com/egds/marks/brands/hotels/loyalty.svg"
               style={{ height: "20px", width: "20px", marginRight: "0.2rem" }}
             ></img>
-            <div>Collect stamps</div>
+            <div>Best Price Guarantee</div>
           </div>
 
           <div

@@ -31,35 +31,48 @@ const validationSchema = yup.object({
   // create validationSchema for the form
   // firstName, firstEmail (and so on) are required
   // yup.string is used to validate the input as a string
-  firstName: yup.string().required("Guest Name is required"),
+  firstName: yup
+    .string()
+    .required("Guest Name is required")
+    // Only allow letters in the first name
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
   firstEmail: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-
-  thirdFirstName: yup.string().required("Guest Name is required"),
+    .required("Email is required")
+    // Validate the email address
+    .email("Please enter a valid email address"),
+  thirdFirstName: yup
+    .string()
+    .required("Guest Name is required")
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
   thirdEmail: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-
-  fifthFirstName: yup.string().required("Guest Name is required"),
+    .required("Email is required")
+    .email("Please enter a valid email address"),
+  fifthFirstName: yup
+    .string()
+    .required("Guest Name is required")
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
   fifthEmail: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-
-  seventhFirstName: yup.string().required("Guest Name is required"),
+    .required("Email is required")
+    .email("Please enter a valid email address"),
+  seventhFirstName: yup
+    .string()
+    .required("Guest Name is required")
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
   seventhEmail: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-
-  eleventhFirstName: yup.string().required("Guest Name is required"),
+    .required("Email is required")
+    .email("Please enter a valid email address"),
+  eleventhFirstName: yup
+    .string()
+    .required("Guest Name is required")
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
   eleventhEmail: yup
     .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
+    .required("Email is required")
+    .email("Please enter a valid email address"),
 });
 
 // create Item component that takes in props
@@ -268,12 +281,19 @@ export default function FlexGrow() {
   // : null means if there is no date, set it to null
   const [SR1checkInDate, setSR1CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("SR1checkInDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : // if there is no date, set it to May 10, 2024
+        new Date(2024, 4, 10);
   });
+
   // check-out date for that room
   const [SR1checkOutDate, setSR1CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("SR1checkOutDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : // if there is no date, set it to May 12, 2024
+        new Date(2024, 4, 12);
   });
 
   // save the check-in date to local storage
@@ -395,11 +415,15 @@ export default function FlexGrow() {
   ] = useState([]);
   const [SR2checkInDate, setSR2CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("SR2checkInDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 10);
   });
   const [SR2checkOutDate, setSR2CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("SR2checkOutDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 12);
   });
 
   useEffect(() => {
@@ -487,11 +511,15 @@ export default function FlexGrow() {
   ] = useState([]);
   const [SR3checkInDate, setSR3CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("SR3checkInDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 10);
   });
   const [SR3checkOutDate, setSR3CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("SR3checkOutDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 12);
   });
 
   useEffect(() => {
@@ -579,11 +607,15 @@ export default function FlexGrow() {
   ] = useState([]);
   const [DS1checkInDate, setDS1CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("DS1checkInDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 10);
   });
   const [DS1checkOutDate, setDS1CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("DS1checkOutDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 12);
   });
 
   useEffect(() => {
@@ -672,11 +704,15 @@ export default function FlexGrow() {
   ] = useState([]);
   const [KDS1checkInDate, setKDS1CheckInDate] = useState(() => {
     const storedDate = localStorage.getItem("KDS1checkInDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 10);
   });
   const [KDS1checkOutDate, setKDS1CheckOutDate] = useState(() => {
     const storedDate = localStorage.getItem("KDS1checkOutDate");
-    return storedDate ? new Date(JSON.parse(storedDate)) : null;
+    return storedDate
+      ? new Date(JSON.parse(storedDate))
+      : new Date(2024, 4, 12);
   });
 
   useEffect(() => {
@@ -747,9 +783,14 @@ export default function FlexGrow() {
     }
   }, []);
 
+  // save the selected option to local storage
+  const [selectedOption, setSelectedOption] = useState(
+    JSON.parse(localStorage.getItem("selectedOption")) || null
+  );
+
   //FORM VALIDATION
   // State to track form validity, initially set to false
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState(true);
   // useEffect hook to check if all required fields are filled
   React.useEffect(
     () => {
@@ -773,9 +814,13 @@ export default function FlexGrow() {
         formik.values.eleventhFirstName.trim() !== "";
       const isEleventhEmailValid = formik.values.eleventhEmail.trim() !== "";
 
+      // Check if an option is selected
+      const isOptionSelected = selectedOption !== null;
+
       // Set the form validity state
       // form is valid if all fields are filled
       // && is the logical AND operator
+      // !formik.touched.firstName means the field is not touched
       setIsFormValid(
         isFirstNameValid &&
           isFirstEmailValid &&
@@ -786,30 +831,52 @@ export default function FlexGrow() {
           isSexenthFirstNameValid &&
           isSeventhEmailValid &&
           isEleventhFirstNameValid &&
-          isEleventhEmailValid
+          isEleventhEmailValid &&
+          isOptionSelected &&
+          !formik.touched.firstName &&
+          !formik.touched.firstEmail &&
+          !formik.touched.thirdFirstName &&
+          !formik.touched.thirdEmail &&
+          !formik.touched.fifthFirstName &&
+          !formik.touched.fifthEmail &&
+          !formik.touched.seventhFirstName &&
+          !formik.touched.seventhEmail &&
+          !formik.touched.eleventhFirstName &&
+          !formik.touched.eleventhEmail
       );
     },
     // [formik.values] is the dependency array which means React will re-run the effect if any of the values in the dependency array change.
-    [formik.values]
+    // [selectedOption] is the dependency array which means React will re-run the effect if the selected option changes.
+    // [formik.touched] is the dependency array which means React will re-run the effect if the touched state changes.
+    [formik.values, selectedOption, formik.touched]
   );
+
+  // useEffect hook to update the form validity state
+  React.useEffect(() => {
+    setIsFormValid(formik.isValid);
+    // formik.isValid is the dependency array which means React will re-run the effect if the isValid state changes.
+  }, [formik.isValid]);
+
   // Function to handle form submission
   // e is the event object
-  // const handleSubmit = (e) => {
-  //   // prevent the default form submission behavior
-  //   e.preventDefault();
-  //   // Check if the form is valid
-  //   if (isFormValid) {
-  //   }
-  // };
+  const handleSubmit = (e) => {
+    // Prevent the default form submission behavior
+    e.preventDefault();
+    // Proceed to the next page if form is valid
+    if (formik.isValid) {
+      formik.submitForm();
+    }
+  };
 
-  // function to determin what room the lead booker is staying in
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  // Function to handle checkbox state changes
   const handleCheckboxChange = (option) => {
-    // Check if the selected option is what is currently selected
-    // If it is, set the selected option to null which will unselect it
-    // If it's different, set the selected option to the clicked option
+    // Update the selected option state
     setSelectedOption(selectedOption === option ? null : option);
+    // Save the selected option to local storage
+    localStorage.setItem(
+      "selectedOption",
+      JSON.stringify(selectedOption === option ? null : option)
+    );
   };
 
   return (
@@ -913,7 +980,7 @@ export default function FlexGrow() {
                   }}
                 />
                 <div style={{ flex: "70%" }}>
-                  Share the cost, each room covers their own share
+                  Share the cost; each room covers their own share
                 </div>
               </div>
               <div
@@ -991,7 +1058,7 @@ export default function FlexGrow() {
                 <div style={{ width: "35%", marginRight: "10px" }}>
                   <img
                     src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Twin Room"
+                    alt="Standard Double Room Image"
                     style={{
                       width: "100%",
                       height: "auto",
@@ -2373,7 +2440,7 @@ export default function FlexGrow() {
                   <div style={{ width: "35%", marginRight: "10px" }}>
                     <img
                       src="https://images.unsplash.com/photo-1629078691977-dc51747c0263?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      alt="Deluxe Suite"
+                      alt="Deluxe Suite Image"
                       style={{
                         width: "100%",
                         height: "auto",
@@ -2974,7 +3041,7 @@ export default function FlexGrow() {
                   <div style={{ width: "35%", marginRight: "10px" }}>
                     <img
                       src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      alt="King Deluxe Suite"
+                      alt="King Deluxe Suite Image"
                       style={{
                         width: "100%",
                         height: "auto",
@@ -3734,26 +3801,33 @@ export default function FlexGrow() {
                         </i>
                       </div>
                       {/* // if form is valid, link to card details page. */}
-                      {isFormValid ? (
+                      {!formik.isValid ||
+                      // Check if the form is touched and has errors
+                      Object.keys(formik.touched).length === 0 ||
+                      // Check if the form has errors
+                      Object.keys(formik.errors).length > 0 ? (
+                        // If form is invalid, disable the button
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          type="submit"
+                          disabled
+                          style={{ width: "auto" }}
+                        >
+                          Next
+                        </Button>
+                      ) : (
+                        // If form is valid, link to card details page
                         <Link to="/CardDetails" className="router-link">
                           <Button
                             color="primary"
                             variant="contained"
                             type="submit"
+                            style={{ width: "auto" }}
                           >
                             Next
                           </Button>
                         </Link>
-                      ) : (
-                        // else (if the form is not valid), disable the button
-                        <Button
-                          disabled
-                          color="primary"
-                          variant="contained"
-                          type="submit"
-                        >
-                          Next
-                        </Button>
                       )}
                     </div>
                   </div>
@@ -3845,7 +3919,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, March 29, 2024
+                      Friday, May 10, 2024
                     </p>
                   </div>
                   <div
@@ -3867,7 +3941,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Sunday, March 31, 2024
+                      Sunday, May 12, 2024
                     </p>
                   </div>
                   <div

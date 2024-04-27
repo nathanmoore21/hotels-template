@@ -15,9 +15,9 @@ function Confirmation() {
       <ResponsiveAppBar />
       <div
         style={{
-          position: "absolute", // Set position to absolute
-          top: "50%", // Set top to 50%
-          left: "50%", // Set left to 50%
+          position: "absolute",
+          top: "50%",
+          left: "50%",
           transform: "translate(-50%, -50%)", // Translate the div to the center of the screen
           display: "flex",
           flexDirection: "column",
@@ -47,7 +47,7 @@ function Confirmation() {
             marginTop: "10px",
           }}
         >
-          Your booking has been updated
+          Your Booking Has Been Updated
         </p>
         <p
           style={{

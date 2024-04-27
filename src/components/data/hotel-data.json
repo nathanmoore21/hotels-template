@@ -9,10 +9,10 @@
       "amenities": [
         "Complimentary Wi-Fi",
         "Pool",
-        "Airport shuttle included",
-        "Room service",
-        "Air conditioning",
-        "Concierge service"
+        "Airport Shuttle Included",
+        "Room Service",
+        "Air Conditioning",
+        "Concierge Service"
       ],
       "address": "123 Main Street, Dublin, Ireland",
       "nearby": [
@@ -50,12 +50,12 @@
       "function_room": {
         "price_per_day": "1000",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control"
         ]
       }
     },
@@ -68,11 +68,11 @@
       "event_management_rating": 9.0,
       "amenities": [
         "Flat-screen TV",
-        "Coffee maker",
-        "Premium bath amenities",
-        "Room service",
+        "Coffee Maker",
+        "Premium Bath Amenities",
+        "Room Service",
         "Pool",
-        "On-site fitness center"
+        "On-site Fitness Center"
       ],
       "address": "456 Park Avenue, Dublin, Ireland",
       "nearby": [
@@ -111,11 +111,11 @@
         "price_per_day": "600",
         "amenities": [
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Adjustable lighting options",
-          "Accessible facilities"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Adjustable Lighting Options",
+          "Accessible Facilities"
         ]
       }
     },
@@ -128,11 +128,11 @@
       "event_management_rating": 8.5,
       "amenities": [
         "Complimentary Wi-Fi",
-        "Plush bathrobes and slippers",
+        "Plush Bathrobes and Slippers",
         "Hairdryer",
-        "Daily housekeeping",
-        "Work desk",
-        "Electronic key card"
+        "Daily Housekeeping",
+        "Work Desk",
+        "Electronic Key Card"
       ],
       "address": "789 Riverside Drive, Dublin, Ireland",
       "nearby": [
@@ -170,12 +170,12 @@
       "function_room": {
         "price_per_day": "400",
         "amenities": [
-          "Audio-visual equipment",
-          "Flexible seating arrangements",
-          "Climate control",
-          "Whiteboards or flip charts",
-          "Podium or stage",
-          "Accessible facilities"
+          "Audio-visual Equipment",
+          "Flexible Seating Options",
+          "Climate Control",
+          "Whiteboards or Flip Charts",
+          "Podium or Stage",
+          "Accessible Facilities"
         ]
       }
     },
@@ -189,10 +189,10 @@
       "amenities": [
         "Flat-screen TV",
         "Pool",
-        "Coffee maker",
-        "In-room safe",
-        "Airport shuttle included",
-        "Bottled water"
+        "Coffee Maker",
+        "In-room Safe",
+        "Airport Shuttle Included",
+        "Bottled Water"
       ],
       "address": "101 Hilltop Avenue, Dublin, Ireland",
       "nearby": [
@@ -230,12 +230,12 @@
       "function_room": {
         "price_per_day": "700",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control"
         ]
       }
     },
@@ -248,11 +248,11 @@
       "event_management_rating": 8.0,
       "amenities": [
         "Flat-screen TV",
-        "Coffee maker",
-        "Premium bath amenities",
-        "Daily housekeeping service",
-        "Room service",
-        "USB charging ports"
+        "Coffee Maker",
+        "Premium Bath Amenities",
+        "Daily Housekeeping Service",
+        "Room Service",
+        "USB Charging Ports"
       ],
       "address": "987 Harbor Road, Dublin, Ireland",
       "nearby": [
@@ -290,12 +290,12 @@
       "function_room": {
         "price_per_day": "550",
         "amenities": [
-          "Audio-visual equipment",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control",
-          "Whiteboards or flip charts"
+          "Audio-visual Equipment",
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control",
+          "Whiteboards or Flip Charts"
         ]
       }
     },
@@ -308,11 +308,11 @@
       "event_management_rating": 8.6,
       "amenities": [
         "Complimentary Wi-Fi",
-        "Coffee maker",
-        "Plush bathrobes and slippers",
-        "In-room safe",
+        "Coffee Maker",
+        "Plush Bathrobes and Slippers",
+        "In-room Safe",
         "Hairdryer",
-        "Air conditioning"
+        "Air Conditioning"
       ],
       "address": "246 Serenity Street, Dublin, Ireland",
       "nearby": [
@@ -350,12 +350,12 @@
       "function_room": {
         "price_per_day": "600",
         "amenities": [
-          "Audio-visual equipment",
-          "Flexible seating arrangements",
-          "Event planning staff",
-          "Climate control",
-          "Adjustable lighting options",
-          "Whiteboards or flip charts"
+          "Audio-visual Equipment",
+          "Flexible Seating Options",
+          "Event Planning Staff",
+          "Climate Control",
+          "Adjustable Lighting Options",
+          "Whiteboards or Flip Charts"
         ]
       }
     },
@@ -410,12 +410,12 @@
       "function_room": {
         "price_per_day": "700",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control"
         ]
       }
     },
@@ -429,10 +429,10 @@
       "amenities": [
         "Complimentary Wi-Fi",
         "Pool",
-        "Coffee maker",
-        "Airport shuttle included",
-        "Daily housekeeping service",
-        "Room service"
+        "Coffee Maker",
+        "Airport Shuttle Included",
+        "Daily Housekeeping Service",
+        "Room Service"
       ],
       "address": "567 Bridge Street, Dublin, Ireland",
       "nearby": [
@@ -470,12 +470,12 @@
       "function_room": {
         "price_per_day": "500",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Catering services",
-          "Event planning staff",
-          "Climate control",
-          "Whiteboards or flip charts"
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control",
+          "Whiteboards or Flip Charts"
         ]
       }
     },
@@ -488,11 +488,11 @@
       "event_management_rating": 9.1,
       "amenities": [
         "Flat-screen TV",
-        "Plush bathrobes and slippers",
-        "In-room safe",
-        "Premium bath amenities",
-        "Room service",
-        "Air conditioning"
+        "Plush Bathrobes and Slippers",
+        "In-room Safe",
+        "Premium Bath Amenities",
+        "Room Service",
+        "Air Conditioning"
       ],
       "address": "753 Grand Avenue, Dublin, Ireland",
       "nearby": [
@@ -530,12 +530,12 @@
       "function_room": {
         "price_per_day": "800",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control"
         ]
       }
     }, 
@@ -549,10 +549,10 @@
       "amenities": [
         "Complimentary Wi-Fi",
         "Pool",
-        "Airport shuttle included",
-        "Room service",
-        "Air conditioning",
-        "Concierge service"
+        "Airport Shuttle Included",
+        "Room Service",
+        "Air Conditioning",
+        "Concierge Service"
       ],
       "address": "123 Main Street, Dublin, Ireland",
       "nearby": [
@@ -590,12 +590,12 @@
       "function_room": {
         "price_per_day": "500",
         "amenities": [
-          "Audio-visual equipment",
+          "Audio-visual Equipment",
           "High-speed Wi-Fi",
-          "Flexible seating arrangements",
-          "Catering services",
-          "Event planning staff",
-          "Climate control"
+          "Flexible Seating Options",
+          "Catering Services",
+          "Event Planning Staff",
+          "Climate Control"
         ]
       }
     }

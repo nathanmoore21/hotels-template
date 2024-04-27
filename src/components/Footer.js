@@ -8,7 +8,7 @@ const Footer = () => {
       <footer style={{ backgroundColor: "transparent" }}>
         <div className="footer-columns">
           <div className="footer-column">
-            <div className="footer-title">Top destinations</div>
+            <div className="footer-title">Top Destinations</div>
             <ul>
               <li>
                 <a href="/">Hotels in Dublin</a>
@@ -85,7 +85,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer-column">
-            <div className="footer-title">Top countries & regions</div>
+            <div className="footer-title">Top Countries & Regions</div>
             <ul>
               <li>
                 <a href="/">Hotels in Ireland</a>
@@ -126,7 +126,7 @@ const Footer = () => {
             <div className="footer-title">Support & FAQs</div>
             <ul>
               <li>
-                <a href="/payments">Your booking</a>
+                <a href="/payments">Your Booking</a>
               </li>
               <li>
                 <a href="/guestcarddetails">Guest Booking</a>
@@ -135,24 +135,24 @@ const Footer = () => {
                 <a href="/">FAQs</a>
               </li>
               <li>
-                <a href="/">Contact us</a>
+                <a href="/">Contact Us</a>
               </li>
               <li>
-                <a href="/">Review a property</a>
+                <a href="/">Review a Property</a>
               </li>
             </ul>
           </div>
           <div className="footer-column">
-            <div className="footer-title">For suppliers</div>
+            <div className="footer-title">For Suppliers</div>
             <ul>
               <li>
-                <a href="/">Affiliate with us</a>
+                <a href="/">Affiliate with Us</a>
               </li>
               <li>
                 <a href="/">Expedia Partner Solutions</a>
               </li>
               <li>
-                <a href="/">Promote with us</a>
+                <a href="/">Promote with Us</a>
               </li>
               <li>
                 <a href="/">Travel Agents</a>
@@ -178,21 +178,21 @@ const Footer = () => {
                 <a href="/">Legal information / Contact us</a>
               </li>
               <li>
-                <a href="/">Content guidelines</a>
+                <a href="/">Content Guidelines</a>
               </li>
             </ul>
           </div>
           <div className="footer-column">
-            <div className="footer-title">Other information</div>
+            <div className="footer-title">Other Information</div>
             <ul>
               <li>
-                <a href="/">About us</a>
+                <a href="/">About Us</a>
               </li>
               <li>
                 <a href="/">Careers</a>
               </li>
               <li>
-                <a href="/">Travel guides</a>
+                <a href="/">Travel Guides</a>
               </li>
             </ul>
           </div>

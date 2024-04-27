@@ -18,22 +18,30 @@ function Results() {
   // Declare variable filteredHotels and a function setFilteredHotels to update it, initialised with an empty array
   const [filteredHotels, setFilteredHotels] = useState([]);
 
+  // Declare variable resultCount and a function setResultCount to update it, initialised with 0
+  const [resultCount, setResultCount] = useState(0);
+
+  useEffect(() => {
+    // Update result count when filteredHotels changes
+    setResultCount(filteredHotels.length);
+  }, [filteredHotels]);
+
   // Define hotel room amenities
   const hotelRoomAmenities = [
     "Complimentary Wi-Fi",
     "Pool",
-    "Airport shuttle included",
-    "Room service",
-    "Air conditioning",
+    "Airport Shuttle Included",
+    "Room Service",
+    "Air Conditioning",
   ];
 
   // Define function room amenities
   const functionRoomAmenities = [
-    "Audio-visual equipment",
+    "Audio-visual Equipment",
     "High-speed Wi-Fi",
-    "Flexible seating arrangements",
-    "Catering services",
-    "Climate control",
+    "Flexible Seating Arrangements",
+    "Catering Services",
+    "Climate Control",
   ];
 
   // Combine both arrays into one array
@@ -177,7 +185,6 @@ function Results() {
     });
   };
 
-  // Define a function to handle changes to the filter criteria
   const handleFilterChange = ({
     minPrice,
     maxPrice,
@@ -187,10 +194,6 @@ function Results() {
     // Filter hotels based on the price range, guest rating, star rating, and selected amenities
     let filteredHotels = hotelData.filter((hotel) => {
       // Convert the minPrice and maxPrice strings to numbers
-      // !== "" is used to check if the minPrice and maxPrice are not empty
-      // parseInt() is used to convert the string to an integer
-      // 0 is used as the default value for minPrice
-      // Number.MAX_VALUE is used as the default value for maxPrice
       const min = minPrice !== "" ? parseInt(minPrice) : 0;
       const max = maxPrice !== "" ? parseInt(maxPrice) : Number.MAX_VALUE;
       // Set the default minRating and maxRating values
@@ -211,21 +214,8 @@ function Results() {
         default:
           break;
       }
-      // Check if the hotel contains at least one of the selected amenities
-      const includesAmenity = selectedAmenities.some(
-        // .some() is used to check if any of the selected amenities are included in the hotel amenities
-        (amenity) =>
-          // || is the OR operator
-          hotel.amenities.includes(amenity) ||
-          (hotel.function_room &&
-            hotel.function_room.amenities.includes(amenity))
-      );
-
       return (
-        // .some() is used to check if any of the room prices are within the price range
-        // >= is used to check if the price is greater than or equal to the min price
-        // <= is used to check if the price is less than or equal to the max price
-        // && is the AND operator
+        // Check if the hotel meets all filter criteria
         hotel.hotel_room.some(
           (room) =>
             parseFloat(room.price_per_night) >= min &&
@@ -233,11 +223,7 @@ function Results() {
         ) &&
         hotel.guest_review_rating >= minRating &&
         hotel.guest_review_rating < maxRating &&
-        // === "" is used to check if the starRating is empty
-        // || is the OR operator
-        (starRating === "" || hotel.star_rating.toString() === starRating) &&
-        // Check if the hotel contains at least one of the selected amenities
-        includesAmenity
+        (starRating === "" || hotel.star_rating.toString() === starRating)
       );
     });
 
@@ -303,13 +289,33 @@ function Results() {
                       value: "functionRoomPriceHighToLow",
                     },
                   ]}
+                  // result count is passed as a prop to the SortDropdown component
+                  resultCount={filteredHotels.length}
                 />
               </div>
               <div>
-                {/* Map through the filteredHotels array and display the HotelResult component for each hotel */}
-                {filteredHotels.map((hotel, index) => (
-                  <HotelResult key={index} hotel={hotel} />
-                ))}
+                {/* // Display the results found */}
+                {filteredHotels.length > 0 ? (
+                  filteredHotels.map((hotel, index) => (
+                    <HotelResult key={index} hotel={hotel} />
+                  ))
+                ) : (
+                  // Display a message when no results are found
+                  <div
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                      marginTop: "4rem",
+                    }}
+                  >
+                    <h3>
+                      Oh no! It looks like we've run out of options for you!
+                    </h3>
+                    <p style={{ fontSize: "20px" }}>
+                      Please adjust your filters to find available options.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

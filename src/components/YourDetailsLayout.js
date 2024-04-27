@@ -21,10 +21,26 @@ import * as yup from "yup"; // Import the yup library
 // Create the validation schema
 const validationSchema = yup.object({
   // all fields are required
-  firstName: yup.string().required("First Name is required"),
-  lastName: yup.string().required("Last Name is required"),
-  email: yup.string().required("Email is required"),
-  phoneNumber: yup.string().required("Phone Number is Required"),
+  firstName: yup
+    .string()
+    .required("First Name is required")
+    // only letters are allowed
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
+  lastName: yup
+    .string()
+    .required("Last Name is required")
+    // only letters are allowed
+    .matches(/^[A-Za-z]+$/, "Please enter a valid Last Name"),
+  email: yup
+    .string()
+    .required("Email is required")
+    // email validation
+    .email("Please enter a valid email address"),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is Required")
+    // phone number validation
+    .matches(/^\d{10}$/, "Please enter a valid Phone Number"),
 });
 
 // Create the Item component
@@ -87,9 +103,9 @@ export default function UserDetails() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
   // State to track form validity
-  // (false) is the initial value of the state (form is not valid by default)
-  const [isFormValid, setIsFormValid] = React.useState(false); // State to track form validity
+  const [isFormValid, setIsFormValid] = React.useState(true);
 
   // useEffect hook to check if all required fields are filled
   React.useEffect(
@@ -105,16 +121,26 @@ export default function UserDetails() {
       // Set the form validity state
       // form is valid if all fields are filled
       // && is the logical AND operator
+      // ! is the logical NOT operator
       setIsFormValid(
         isFirstNameValid &&
           isLastNameValid &&
           isEmailValid &&
-          isPhoneNumberValid
+          isPhoneNumberValid &&
+          !formik.touched.firstName &&
+          !formik.touched.lastName &&
+          !formik.touched.email &&
+          !formik.touched.phoneNumber
       );
     },
     // [formik.values] is the dependency array which means React will re-run the effect if any of the values in the dependency array change.
-    [formik.values]
+    [formik.values, formik.touched]
   );
+
+  // Update the form validity state whenever the form changes
+  React.useEffect(() => {
+    setIsFormValid(formik.isValid);
+  }, [formik.isValid]);
 
   // Function to handle form submission
   // e is the event object
@@ -122,12 +148,13 @@ export default function UserDetails() {
     // Prevent the default form submission behavior
     e.preventDefault();
     // Proceed to the next page if form is valid
-    if (isFormValid) {
+    if (formik.isValid) {
       // Show confirmation dialog before navigating
       // if (window.confirm("Are you sure you want to continue?")) {
       // Navigate to the next page
       // Example: history.push('/NextPage');
       // }
+      formik.submitForm();
     }
   };
 
@@ -230,7 +257,7 @@ export default function UserDetails() {
                 }}
               />
               <div style={{ flex: "70%" }}>
-                Share the cost, each room covers their own share
+                Share the cost; each room covers their own share
               </div>
             </div>
             <div
@@ -304,7 +331,7 @@ export default function UserDetails() {
                   icon={faBusSimple}
                   style={{ marginRight: "0.5rem", marginLeft: "0.8rem" }}
                 />
-                Airport shuttle included
+                Airport Shuttle Included
                 <FontAwesomeIcon
                   icon={faBellConcierge}
                   style={{ marginRight: "0.5rem", marginLeft: "0.8rem" }}
@@ -422,21 +449,34 @@ export default function UserDetails() {
                 {/* // Add the Next button */}
                 {/* // if the form is valid, the button is enabled */}
                 {/* // if the form is invalid, the button is disabled */}
-                {isFormValid ? (
-                  <Link to="/RoomDetails" className="router-link">
-                    <Button color="primary" variant="contained" type="submit">
-                      Next
-                    </Button>
-                  </Link>
-                ) : (
+                {/* // If the button is disabled, render a disabled button without the Link */}
+                {/* // If the button is enabled, render the Link wrapping the button */}
+                {!formik.isValid ||
+                // Check if the form is touched and has errors
+                Object.keys(formik.touched).length === 0 ||
+                // Check if the form has errors
+                Object.keys(formik.errors).length > 0 ? (
                   <Button
-                    disabled
                     color="primary"
                     variant="contained"
                     type="submit"
+                    disabled
+                    style={{ width: "auto" }}
                   >
                     Next
                   </Button>
+                ) : (
+                  // If the form is valid, render the Link wrapping the button
+                  <Link to="/RoomDetails" className="router-link">
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      type="submit"
+                      style={{ width: "auto" }}
+                    >
+                      Next
+                    </Button>
+                  </Link>
                 )}
               </div>
             </form>
@@ -525,7 +565,7 @@ export default function UserDetails() {
                 >
                   <p className="info-body">Check-in</p>
                   <p className="info-body" style={{ fontWeight: 600 }}>
-                    Friday, March 29, 2024
+                    Friday, May 10, 2024
                   </p>
                 </div>
                 <div
@@ -547,7 +587,7 @@ export default function UserDetails() {
                 >
                   <p className="info-body">Check-out</p>
                   <p className="info-body" style={{ fontWeight: 600 }}>
-                    Sunday, March 31, 2024
+                    Sunday, May 12, 2024
                   </p>
                 </div>
                 <div

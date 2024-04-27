@@ -75,6 +75,16 @@ function FilterCheckboxes({
     onFilterChange({ minPrice, maxPrice, guestRating, starRating: newRating });
   };
 
+  // Define state for selected area
+  const [selectedArea, setSelectedArea] = useState("");
+
+  // Define event handlers for area
+  // value is the value of the radio button
+  const handleAreaChange = (value) => {
+    // Update the selected area state
+    setSelectedArea(value);
+  };
+
   return (
     <Box
       component="form"
@@ -285,8 +295,9 @@ function FilterCheckboxes({
         ))}
       </div>
 
+      {/* // checkbox Traveller experience - doesn't work, just a placeholder */}
       <div style={{ fontSize: "15px", marginTop: "30px", fontWeight: 400 }}>
-        Traveller experience
+        Traveller Experience
       </div>
       <label className="checkbox-label">
         <input type="checkbox" />
@@ -294,7 +305,7 @@ function FilterCheckboxes({
       </label>
       <label className="checkbox-label">
         <input type="checkbox" />
-        LGBTQ welcoming
+        LGBTQ Welcoming
       </label>
       <label className="checkbox-label">
         <input type="checkbox" />
@@ -303,6 +314,131 @@ function FilterCheckboxes({
       <label className="checkbox-label">
         <input type="checkbox" />
         Family-friendly
+      </label>
+
+      {/* //checkbox for accessibility - doesn't work, just a placeholder*/}
+      <div style={{ fontSize: "15px", marginTop: "30px", fontWeight: 400 }}>
+        Accessibility
+      </div>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        Lift
+      </label>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        Stair-free Path to Entrance
+      </label>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        Service Animals Allowed
+      </label>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        Roll-in Shower
+      </label>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        In-room Accessibility
+      </label>
+      <label className="checkbox-label">
+        <input type="checkbox" />
+        Wheelchair-accessible Parking
+      </label>
+
+      {/* // radio buttons for area - doesn't work, just a placeholder*/}
+      <div style={{ fontSize: "15px", marginTop: "30px", fontWeight: 400 }}>
+        Area
+      </div>
+
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Dublin City"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Dublin City
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Blanchardstown"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Blanchardstown
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Malahide"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Malahide
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Dun Laoghaire"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Dun Laoghaire
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Tallaght"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Tallaght
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Connolly Station"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Connolly Station
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Howth"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Howth
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Swords"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Swords
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Leopardstown"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Leopardstown
+      </label>
+      <label className="radio-label">
+        <input
+          type="radio"
+          name="area"
+          value="Clontarf"
+          onChange={(e) => handleAreaChange(e.target.value)}
+        />
+        Clontarf
       </label>
     </Box>
   );

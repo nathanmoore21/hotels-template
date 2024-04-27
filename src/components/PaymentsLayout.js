@@ -1,4 +1,4 @@
-// a replica from the RoomDetailsLayout.js file, 
+// a replica from the RoomDetailsLayout.js file,
 // this is where the lead boooker can access the booking details and make changes to the booking
 
 import React, { useState, useEffect } from "react";
@@ -25,6 +25,8 @@ import {
   faTag,
   faBellConcierge,
   faCircleCheck,
+  faCheck,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import LogoImage from "./images/logo.svg";
 
@@ -900,7 +902,7 @@ export default function FlexGrow() {
                 <div style={{ width: "35%", marginRight: "10px" }}>
                   <img
                     src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Twin Room"
+                    alt="Standard Double Room Image"
                     style={{
                       width: "100%",
                       height: "auto",
@@ -1107,8 +1109,8 @@ export default function FlexGrow() {
 
                 <div>
                   <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
-                    {formik.values.firstName} and{" "}
-                    {formik.values.secondFirstName} have paid.
+                    <FontAwesomeIcon icon={faCheck} /> {formik.values.firstName}{" "}
+                    and {formik.values.secondFirstName} have paid.
                   </div>
                   <div
                     style={{
@@ -1519,7 +1521,8 @@ export default function FlexGrow() {
                 </div>
 
                 <div>
-                  <div style={{ marginLeft: "2.5rem", color: "#FF0000" }}>
+                  <div style={{ marginLeft: "2.5rem", color: "#d91f11" }}>
+                    <FontAwesomeIcon icon={faXmark} />{" "}
                     {formik.values.thirdFirstName} and{" "}
                     {formik.values.forthFirstName} have not yet paid.
                   </div>
@@ -1930,9 +1933,11 @@ export default function FlexGrow() {
 
                 <div>
                   <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
+                    <FontAwesomeIcon icon={faCheck} />{" "}
                     {formik.values.fifthFirstName} has paid.
                   </div>
-                  <div style={{ marginLeft: "2.5rem", color: "#FF0000" }}>
+                  <div style={{ marginLeft: "2.5rem", color: "#d91f11" }}>
+                    <FontAwesomeIcon icon={faXmark} />{" "}
                     {formik.values.sixthFirstName} has not yet paid.
                   </div>
                   <div
@@ -2230,7 +2235,7 @@ export default function FlexGrow() {
                   <div style={{ width: "35%", marginRight: "10px" }}>
                     <img
                       src="https://images.unsplash.com/photo-1629078691977-dc51747c0263?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      alt="Deluxe Suite"
+                      alt="Deluxe Suite Image"
                       style={{
                         width: "100%",
                         height: "auto",
@@ -2528,6 +2533,7 @@ export default function FlexGrow() {
 
                 <div>
                   <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
+                    <FontAwesomeIcon icon={faCheck} />{" "}
                     {formik.values.seventhFirstName} has paid.
                   </div>
                   <div
@@ -2825,7 +2831,7 @@ export default function FlexGrow() {
                   <div style={{ width: "35%", marginRight: "10px" }}>
                     <img
                       src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      alt="King Deluxe Suite"
+                      alt="King Deluxe Suite Image"
                       style={{
                         width: "100%",
                         height: "auto",
@@ -3125,6 +3131,7 @@ export default function FlexGrow() {
 
                     <div>
                       <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
+                        <FontAwesomeIcon icon={faCheck} />{" "}
                         {formik.values.eleventhFirstName},{" "}
                         {formik.values.twelfthFirstName},{" "}
                         {formik.values.thirteenthFirstName},{" "}
@@ -3553,35 +3560,18 @@ export default function FlexGrow() {
                       onChange={handleFRRequestChange}
                     />
 
-                    <hr />
                     {/* Submit Button */}
                     <div
                       style={{
                         display: "flex",
                         justifyContent: "flex-end",
-                        marginTop: "1rem",
                       }}
                     >
                       <div
                         style={{
-                          textAlign: "right",
-                          fontWeight: "100",
-                          fontSize: "11px",
-                          marginRight: "15px",
-                        }}
-                      >
-                        <i>
-                          *<b>Note:</b> Once you confirm the booking, each guest
-                          will receive an email requesting payment for their
-                          share. Those without emails provided are assumed
-                          covered by other room guests.*
-                        </i>
-                      </div>
-                      <div
-                        style={{
                           display: "flex",
                           justifyContent: "flex-end",
-                          marginTop: "1rem",
+                          marginTop: "0.5rem",
                         }}
                       >
                         <Link to="/UpdateConfirmation" className="router-link">
@@ -3657,7 +3647,7 @@ export default function FlexGrow() {
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={LogoImage}
-                    alt="Logo"
+                    alt="Hotels.com Logo"
                     style={{ height: "15px", marginRight: "0.5rem" }}
                   />
                   <p className="info-body">1,204 reviews</p>
@@ -3684,7 +3674,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, March 29, 2024
+                      Friday, May 10, 2024
                     </p>
                   </div>
                   <div
@@ -3706,7 +3696,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Sunday, March 31, 2024
+                      Sunday, May 12, 2024
                     </p>
                   </div>
                   <div

@@ -1,16 +1,17 @@
 // import relevant libraries and components
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import ResponsiveAppBar from "./ResponsiveAppBar";
-import Footer from "./Footer";
-import { Link } from "react-router-dom";
-import { Icon } from "@iconify/react";
-import starIcon from "@iconify/icons-ion/ios-star";
-import checkmarkIcon from "@iconify/icons-ion/checkmark";
-import locationIcon from "@iconify-icons/mdi/map-marker";
-import Button from "@material-ui/core/Button";
-import { Icon as IconifyIcon } from "@iconify/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react"; // Import the useState hook
+import { useParams } from "react-router-dom"; // Import the useParams hook
+import ResponsiveAppBar from "./ResponsiveAppBar"; // Import the ResponsiveAppBar component
+import Footer from "./Footer"; // Import the Footer component
+import { Link } from "react-router-dom"; // Import the Link component
+import { Icon } from "@iconify/react"; // Import the Icon component
+import starIcon from "@iconify/icons-ion/ios-star"; // Import the star icon
+import checkmarkIcon from "@iconify/icons-ion/checkmark"; // Import the checkmark icon
+import locationIcon from "@iconify-icons/mdi/map-marker"; // Import the location icon
+import Button from "@material-ui/core/Button"; // Import the Button component
+import { Icon as IconifyIcon } from "@iconify/react"; // Import the Icon component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
+// Import the icons from the fontawesome library
 import {
   faBabyCarriage,
   faChildReaching,
@@ -19,11 +20,9 @@ import {
   faExpand,
   faBed,
   faUsers,
-  faHeart as solidHeart,
-} from "@fortawesome/free-solid-svg-icons";
-import {
   faShoppingBasket,
   faAngleDown,
+  faHeart as solidHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 // import amenitiesIcons so we can access the icons from file
@@ -296,7 +295,8 @@ const HotelPage = ({ hotels }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    {/* // Multiply the total price by 2 */}€{totalPrice * 2}
+                    {/* // Multiply the total price by 2 (for two nights) */}€
+                    {totalPrice * 2}
                   </span>
                 </div>
                 <div
@@ -456,7 +456,7 @@ const HotelPage = ({ hotels }) => {
           {/* // Add the hotel image, name, star rating, and description */}
           <img
             src={image}
-            alt="Hotel"
+            alt="Hotel Image"
             style={{ width: "100%", height: "300px", objectFit: "cover" }}
           />
           <div
@@ -474,7 +474,8 @@ const HotelPage = ({ hotels }) => {
           >
             {/* // add a small menu for the hotel page */}
             <div style={{ padding: "5px" }}>
-              <Link
+              <a
+                // Add the href to the overview section
                 to="#overview"
                 style={{
                   marginRight: "20px",
@@ -495,48 +496,56 @@ const HotelPage = ({ hotels }) => {
                 onClick={() => handleClick("#overview")}
               >
                 Overview
-              </Link>
+              </a>
 
-              <Link
-                to="#rooms"
+              <a
+                href="#function-room"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  color: activeLink === "#rooms" ? "#1169E0" : "#191E3A",
-                  fontWeight: activeLink === "#rooms" ? "bold" : "normal",
+                  color:
+                    activeLink === "#Function Room" ? "#1169E0" : "#191E3A",
+                  fontWeight:
+                    activeLink === "#Function Room" ? "bold" : "normal",
                   borderBottom:
-                    activeLink === "#rooms"
+                    activeLink === "#Function Room"
                       ? "2px solid #1169E0"
                       : "2px solid transparent",
                   paddingBottom: "20px",
                   fontSize: "14px",
                 }}
-                onClick={() => handleClick("#rooms")}
+                onClick={() => handleClick("#Function Room")}
               >
-                Rooms
-              </Link>
+                Function Room
+              </a>
 
-              <Link
-                to="#amenities"
+              <a
+                href="#family-friendly-services"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
-                  color: activeLink === "#amenities" ? "#1169E0" : "#191E3A",
-                  fontWeight: activeLink === "#amenities" ? "bold" : "normal",
+                  color:
+                    activeLink === "#Family Friendly Services"
+                      ? "#1169E0"
+                      : "#191E3A",
+                  fontWeight:
+                    activeLink === "#Family Friendly Services"
+                      ? "bold"
+                      : "normal",
                   borderBottom:
-                    activeLink === "#amenities"
+                    activeLink === "#Family Friendly Services"
                       ? "2px solid #1169E0"
                       : "2px solid transparent",
                   paddingBottom: "20px",
                   fontSize: "14px",
                 }}
-                onClick={() => handleClick("#amenities")}
+                onClick={() => handleClick("#Family Friendly Services")}
               >
-                Amenities
-              </Link>
+                Family Friendly Services
+              </a>
 
-              <Link
-                to="#accessibility"
+              <a
+                href="#accessibility"
                 style={{
                   marginRight: "20px",
                   textDecoration: "none",
@@ -554,10 +563,10 @@ const HotelPage = ({ hotels }) => {
                 onClick={() => handleClick("#accessibility")}
               >
                 Accessibility
-              </Link>
+              </a>
 
-              <Link
-                to="#policies"
+              <a
+                href="#policies"
                 style={{
                   textDecoration: "none",
                   color: activeLink === "#policies" ? "#1169E0" : "#191E3A",
@@ -572,7 +581,7 @@ const HotelPage = ({ hotels }) => {
                 onClick={() => handleClick("#policies")}
               >
                 Policies
-              </Link>
+              </a>
             </div>
             <button
               style={{
@@ -589,7 +598,7 @@ const HotelPage = ({ hotels }) => {
                 href="#rooms-section"
                 style={{ textDecoration: "none", color: "white" }}
               >
-                Reserve a room
+                Reserve a Room
               </a>
             </button>
           </div>
@@ -658,7 +667,7 @@ const HotelPage = ({ hotels }) => {
                   }}
                 />
                 {/* pay within 31 days, since it is a large booking, the hotel can't wait until last minute incase the party cancel */}
-                <span>Reserve now, Pay within 31 days</span>
+                <span>Reserve Now, Pay Within 31 Days</span>
               </div>
               <div style={{ display: "flex", marginBottom: "0.5rem" }}>
                 <div
@@ -777,6 +786,7 @@ const HotelPage = ({ hotels }) => {
                   marginTop: "0px",
                 }}
               >
+                <div id="function-room"></div>
                 <Link
                   to="#"
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -873,13 +883,23 @@ const HotelPage = ({ hotels }) => {
       <br />
 
       {/* FUNCTION ROOM INFO */}
-      <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
+      <div
+        style={{
+          width: "70%",
+          margin: "0 auto",
+          textAlign: "left",
+          position: "relative",
+        }}
+      >
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>Function Room</h1>{" "}
         <div
           style={{
             display: "flex",
             backgroundColor: "#FFFFFF",
             borderRadius: "20px 0 0 20px",
+            maxHeight: "30rem",
+            overflow: "hidden",
+            width: "100%",
           }}
         >
           <div style={{ width: "50%", marginLeft: "15px" }}>
@@ -892,6 +912,7 @@ const HotelPage = ({ hotels }) => {
             >
               Will you and your guests require the use of our function room?
             </p>
+
             <p
               style={{
                 fontSize: "13px",
@@ -947,6 +968,17 @@ const HotelPage = ({ hotels }) => {
             </div>
             <div
               style={{
+                fontSize: "13px",
+                fontWeight: "600",
+                marginTop: "0px",
+                marginBottom: "5px",
+              }}
+            >
+              {/* // display some important information about the function room */}
+              What's Included?
+            </div>
+            <div
+              style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(2, 1fr)",
                 gridGap: "10px",
@@ -970,91 +1002,66 @@ const HotelPage = ({ hotels }) => {
                   <span>{amenity}</span>
                 </div>
               ))}
-            </div>
-            <div style={{ fontSize: "13px" }}>
-              <div
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "600",
-                  marginTop: "20px",
-                  marginBottom: "5px",
-                }}
-              >
-                {/* // display some important information about the function room */}
-                Whats included in the price?
-              </div>
-              <ul style={{ marginTop: "0" }}>
-                <li style={{ marginBottom: "5px" }}>
-                  Catering Service: Enjoy our diverse menu, customized to
-                  dietary needs.
-                </li>
-                <li style={{ marginBottom: "5px" }}>
-                  Staff Assistance: Our friendly team ensures a smooth event
-                  from setup to service.
-                </li>
-                <li style={{ marginBottom: "0px" }}>
-                  Customised Setup: Personalise your event space to perfection
-                  with our flexible options.
-                </li>
-              </ul>
-            </div>
-            <div
-              style={{
-                fontSize: "15px",
-                color: "#191E3A",
-                marginTop: "20px",
-                marginBottom: "20px",
-                textAlign: "center",
-              }}
-            >
-              <hr />
-              <i>
-                "The dedicated team not only provided the necessary equipment
-                and amenities but also set up the function room according to our
-                specifications, allowing us to focus on enjoying our event to
-                the fullest."
-              </i>{" "}
-              - John Doe
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  marginRight: "1rem",
-                  display: "flex",
-                  alignItems: "center",
-                  fontSize: "15px",
-                }}
-              >
-                <div
-                  style={{
-                    marginRight: "0.5rem",
-                    borderRadius: "4px",
-                    padding: "0.2rem 0.5rem",
-                    fontSize: "15px",
-                    // Use the getRatingColor function to get the color based on the rating
-                    ...getRatingColor(hotel.event_management_rating),
-                  }}
-                >
-                  {hotel.event_management_rating}
-                </div>
-                Event Rating
-              </div>
               <div
                 style={{
                   fontWeight: "medium",
                   fontSize: "13px",
                   color: "#1169E0",
-                  marginTop: "2px",
+                  marginTop: "5px",
                 }}
               >
                 <Link
                   to="#"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  See all function room reviews{" "}
+                  See all{" "}
                   <FontAwesomeIcon
                     icon={faGreaterThan}
                     style={{ fontSize: "9px" }}
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div
+              style={{
+                fontSize: "15px",
+                color: "#191E3A",
+                marginTop: "20px",
+
+                textAlign: "center",
+              }}
+            >
+              <hr />
+              <div style={{ marginTop: "20px", fontSize: "0.8vw" }}>
+                <i>
+                  "The dedicated team not only provided the necessary equipment
+                  and amenities but also set up the function room according to
+                  our specifications, allowing us to focus on enjoying our event
+                  to the fullest."
+                </i>{" "}
+                - John Doe
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div
+                style={{
+                  fontWeight: "medium",
+                  fontSize: "13px",
+                  color: "#1169E0",
+                  marginTop: "8px",
+                }}
+              >
+                <div id="family-friendly-services"></div>
+
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  See all reviews{" "}
+                  <FontAwesomeIcon
+                    icon={faGreaterThan}
+                    style={{ fontSize: "0.5vw" }}
                   />
                 </Link>
               </div>
@@ -1066,29 +1073,29 @@ const HotelPage = ({ hotels }) => {
           >
             <div
               style={{
-                position: "relative",
-                overflow: "hidden",
-                width: "100%",
+                position: "relative", // Absolute position for finer control
+                overflow: "hidden", // Ensure no overflow
+                width: "100%", // Ensures the div is fully using its parent's set width
+                height: "100%", // Match the height to keep aspect ratio correct
               }}
             >
               <img
                 src="https://images.unsplash.com/photo-1620735692151-26a7e0748429?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Function Room"
                 style={{
-                  width: "100%",
-                  height: "630px",
+                  width: "100%", // Full width
+                  height: "100%", // Full height
+                  objectFit: "cover", // Cover the area completely
+                  objectPosition: "center", // Center the image vertically
                   clipPath: "polygon(15% 0, 100% 0%, 100% 100%, 0% 100%)",
-                  verticalAlign: "top",
-                  objectFit: "cover",
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-      <div id="rooms-section"></div>
-      <br />
 
+      <br />
       {/* KIDS CLUB INFO */}
       <div style={{ width: "70%", margin: "0 auto", textAlign: "left" }}>
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
@@ -1118,25 +1125,37 @@ const HotelPage = ({ hotels }) => {
                 fontSize: "13px",
                 fontWeight: "lighter",
                 fontStyle: "italic",
-                marginTop: "0px",
+                marginTop: "8px",
               }}
             >
               Kids Daycare is included in the total cost, simply add their name,
-              age and other relevant information at checkout.
+              age and other relevant information at the checkout.
             </p>
 
-            <div>
-              If you child is aged from 2-12, let them join in on:{" "}
+            <div style={{ marginBottom: "15px" }}>
+              <div style={{ marginBottom: "3px" }}>
+                {" "}
+                If your child is aged from 2-12, let them join in on:{" "}
+              </div>
               <ul style={{ marginTop: "0" }}>
-                <li>Creative arts and crafts activities</li>
-                <li>Interactive games and toys</li>
-                <li>Storytime and educational activities</li>
-                <li>Healthy snacks and meals</li>
-                <li>Experienced and caring staff</li>
+                <li style={{ marginBottom: "3px" }}>
+                  Creative arts and crafts activities
+                </li>
+                <li style={{ marginBottom: "3px" }}>
+                  Interactive games and toys
+                </li>
+                <li style={{ marginBottom: "3px" }}>
+                  Storytime and educational activities
+                </li>
+                <li style={{ marginBottom: "3px" }}>
+                  Healthy snacks and meals
+                </li>
               </ul>
             </div>
+
             <hr />
-            <div style={{ textAlign: "center" }}>
+            <div id="rooms-section"></div>
+            <div style={{ textAlign: "center", marginTop: "15px" }}>
               <b>Opening Hours:</b> Monday to Friday: 9:00 AM - 7:00 PM
             </div>
             <div style={{ textAlign: "center" }}>
@@ -1169,7 +1188,6 @@ const HotelPage = ({ hotels }) => {
           </div>
         </div>
       </div>
-      <div id="rooms-section"></div>
       <br />
 
       {/* AVAILABLE ROOMS FOR YOUR STAY */}
@@ -1182,7 +1200,7 @@ const HotelPage = ({ hotels }) => {
         }}
       >
         <h1 style={{ fontSize: "25px", fontWeight: "600" }}>
-          Available rooms for your stay
+          Available Rooms for Your Stay
         </h1>{" "}
         {/* // Map through the hotel rooms and display them */}
         {hotel.hotel_room.map((room, index) => (
@@ -1209,7 +1227,7 @@ const HotelPage = ({ hotels }) => {
             >
               <img
                 src={room.room_image}
-                alt="Twin Room"
+                alt="Room image"
                 style={{
                   width: "100%",
                   height: "200px",
@@ -1278,8 +1296,14 @@ const HotelPage = ({ hotels }) => {
                   >
                     {" "}
                     {/* // Add the price per night */}€{room.price_per_night}.00
-                    <div style={{ fontSize: "11px", marginTom: "0px" }}>
-                      per night
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        marginTop: "0px",
+                        lineHeight: "1",
+                      }}
+                    >
+                      per night for <br /> each room
                     </div>
                   </li>
                 </ul>
@@ -1427,10 +1451,10 @@ const HotelPage = ({ hotels }) => {
             <hr style={{ borderTop: "2px solid #1169e0", width: "100%" }} />
             <div style={{ fontSize: "14px" }}>
               <p style={{ marginBottom: "3px" }}>
-                Check In Date: <b>Friday, March 29, 2024</b> (3:00p.m){" "}
+                Check In Date: <b>Friday, May 10, 2024</b> (3:00p.m){" "}
               </p>
               <p style={{ marginTop: "0px" }}>
-                Check Out Date: <b>Sunday, March 31, 2024</b> (noon)
+                Check Out Date: <b>Sunday, May 12, 2024</b> (noon)
               </p>
               <p>
                 <FontAwesomeIcon
@@ -1500,7 +1524,7 @@ const HotelPage = ({ hotels }) => {
               <ul style={{ margin: "0px" }}>
                 <li>
                   {/* // Display the function room if groupBooking is true, else display "No Extras Selected" */}
-                  {groupBooking ? "Function Room Added" : "No Extras Selected"}
+                  {groupBooking ? "Function Room Added" : "No extras selected"}
                 </li>
               </ul>
               <div style={{ textAlign: "right", lineHeight: "1" }}>
@@ -1537,7 +1561,7 @@ const HotelPage = ({ hotels }) => {
                   textAlign: "right",
                 }}
               >
-                Please select at least one room.
+                Please choose at least one room to proceed.
               </p>
             )}
         </div>

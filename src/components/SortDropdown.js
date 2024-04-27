@@ -7,8 +7,8 @@ import hotelData from "./data/hotel-data.json"; // Import the hotelData JSON obj
 
 // Create the SortDropdown component
 // onChange is a function that is passed as a prop to the SortDropdown component
-// --onChange is called when the value of the dropdown changes
-function SortDropdown({ onChange }) {
+// --onChange is called when the value of the dropdown changes, resultCount is the number of properties displayed
+function SortDropdown({ onChange, resultCount }) {
   // Create the value and setValue state variables
   // --value is used to store the value of the dropdown
   // recommended is the default value of the dropdown
@@ -45,7 +45,7 @@ function SortDropdown({ onChange }) {
           }}
         >
           {/* Display the amount of properties */}
-          {propertyCount} properties
+          Showing {resultCount} of {propertyCount} Properties
         </p>
         <p
           style={{
@@ -56,7 +56,7 @@ function SortDropdown({ onChange }) {
             letterSpacing: "1px",
           }}
         >
-          What we are paid impacts our sort order
+          What we are paid impacts our sort order.
         </p>
       </div>
       <FormControl style={{ marginLeft: "8px" }}>

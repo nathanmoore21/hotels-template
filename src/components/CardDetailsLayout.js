@@ -31,14 +31,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Create a validation schema for the credit card form
+// All fields are required
 const validationSchema = yup.object({
-  // all fields are required
-  firstName: yup.string().required("First Name is required"),
-  lastName: yup.string().required("Last Name is required"),
-  cardNumber: yup.string().required("Card Number is required"),
-  expiryMonth: yup.string().required("Expiry Month is Required"),
-  expiryYear: yup.string().required("Expiry Year is Required"),
-  securityCode: yup.string().required("Security Code is required"),
+  firstName: yup
+    .string()
+    .required("First Name is required")
+    // Only allow letters in the first name
+    .matches(/^[A-Za-z]+$/, "Please enter a valid First Name"),
+  lastName: yup
+    .string()
+    .required("Last Name is required")
+    // Only allow letters in the last name
+    .matches(/^[A-Za-z]+$/, "Please enter a valid Last Name"),
+  cardNumber: yup
+    .string()
+    .required("Card Number is required")
+    // Only allow 16 digits in the card number
+    .matches(/^\d{16}$/, "Please enter a valid Card Number"),
+  expiryMonth: yup
+    .string()
+    .required("Expiry Month is Required")
+    // Only allow 2 digits in the expiry month
+    .matches(/^\d{2}$/, "Please enter a valid Expiry Month"),
+  expiryYear: yup
+    .string()
+    .required("Expiry Year is Required")
+    // Only allow 4 digits in the expiry year
+    .matches(/^\d{4}$/, "Please enter a valid Expiry Year"),
+  securityCode: yup
+    .string()
+    .required("Security Code is required")
+    // Only allow 3 digits in the security code
+    .matches(/^\d{3}$/, "Please enter a valid Security Code"),
 });
 
 // Create a custom component for the form fields
@@ -113,8 +137,7 @@ export default function FlexGrow() {
   });
 
   // State to track form validity
-  // (false) is the initial value of the state (form is not valid by default)
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState(true);
 
   // useEffect hook to check if all required fields are filled
   React.useEffect(
@@ -131,26 +154,42 @@ export default function FlexGrow() {
       // Set the form validity state
       // form is valid if all fields are filled
       // && is the logical AND operator
+      // ! is the logical NOT operator
       setIsFormValid(
         isFirstNameValid &&
           isLastNameValid &&
           isCardNumberValid &&
           isExpiryMonthlValid &&
           isExpiryYearValid &&
-          isSecurityCodeValid
+          isSecurityCodeValid &&
+          !formik.touched.firstName &&
+          !formik.touched.lastName &&
+          !formik.touched.cardNumber &&
+          !formik.touched.expiryMonth &&
+          !formik.touched.expiryYear &&
+          !formik.touched.securityCode
       );
     },
-    // [formik.values] is the dependency array which means React will re-run the effect if any of the values in the dependency array change.
-    [formik.values]
+    // [formik.values, formik.touched] is the dependency array which means React will re-run the effect if any of the values in the dependency array change.
+    [formik.values, formik.touched]
   );
 
+  // Update the form validity state whenever the form changes
+  // useEffect hook to check if the form is valid
+  React.useEffect(() => {
+    // Set the form validity state
+    setIsFormValid(formik.isValid);
+    // [formik.isValid] is the dependency array which means React will re-run the effect if the value of formik.isValid changes
+  }, [formik.isValid]);
+
   // Function to handle form submission
-  // e is the event object
   const handleSubmit = (e) => {
     // prevent the default form submission behavior
     e.preventDefault();
     // Check if the form is valid
-    if (isFormValid) {
+    if (formik.isValid) {
+      // Proceed with form submission
+      formik.submitForm();
     }
   };
 
@@ -183,8 +222,8 @@ export default function FlexGrow() {
                 bgcolor: "#FFFFFF", // background color is white
                 border: "2px solid #CACCD2", // border is 2px solid #CACCD2
                 borderRadius: 1, // border-radius: 1
-                maxWidth: "610px", // max-width: 610px
-                minWidth: "610px", // min-width: 610px
+                maxWidth: "610px",
+                minWidth: "610px",
               }}
             >
               <h4 style={{ marginBottom: "0px" }}>
@@ -261,7 +300,7 @@ export default function FlexGrow() {
                   }}
                 />
                 <div style={{ flex: "70%" }}>
-                  Share the cost, each room covers their own share
+                  Share the cost; each room covers their own share
                 </div>
               </div>
               <div
@@ -338,7 +377,7 @@ export default function FlexGrow() {
                 </div>
               </div>
               {/* // Add the formik handleSubmit function to the form */}
-              <form onSubmit={formik.handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 {/* First Name */}
                 <h5 className="field-label">
                   First Name <span className="required-indicator">*</span>
@@ -347,7 +386,7 @@ export default function FlexGrow() {
                   // Add the formik properties to the TextField component
                   // id is the unique identifier for the input field
                   id="firstName"
-                  // name is the name of the input field
+                  // 'name' is the name of the input field
                   name="firstName"
                   // value is the value of the input field
                   value={formik.values.firstName}
@@ -488,7 +527,7 @@ export default function FlexGrow() {
                     </div>
                   )}
                 </div>
-
+                {/* Security code */}
                 <div>
                   <h5 className="field-label">
                     Security code <span className="required-indicator">*</span>
@@ -540,8 +579,24 @@ export default function FlexGrow() {
                     marginTop: "1rem",
                   }}
                 >
-                  {/* // if the form is valid, enable the button, else disable it */}
-                  {isFormValid ? (
+                  {/* // If the button is disabled, render a disabled button without the Link */}
+                  {/* // If the button is enabled, render the Link wrapping the button */}
+                  {/* // check if the form is valid */}
+                  {!formik.isValid ||
+                  // Check if the form is touched and has errors
+                  Object.keys(formik.touched).length === 0 ||
+                  // Check if the form has errors
+                  Object.keys(formik.errors).length > 0 ? (
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      type="submit"
+                      disabled
+                      style={{ width: "auto" }}
+                    >
+                      Confirm & Send Emails
+                    </Button>
+                  ) : (
                     <Link to="/Confirmation" className="router-link">
                       <Button
                         color="primary"
@@ -552,15 +607,6 @@ export default function FlexGrow() {
                         Confirm & Send Emails
                       </Button>
                     </Link>
-                  ) : (
-                    <Button
-                      disabled
-                      color="primary"
-                      variant="contained"
-                      type="submit"
-                    >
-                      Confirm
-                    </Button>
                   )}
                 </div>
               </form>
@@ -622,7 +668,7 @@ export default function FlexGrow() {
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={LogoImage}
-                    alt="Logo"
+                    alt="Hotel.com Logo"
                     style={{ height: "15px", marginRight: "0.5rem" }}
                   />
                   <p className="info-body">1,204 reviews</p>
@@ -649,7 +695,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-in</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Friday, March 29, 2024
+                      Friday, May 10, 2024
                     </p>
                   </div>
                   <div
@@ -671,7 +717,7 @@ export default function FlexGrow() {
                   >
                     <p className="info-body">Check-out</p>
                     <p className="info-body" style={{ fontWeight: 600 }}>
-                      Sunday, March 31, 2024
+                      Sunday, May 12, 2024
                     </p>
                   </div>
                   <div

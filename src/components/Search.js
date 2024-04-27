@@ -123,7 +123,11 @@ const Search = () => {
     setIsError(false);
 
     // if there's no location or dateRange or the dateRange length is not 2
-    if (!values.location || !dateRange || dateRange.length !== 2) {
+    if (
+      values.location === "Going to" ||
+      !dateRange ||
+      dateRange.length !== 2
+    ) {
       // set isError to true
       setIsError(true);
       // setSubmitting to false
@@ -263,33 +267,31 @@ const Search = () => {
                 }}
               />
               {/* // DatePicker component */}
-              <DatePicker
-                // date
-                range
-                // dateseparator is 'to' which is the separator between the two dates
-                dateSeparator=" to "
-                // id for the dateRange field
-                id="dateRange"
-                // name for the dateRange field
-                value={dateRange}
-                // set the dateRange state
-                onChange={setDateRange}
-                // format
-                format="DD MMM YYYY"
-                // minDate is today, but will not work in the project
-                // minDate={today}
-                className="search-field"
+              <div
                 style={{
-                  width: "138%",
-                  minWidth: "15rem",
-                  height: "42px",
-                  border: "1px solid #818494",
-                  backgroundColor: "transparent",
-                  borderRadius: "9px",
-                  paddingLeft: "30px",
-                  fontSize: "15px",
+                  Width: "100%",
                 }}
-              />
+              >
+                <DatePicker
+                  // Existing props
+                  range
+                  dateSeparator=" to "
+                  value={dateRange}
+                  onChange={setDateRange}
+                  format="DD MMM YYYY"
+                  className="search-field custom-date-picker"
+                  style={{
+                    width: "100%",
+                    height: "42px",
+                    border: "1px solid #818494",
+                    backgroundColor: "transparent",
+                    borderRadius: "9px",
+                    paddingLeft: "30px",
+                    fontSize: "15px",
+                  }}
+                />
+              </div>
+
               {/* // error message for the dateRange field */}
               <ErrorMessage
                 name="dateRange"

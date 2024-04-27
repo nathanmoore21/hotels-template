@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"; // Import the Link component
 import Button from "@mui/material/Button"; // Import the Button component
 
 // Define the Confirmation component
-function Confirmation() {
+function GuestConfirmation() {
   return (
     // Return the Confirmation component
     // relative positioning is used to position the confirmation message in the center of the screen
@@ -50,7 +50,7 @@ function Confirmation() {
             marginTop: "10px",
           }}
         >
-          Your Booking Is Confirmed
+          Your Payment Was Successful
         </p>
         <p
           style={{
@@ -88,4 +88,4 @@ function Confirmation() {
   );
 }
 
-export default Confirmation;
+export default GuestConfirmation;

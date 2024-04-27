@@ -1,5 +1,5 @@
-import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as React from "react"; // Import React
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
 // import icons from "@fortawesome/free-solid-svg-icons";
 import {
   faMoon,
@@ -53,6 +53,8 @@ export default function HomePageGrid() {
     }
   };
 
+  // this styling approach was used near the beginning of the project, it wasnt my preferred method of styling, so for the reamaing of the components i styled in line as well as a css file for some components.
+
   // Create the styles for the HomePageGrid component
   const containerStyle = {
     width: "80%",
@@ -60,14 +62,14 @@ export default function HomePageGrid() {
   };
 
   const boxStyle = {
-    width: "100%",
+    width: "97%",
     margin: "0 auto",
-    height: "8.6875rem",
+    height: "auto",
     borderRadius: "1.5rem",
     backgroundColor: "#E71E42",
     padding: "1rem",
     display: "flex",
-    alignItems: "center",
+    alignItems: "left",
     justifyContent: "space-between",
     marginBottom: "2rem",
   };
@@ -83,24 +85,25 @@ export default function HomePageGrid() {
 
   const firstHeadingTextStyle = {
     color: "#FFFFFF",
-    fontSize: "25px",
+    fontSize: "1.502vw",
     fontWeight: "bold",
     textAlign: "left",
   };
 
   const sectionBoxStyle = {
-    width: "15rem",
+    width: "25%",
     height: "7.3125rem",
     borderRadius: "1.5rem",
     backgroundColor: "#A2122B",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    marginRight: "2%",
   };
 
   const sectionTextStyle = {
     color: "#FFFFFF",
-    fontSize: "0.9375rem",
+    fontSize: "1vw",
     fontWeight: "300",
     textAlign: "left",
     marginRight: "1rem",
@@ -108,8 +111,8 @@ export default function HomePageGrid() {
   };
 
   const sectionIconStyle = {
-    width: "3rem",
-    height: "3rem",
+    width: "2.5vw",
+    height: "2.5vw",
     marginRight: "1rem",
     paddingLeft: "1rem",
     color: "#ffffff",
@@ -121,36 +124,36 @@ export default function HomePageGrid() {
     marginBottom: "1rem",
   };
 
-  const circleTextStyle = {
-    color: "#191E3A",
-    fontSize: "0.875rem",
-    fontWeight: "normal",
-    textAlign: "center",
-    padding: "0.5rem",
-    maxWidth: "80%",
-  };
+  const iconColor = "#1169E0";
 
   const circleStyle = {
-    width: "80px",
-    height: "80px",
+    width: "4.73vw",
+    height: "4.73vw",
     borderRadius: "50%",
     border: "1px solid #818494",
-    margin: "0 0.5rem",
+    margin: "0",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   };
 
-  const iconColor = "#1169E0";
+  const circleTextStyle = {
+    color: "#191E3A",
+    fontSize: "0.9vw",
+    fontWeight: "normal",
+    textAlign: "center",
+    marginLeft: "8px",
+    maxWidth: "80%",
+  };
 
-  const iconSize = "2rem";
+  const iconSize = "2vw";
 
   // Create an array of circles to be displayed as icons
   const circles = [
     {
-      // text is the text to be displayed below the icon
+      // text to be displayed below the icon
       text: "Spa",
-      // icon is the icon to be displayed
+      // icon to be displayed
       icon: (
         // Link to the home page
         <Link to="/">
@@ -174,7 +177,7 @@ export default function HomePageGrid() {
       ),
     },
     {
-      text: "Pet friendly",
+      text: "Pets",
       icon: (
         <Link to="/">
           <FontAwesomeIcon
@@ -185,7 +188,7 @@ export default function HomePageGrid() {
       ),
     },
     {
-      text: "Hot tub",
+      text: "Hot Tub",
       icon: (
         <Link to="/">
           <FontAwesomeIcon
@@ -207,7 +210,7 @@ export default function HomePageGrid() {
       ),
     },
     {
-      text: "Sea view",
+      text: "Sea View",
       icon: (
         <Link to="/">
           <FontAwesomeIcon
@@ -229,7 +232,7 @@ export default function HomePageGrid() {
       ),
     },
     {
-      text: "Apart hotel",
+      text: "Hostle",
       icon: (
         <Link to="/">
           <FontAwesomeIcon
@@ -262,7 +265,7 @@ export default function HomePageGrid() {
       ),
     },
     {
-      text: "Family friendly",
+      text: "Families",
       icon: (
         <Link to="/">
           <FontAwesomeIcon
@@ -299,122 +302,126 @@ export default function HomePageGrid() {
 
   return (
     <>
-      <div style={{ width: "100%" }}>
-        {/* create a banner for the home page */}
-        <div style={boxStyle}>
-          {/* Section 1 */}
-          <div style={firstHeadingBoxStyle}>
-            <h2 style={firstHeadingTextStyle}>
-              Find and book your perfect group stay
-            </h2>
-          </div>
-
-          {/* Section 2 */}
-          <div style={sectionBoxStyle}>
-            <FontAwesomeIcon icon={faMoon} style={sectionIconStyle} />
-            <h2 style={sectionTextStyle}>
-              Mix and match rooms to suit your preferences
-            </h2>
-          </div>
-
-          {/* Section 3 */}
-          <div style={sectionBoxStyle}>
-            <FontAwesomeIcon icon={faTag} style={sectionIconStyle} />
-            <h2 style={sectionTextStyle}>
-              Share the cost, each room covers their own share
-            </h2>
-          </div>
-
-          {/* Section 4 */}
-          <div style={sectionBoxStyle}>
-            <FontAwesomeIcon icon={faCalendarDays} style={sectionIconStyle} />
-            <h2 style={sectionTextStyle}>
-              Flexible room check-in and check-out dates
-            </h2>
-          </div>
+      {/* create a banner for the home page */}
+      <div style={boxStyle}>
+        {/* Section 1 */}
+        <div style={firstHeadingBoxStyle}>
+          <h2 style={firstHeadingTextStyle}>
+            Find and Book Your Perfect Group Stay
+          </h2>
         </div>
 
-        <div>
-          <h3>Discover your new favourite stay</h3>
-          <div style={circleContainerStyle}>{circles}</div>
+        {/* Section 2 */}
+        <div style={sectionBoxStyle}>
+          <FontAwesomeIcon icon={faMoon} style={sectionIconStyle} />
+          <h2 style={sectionTextStyle}>
+            Mix and Match Rooms to Suit Your Preferences
+          </h2>
         </div>
 
-        <h3>Looking for the perfect place to stay?</h3>
+        {/* Section 3 */}
+        <div style={sectionBoxStyle}>
+          <FontAwesomeIcon icon={faTag} style={sectionIconStyle} />
+          <h2 style={sectionTextStyle}>
+            Share the Cost; Each Room Covers Their Own Share
+          </h2>
+        </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1rem",
-            width: "100%",
-          }}
-        >
-          {/* Map through trendingHotels and render each hotel */}
-          {trendingHotels.map((hotel, index) => {
-            const ratingInfo = getRatingInfo(hotel.guest_review_rating);
-            return (
-              <div
-                key={index}
-                style={{
-                  width: "23%",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "0.5rem",
-                  border: "1px solid #DFE0E4",
-                }}
+        {/* Section 4 */}
+        <div style={sectionBoxStyle}>
+          <FontAwesomeIcon icon={faCalendarDays} style={sectionIconStyle} />
+          <h2 style={sectionTextStyle}>
+            Flexible Room Check-In and Check-Out Dates
+          </h2>
+        </div>
+      </div>
+
+      <div>
+        <h3>Discover your new favourite stay</h3>
+        <div style={circleContainerStyle}>{circles}</div>
+      </div>
+
+      <h3 style={{ marginTop: "3rem" }}>
+        Looking for the perfect place to stay?
+      </h3>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "1rem",
+          width: "100%",
+        }}
+      >
+        {/* Map through trendingHotels and render each hotel */}
+        {trendingHotels.map((hotel, index) => {
+          // get the rating info for the hotel
+          const ratingInfo = getRatingInfo(hotel.guest_review_rating);
+          return (
+            <div
+              key={index}
+              style={{
+                width: "23%",
+                backgroundColor: "#ffffff",
+                borderRadius: "0.5rem",
+                border: "1px solid #DFE0E4",
+              }}
+            >
+              {/* // Link to each hotel page */}
+              <Link
+                // link to the hotel page with the hotel name as the parameter
+                // use encodeURIComponent to encode the hotel name
+                to={`/hotel/${encodeURIComponent(hotel.hotel_name)}`}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
-                <Link
-                  to="/"
-                  style={{ textDecoration: "none", color: "inherit" }}
+                <img
+                  src={hotel.image}
+                  alt={hotel.hotel_name}
+                  style={{
+                    width: "100%",
+                    height: "150px",
+                    objectFit: "cover",
+                    borderTopLeftRadius: "0.5rem",
+                    borderTopRightRadius: "0.5rem",
+                  }}
+                />
+                <div
+                  style={{
+                    textAlign: "left",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    marginLeft: "0.5rem",
+                    marginBottom: "0",
+                    ...ratingInfo,
+                  }}
                 >
-                  <img
-                    src={hotel.image}
-                    alt={hotel.hotel_name}
-                    style={{
-                      width: "100%",
-                      height: "150px",
-                      objectFit: "cover",
-                      borderTopLeftRadius: "0.5rem",
-                      borderTopRightRadius: "0.5rem",
-                    }}
-                  />
-                  <div
-                    style={{
-                      textAlign: "left",
-                      fontSize: "1rem",
-                      fontWeight: "bold",
-                      marginLeft: "0.5rem",
-                      marginBottom: "0",
-                      ...ratingInfo,
-                    }}
-                  >
-                    {hotel.hotel_name}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.5rem",
-                      marginTop: "0",
-                      marginBottom: "1rem",
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {hotel.address}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.9rem",
-                      marginBottom: "0.5rem",
-                      margin: "0.5rem",
-                      ...ratingInfo,
-                    }}
-                  >
-                    <strong>{hotel.guest_review_rating}/10</strong>{" "}
-                    {ratingInfo.text}
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                  {hotel.hotel_name}
+                </div>
+                <div
+                  style={{
+                    marginLeft: "0.5rem",
+                    marginTop: "0",
+                    marginBottom: "1rem",
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {hotel.address}
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.9rem",
+                    marginBottom: "0.5rem",
+                    margin: "0.5rem",
+                    ...ratingInfo,
+                  }}
+                >
+                  <strong>{hotel.guest_review_rating}/10</strong>{" "}
+                  {ratingInfo.text}
+                </div>
+              </Link>
+            </div>
+          );
+        })}
       </div>
       <Link
         to="/results"
@@ -617,7 +624,7 @@ export default function HomePageGrid() {
       <div
         style={{
           width: "100%",
-          height: "300px",
+          height: "auto",
           backgroundColor: "#FFFFFF",
           borderRadius: "0.5rem",
           border: "1px solid #DFE0E4",
@@ -631,33 +638,34 @@ export default function HomePageGrid() {
           src="https://a.travel-assets.com/mad-service/footer/bnaBanners/HCOM_POOL_Stocksy_300dpi.jpg"
           alt="Swimming Pool"
           style={{
-            width: "auto",
-            height: "100%",
+            width: "45%",
             borderTopLeftRadius: "0.5rem",
             borderBottomLeftRadius: "0.5rem",
             marginLeft: "0rem",
           }}
         />
         <div>
-          <h2 style={{ margin: "1rem" }}>With the Hotels.com app, you can:</h2>
-          <ul style={{ fontSize: "0.8rem" }}>
-            <li>Save on select hotels</li>
-            <li>Earn one reward night* for every 10 nights you stay</li>
-            <li>Search, book, and save on the go</li>
+          <h2 style={{ margin: "1rem", fontSize: "1.7vw" }}>
+            With the Hotels.com App, You Can:
+          </h2>
+          <ul style={{ fontSize: "1vw" }}>
+            <li>Save on Selected Hotels</li>
+            <li>Earn One Reward Night* for Every 10 Nights You Stay</li>
+            <li>Search, Book, and Save on the Go</li>
           </ul>
-          <h5 style={{ margin: "1rem", marginTop: "3rem" }}>
-            Scan the QR code with your device camera and download our app
+          <h5 style={{ margin: "1rem", marginTop: "3rem", fontSize: "0.9vw" }}>
+            Scan the QR Code with Your Device Camera and Download Our App
           </h5>
           <Link
             style={{
-              margin: "1rem",
+              margin: "1vw",
               color: "#1169E0",
               textDecoration: "underline",
-              fontSize: "0.8rem",
+              fontSize: "0.8vw",
             }}
             onClick={(e) => (e.target.style.color = "#1169E0")}
           >
-            *See Hotels.com Rewards terms & conditions
+            See Hotels.com Rewards Terms & Conditions
           </Link>
         </div>
 
@@ -667,8 +675,8 @@ export default function HomePageGrid() {
           style={{
             marginTop: "1rem",
             marginRight: "0.5rem",
-            width: "9rem",
-            height: "9rem",
+            width: "10vw",
+            height: "10vw",
           }}
         />
       </div>
