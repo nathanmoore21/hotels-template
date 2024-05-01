@@ -71,17 +71,6 @@ function GuestConfirmation() {
               Go Home
             </Button>
           </Link>{" "}
-          {/* // add a link to the payments page */}
-          <Link to="/payments" className="router-link">
-            <Button
-              color="primary"
-              variant="contained"
-              type="submit"
-              style={{ width: "150px" }}
-            >
-              Your Booking
-            </Button>
-          </Link>{" "}
         </div>
       </div>
     </div>

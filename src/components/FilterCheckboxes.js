@@ -7,7 +7,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 // Define the FilterCheckboxes component
 function FilterCheckboxes({
-  // Destructure the props (items i need to use)
   predefinedAmenities,
   selectedAmenities,
   onChange,

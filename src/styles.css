@@ -335,6 +335,6 @@ button[type="submit"] {
 
 /* styles for search button active */
 .rmdp-input {
+  /* width: 135% !important; */
   width: 20.9375rem !important;
-  /* width: 28.9375rem !important; */
 }

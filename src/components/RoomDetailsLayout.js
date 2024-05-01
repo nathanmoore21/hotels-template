@@ -1073,7 +1073,7 @@ export default function FlexGrow() {
                   <h2
                     style={{
                       fontSize: "18px",
-                      fontWeight: "300",
+                      fontWeight: "500",
                       marginBottom: "10px",
                     }}
                   >
@@ -1084,7 +1084,7 @@ export default function FlexGrow() {
                       listStyle: "none",
                       padding: 0,
                       margin: 0,
-                      fontWeight: "100",
+                      fontWeight: "500",
                       fontSize: "11px",
                     }}
                   >
@@ -1145,7 +1145,10 @@ export default function FlexGrow() {
                 />
                 <label
                   htmlFor="option1"
-                  style={{ fontWeight: "100", fontSize: "12px" }}
+                  style={{
+                    fontWeight: "normal",
+                    fontSize: "12px",
+                  }}
                 >
                   I will be staying in the Standard Double Room
                 </label>
@@ -1354,7 +1357,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -1429,7 +1432,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -1444,7 +1447,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {/* // Map over the accessibility options and create a checkbox for each option */}
@@ -1507,7 +1510,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -1567,14 +1570,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -1795,7 +1798,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -1857,7 +1860,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -1872,7 +1875,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {SR2accessibilityOptions.map((option) => (
@@ -1924,7 +1927,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -1979,14 +1982,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -2201,7 +2204,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -2263,7 +2266,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -2278,7 +2281,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {SR3accessibilityOptions.map((option) => (
@@ -2330,7 +2333,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -2385,14 +2388,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -2455,7 +2458,7 @@ export default function FlexGrow() {
                     <h2
                       style={{
                         fontSize: "18px",
-                        fontWeight: "300",
+                        fontWeight: "500",
                         marginBottom: "10px",
                       }}
                     >
@@ -2466,7 +2469,7 @@ export default function FlexGrow() {
                         listStyle: "none",
                         padding: 0,
                         margin: 0,
-                        fontWeight: "100",
+                        fontWeight: "500",
                         fontSize: "11px",
                       }}
                     >
@@ -2523,7 +2526,9 @@ export default function FlexGrow() {
                   />
                   <label
                     htmlFor="option2"
-                    style={{ fontWeight: "100", fontSize: "12px" }}
+                    style={{ 
+                      fontWeight: "normal",
+                      fontSize: "12px" }}
                   >
                     I will be staying in the Deluxe Suite
                   </label>
@@ -2802,7 +2807,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -2864,7 +2869,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -2879,7 +2884,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {DS1accessibilityOptions.map((option) => (
@@ -2931,7 +2936,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -2986,14 +2991,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -3056,7 +3061,7 @@ export default function FlexGrow() {
                     <h2
                       style={{
                         fontSize: "18px",
-                        fontWeight: "300",
+                        fontWeight: "500",
                         marginBottom: "10px",
                       }}
                     >
@@ -3067,7 +3072,7 @@ export default function FlexGrow() {
                         listStyle: "none",
                         padding: 0,
                         margin: 0,
-                        fontWeight: "100",
+                        fontWeight: "500",
                         fontSize: "11px",
                       }}
                     >
@@ -3125,7 +3130,9 @@ export default function FlexGrow() {
                   />
                   <label
                     htmlFor="option3"
-                    style={{ fontWeight: "100", fontSize: "12px" }}
+                    style={{ 
+                      fontWeight: "normal",
+                    fontSize: "12px" }}
                   >
                     I will be staying in the King Deluxe Suite
                   </label>
@@ -3410,7 +3417,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please include details of your special request
@@ -3472,7 +3479,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please choose the accessibility options you
@@ -3487,7 +3494,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0px",
                                     fontSize: "12px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   {KDS1accessibilityOptions.map((option) => (
@@ -3543,7 +3550,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please include any necessary information about
@@ -3603,14 +3610,14 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0px",
                                     fontSize: "12px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   <p
                                     style={{
                                       marginTop: "0rem",
                                       fontSize: "11px",
-                                      fontWeight: "100",
+                                      fontWeight: "normal",
                                     }}
                                   >
                                     Please include details of your date change
@@ -3682,7 +3689,7 @@ export default function FlexGrow() {
                         <h2
                           style={{
                             fontSize: "18px",
-                            fontWeight: "300",
+                            fontWeight: "500",
                             marginBottom: "10px",
                           }}
                         >
@@ -3693,7 +3700,7 @@ export default function FlexGrow() {
                             listStyle: "none",
                             padding: 0,
                             margin: 0,
-                            fontWeight: "100",
+                            fontWeight: "500",
                             fontSize: "11px",
                           }}
                         >
@@ -3751,7 +3758,7 @@ export default function FlexGrow() {
                       style={{
                         marginTop: "0rem",
                         fontSize: "13px",
-                        fontWeight: "100",
+                        fontWeight: "normal",
                       }}
                     >
                       Please include any necessary information about your event
@@ -3788,7 +3795,7 @@ export default function FlexGrow() {
                       <div
                         style={{
                           textAlign: "right",
-                          fontWeight: "100",
+                          fontWeight: "normal",
                           fontSize: "11px",
                           marginRight: "15px",
                         }}

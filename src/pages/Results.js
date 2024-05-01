@@ -1,32 +1,68 @@
-import React, { useState, useEffect } from "react"; // Import the React and useState hooks
+import React, { useState, useEffect } from "react"; // Import the useState and useEffect hooks from React
 import ResponsiveAppBar from "../components/ResponsiveAppBar"; // Import the ResponsiveAppBar component
 import Footer from "../components/Footer"; // Import the Footer component
 import SortDropdown from "../components/SortDropdown"; // Import the SortDropdown component
-import FilterCheckboxes from "../components/FilterCheckboxes"; //  Import the FilterCheckboxes component
+import FilterCheckboxes from "../components/FilterCheckboxes"; // Import the FilterCheckboxes component
 import HotelResult from "../components/HotelResult"; // Import the HotelResult component
-import hotelData from "../components/data/hotel-data.json"; //  Import the hotelData JSON file
+import hotelData from "../components/data/hotel-data.json"; // Import the hotel data from the hotel-data.json file
 import Search from "../components/Search"; // Import the Search component
 
-// Define the Results component
 function Results() {
-  // Declare variable sortBy and a function setSortBy to update it, initialised with null (no initial sorting criteria selected)
+  // Create a sortBy state variable and a setSortBy function to update the sortBy variable
   const [sortBy, setSortBy] = useState(null);
-  // Declare variable selectedAmenities and a function setSelectedAmenities to update it, initialised with an empty array
-  // Initialising with an empty array allows it to store selected amenities; initially, no amenities are selected
+  // Create a selectedAmenities state variable and a setSelectedAmenities function to update the selectedAmenities variable
   const [selectedAmenities, setSelectedAmenities] = useState([]);
-
-  // Declare variable filteredHotels and a function setFilteredHotels to update it, initialised with an empty array
+  // Create a filteredHotels state variable and a setFilteredHotels function to update the filteredHotels variable
   const [filteredHotels, setFilteredHotels] = useState([]);
-
-  // Declare variable resultCount and a function setResultCount to update it, initialised with 0
+  // Create a resultCount state variable and a setResultCount function to update the resultCount variable
   const [resultCount, setResultCount] = useState(0);
+  // Create a minPrice state variable and a setMinPrice function to update the minPrice variable
+  const [minPrice, setMinPrice] = useState("");
+  // Create a maxPrice state variable and a setMaxPrice function to update the maxPrice variable
+  const [maxPrice, setMaxPrice] = useState("");
+  // Create a guestRating state variable and a setGuestRating function to update the guestRating variable
+  const [guestRating, setGuestRating] = useState("");
+  // Create a starRating state variable and a setStarRating function to update the starRating variable
+  const [starRating, setStarRating] = useState("");
 
+  // Update the result count when the filteredHotels array changes
   useEffect(() => {
-    // Update result count when filteredHotels changes
+    // .length returns the number of items in the filteredHotels array
     setResultCount(filteredHotels.length);
   }, [filteredHotels]);
 
-  // Define hotel room amenities
+  // Handle change in checkboxes for amenities
+  const handleCheckboxChange = (e) => {
+    // Get the value of the checkbox that was clicked
+    const amenity = e.target.value;
+    // Update the selectedAmenities array based on the checkbox that was clicked
+    setSelectedAmenities((prevState) =>
+      // If the selectedAmenities array already includes the amenity, remove it
+      prevState.includes(amenity)
+        ? // Filter out the amenity that was clicked
+          // !== means not equal to
+          prevState.filter((item) => item !== amenity)
+        : // If the selectedAmenities array does not include the amenity, add it
+          [...prevState, amenity]
+    );
+  };
+
+  // Handle changes in filter options
+  const handleFilterChange = (filters) => {
+    // Destructure the filters object to get the minPrice, maxPrice, guestRating, and starRating values
+    const { minPrice, maxPrice, guestRating, starRating } = filters;
+    // Update the minPrice, maxPrice, guestRating, and starRating state variables
+    setMinPrice(minPrice);
+    setMaxPrice(maxPrice);
+    setGuestRating(guestRating);
+    setStarRating(starRating);
+    // Filter the hotels based on the selected filters
+    const filtered = filterHotels(sortHotels(sortBy, hotelData));
+    // Update the filteredHotels state variable
+    setFilteredHotels(filtered);
+  };
+
+  // Define the predefined amenities for hotel rooms and function rooms
   const hotelRoomAmenities = [
     "Complimentary Wi-Fi",
     "Pool",
@@ -35,204 +71,141 @@ function Results() {
     "Air Conditioning",
   ];
 
-  // Define function room amenities
   const functionRoomAmenities = [
     "Audio-visual Equipment",
     "High-speed Wi-Fi",
-    "Flexible Seating Arrangements",
+    "Flexible Seating Options",
     "Catering Services",
     "Climate Control",
   ];
 
-  // Combine both arrays into one array
+  // Combine the hotel room and function room amenities into a single array
   const predefinedAmenities = [...hotelRoomAmenities, ...functionRoomAmenities];
 
-  // Use the useEffect hook to update the filteredHotels variable when sortBy or selectedAmenities change
+  // Update the filteredHotels array when the sortBy, selectedAmenities, minPrice, maxPrice, guestRating, or starRating variables change
   useEffect(() => {
     // Sort the hotels based on the selected sorting criteria
-    setFilteredHotels(filterHotels(sortHotels(sortBy)));
-  }, [sortBy, selectedAmenities]);
+    const sortedHotels = sortHotels(sortBy);
+    // Update the filteredHotels array based on the selected filters
+    setFilteredHotels(filterHotels(sortedHotels));
+  }, [sortBy, selectedAmenities, minPrice, maxPrice, guestRating, starRating]);
 
-  // Define a function to sort the hotels based on the selected sorting criteria
+  // Sort the hotels based on the selected sorting criteria
   const sortHotels = (sortBy) => {
-    // If the hotelData array is empty, return an empty array
-    if (!hotelData || hotelData.length === 0) return [];
-
-    // Map through the hotelData array and convert the price strings to numbers
-    let hotelsWithNumericPrices = hotelData.map((hotel) => ({
-      // Spread operator is used to copy all the properties from the hotel object
+    // Convert the price_per_night and price_per_day values to numbers
+    let hotelsPrices = hotelData.map((hotel) => ({
+      // Spread the hotel object to include all existing properties
       ...hotel,
-      // Map through the hotel_room array and convert the price strings to numbers
+      // Map over the hotel_room array to convert the price_per_night values to numbers
       hotel_room: hotel.hotel_room.map((room) => ({
+        // Spread the room object to include all existing properties
         ...room,
-        price_per_night: parseFloat(room["price_per_night"]),
+        // Convert the price_per_night value to a number
+        price_per_night: parseFloat(room.price_per_night),
       })),
-      // Map through the function_room array and convert the price strings to numbers
+      // Convert the price_per_day value to a number
       function_room: {
+        // Spread the function_room object to include all existing properties
         ...hotel.function_room,
-        price_per_day: parseFloat(hotel.function_room["price_per_day"]),
+        // Convert the price_per_day value to a number
+        price_per_day: parseFloat(hotel.function_room.price_per_day),
       },
     }));
 
     // Sort the hotels based on the selected sorting criteria
-    // sortBy is used to determine the sorting criteria
-    //.slice() is used to create a shallow (new) copy of the hotels array
+    switch (sortBy) {
+      // Sort the hotels from low to high based on the price_per_night value
+      case "priceLowToHigh":
     // .sort() is used to sort the hotels array based on the sorting criteria
     // a and b are the two elements being compared
     // a.hotel_room[0]["price_per_night"] is the price of the first room in hotel a
     // b.hotel_room[0]["price_per_night"] is the price of the first room in hotel b
     // price low to high
-    if (sortBy === "priceLowToHigh") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort(
+        return hotelsPrices.sort(
           (a, b) =>
-            a.hotel_room[0]["price_per_night"] -
-            b.hotel_room[0]["price_per_night"]
+            a.hotel_room[0].price_per_night - b.hotel_room[0].price_per_night
         );
-      // price high to low
-    } else if (sortBy === "priceHighToLow") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort(
+      case "priceHighToLow":
+        return hotelsPrices.sort(
           (a, b) =>
-            b.hotel_room[0]["price_per_night"] -
-            a.hotel_room[0]["price_per_night"]
+            b.hotel_room[0].price_per_night - a.hotel_room[0].price_per_night
         );
-      // function room price low to high
-    } else if (sortBy === "functionRoomPriceLowToHigh") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort(
+      case "functionRoomPriceLowToHigh":
+        return hotelsPrices.sort(
           (a, b) =>
-            a.function_room["price_per_day"] - b.function_room["price_per_day"]
+            a.function_room.price_per_day - b.function_room.price_per_day
         );
-      // function room price high to low
-    } else if (sortBy === "functionRoomPriceHighToLow") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort(
+      case "functionRoomPriceHighToLow":
+        return hotelsPrices.sort(
           (a, b) =>
-            b.function_room["price_per_day"] - a.function_room["price_per_day"]
+            b.function_room.price_per_day - a.function_room.price_per_day
         );
-      // guest rating high to low
-    } else if (sortBy === "guestRatingHighToLow") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort((a, b) => b.guest_review_rating - a.guest_review_rating);
-      // guest rating low to high
-    } else if (sortBy === "guestRatingLowToHigh") {
-      return hotelsWithNumericPrices
-        .slice()
-        .sort((a, b) => a.guest_review_rating - b.guest_review_rating);
-      // default case is used to return the hotels array as is
-    } else {
-      return hotelsWithNumericPrices;
+      case "guestRatingHighToLow":
+        return hotelsPrices.sort(
+          (a, b) => b.guest_review_rating - a.guest_review_rating
+        );
+      case "guestRatingLowToHigh":
+        return hotelsPrices.sort(
+          (a, b) => a.guest_review_rating - b.guest_review_rating
+        );
+      default:
+        return hotelsPrices;
     }
   };
 
-  // Define a function to filter the hotels based on the selected amenities
+  // Filter the hotels based on the selected filters
   const filterHotels = (hotels) => {
-    // If the hotels array is empty, return an empty array
-    if (!hotels || hotels.length === 0 || selectedAmenities.length === 0) {
-      // Return the hotels array
-      return hotels;
-    }
-
-    // Return a new array of hotels that include all the selected amenities
     return hotels.filter((hotel) => {
-      // Check if the hotel contains all selected amenities
-      const includesAmenity = selectedAmenities.every((amenity) => {
-        // console.log() to log messages to the console for debugging
-        console.log(
-          `Checking amenity ${amenity} for hotel ${hotel.hotel_name}`
-        );
-        // Check if the hotel or function room amenities include the selected amenity
-        const included =
-          hotel.amenities.includes(amenity) ||
-          // Check if the function room has the selected amenity
-          (hotel.function_room &&
-            hotel.function_room.amenities.includes(amenity));
-        // console.log() to log messages to the console for debugging
-        console.log(`Amenity ${amenity} included: ${included}`);
-        return included;
+      // Check if the hotel meets the selected filter criteria
+      const meetsPriceCriteria = hotel.hotel_room.some((room) => {
+        // Convert the price_per_night value to a number
+        const pricePerNight = parseFloat(room.price_per_night);
+        // Convert the minPrice and maxPrice values to numbers
+        const min = minPrice ? parseFloat(minPrice) : 0;
+        // Number.MAX_VALUE is the largest positive representable number in JavaScript
+        const max = maxPrice ? parseFloat(maxPrice) : Number.MAX_VALUE;
+
+        // Check if the price_per_night value is within the minPrice and maxPrice range
+        return pricePerNight >= min && pricePerNight <= max;
       });
 
-      // console.log() to log messages to the console for debugging
-      console.log(
-        `Hotel ${hotel.hotel_name} includes all selected amenities: ${includesAmenity}`
-      );
-      return includesAmenity;
-    });
-  };
+      // Check if the hotel meets the selected filter criteria
+      const meetsGuestRatingCriteria = guestRating
+      // Check if the hotel's guest_review_rating is greater than or equal to the selected guestRating
+        ? hotel.guest_review_rating >= parseInt(guestRating)
+        // If no guestRating is selected, return true
+        : true;
+        // Check if the hotel meets the selected filter criteria
+      const meetsStarRatingCriteria = starRating
+      // Check if the hotel's star_rating is equal to the selected starRating
+        ? hotel.star_rating.toString() === starRating
+        // If no starRating is selected, return true
+        : true;
+        // Check if the hotel meets the selected filter criteria
+      const meetsAmenitiesCriteria =
+      // Check if the selectedAmenities array is empty or if the hotel's amenities array includes all selected amenities
+      // === 0 means the selectedAmenities array is empty
+      // || means or
+      // .every checks if all elements in the selectedAmenities array meet the condition
+        selectedAmenities.length === 0 ||
+        selectedAmenities.every(
+          // Check if the hotel's amenities array includes the selected amenity
+          (amenity) =>
+          // .includes checks if the hotel's amenities array includes the selected amenity
+            hotel.amenities.includes(amenity) ||
+            // Check if the hotel's hotel_room array includes the selected amenity 
+            (hotel.function_room &&
+              hotel.function_room.amenities.includes(amenity))
+        );
 
-  // Define a function to handle changes to the selected amenities
-  const handleCheckboxChange = (e) => {
-    // Update the selectedAmenities array based on the selected amenity
-    // e.target.value is the value of the checkbox that was clicked
-    const amenity = e.target.value;
-    // If the selectedAmenities array includes the selected amenity, remove it from the array
-    setSelectedAmenities((prevState) => {
-      // .includes() is used to check if the selected amenity is already in the array
-      if (prevState.includes(amenity)) {
-        // .filter() is used to create a new array with all the elements
-        // item !== amenity is used to remove the selected amenity from the array
-        return prevState.filter((item) => item !== amenity);
-      } else {
-        // ...prevState is the spread operator used to create a new array with all the elements from the prevState array
-        return [...prevState, amenity];
-      }
-    });
-  };
-
-  const handleFilterChange = ({
-    minPrice,
-    maxPrice,
-    guestRating,
-    starRating,
-  }) => {
-    // Filter hotels based on the price range, guest rating, star rating, and selected amenities
-    let filteredHotels = hotelData.filter((hotel) => {
-      // Convert the minPrice and maxPrice strings to numbers
-      const min = minPrice !== "" ? parseInt(minPrice) : 0;
-      const max = maxPrice !== "" ? parseInt(maxPrice) : Number.MAX_VALUE;
-      // Set the default minRating and maxRating values
-      let minRating = 0;
-      let maxRating = 10;
-      // switch statement to set the minRating and maxRating based on the guestRating
-      switch (guestRating) {
-        case "9+":
-          minRating = 9;
-          break;
-        case "8+":
-          minRating = 8;
-          break;
-        case "7+":
-          minRating = 7;
-          break;
-        // default case is used to set the minRating to 0 and maxRating to 10
-        default:
-          break;
-      }
+        // Return true if the hotel meets all selected filter criteria
       return (
-        // Check if the hotel meets all filter criteria
-        hotel.hotel_room.some(
-          (room) =>
-            parseFloat(room.price_per_night) >= min &&
-            parseFloat(room.price_per_night) <= max
-        ) &&
-        hotel.guest_review_rating >= minRating &&
-        hotel.guest_review_rating < maxRating &&
-        (starRating === "" || hotel.star_rating.toString() === starRating)
+        meetsPriceCriteria &&
+        meetsGuestRatingCriteria &&
+        meetsStarRatingCriteria &&
+        meetsAmenitiesCriteria
       );
     });
-
-    // Sort the filtered hotels based on the selected sorting criteria
-    if (sortBy) {
-      filteredHotels = sortHotels(sortBy, filteredHotels);
-    }
-    // Update the filteredHotels array with the new filtered hotels
-    setFilteredHotels(filteredHotels);
   };
 
   // Return the JSX for the Results component
@@ -264,6 +237,14 @@ function Results() {
                 selectedAmenities={selectedAmenities}
                 onChange={handleCheckboxChange}
                 onFilterChange={handleFilterChange}
+                minPrice={minPrice}
+                setMinPrice={setMinPrice}
+                maxPrice={maxPrice}
+                setMaxPrice={setMaxPrice}
+                guestRating={guestRating}
+                setGuestRating={setGuestRating}
+                starRating={starRating}
+                setStarRating={setStarRating}
               />
             </div>
             <div

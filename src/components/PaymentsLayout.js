@@ -917,7 +917,7 @@ export default function FlexGrow() {
                   <h2
                     style={{
                       fontSize: "18px",
-                      fontWeight: "300",
+                       fontWeight: "500",
                       marginBottom: "10px",
                     }}
                   >
@@ -928,7 +928,7 @@ export default function FlexGrow() {
                       listStyle: "none",
                       padding: 0,
                       margin: 0,
-                      fontWeight: "100",
+                      fontWeight: "500",
                       fontSize: "11px",
                     }}
                   >
@@ -1108,9 +1108,28 @@ export default function FlexGrow() {
                 </div>
 
                 <div>
-                  <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
-                    <FontAwesomeIcon icon={faCheck} /> {formik.values.firstName}{" "}
-                    and {formik.values.secondFirstName} have paid.
+                <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#E6F7EA",
+                        color: "#217952",
+                        border: "2px solid #217952",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ marginRight: "5px" }}
+                      />
+                      {formik.values.firstName} and {formik.values.secondFirstName} have paid.
+                    </div>
                   </div>
                   <div
                     style={{
@@ -1168,8 +1187,8 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
-                              }}
+                                fontWeight: "normal",
+                                                            }}
                             >
                               Please include details of your special request and
                               we’ll forward it to the property. Please note,
@@ -1230,7 +1249,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -1245,7 +1264,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {SR1accessibilityOptions.map((option) => (
@@ -1298,7 +1317,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -1354,14 +1373,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -1521,11 +1540,28 @@ export default function FlexGrow() {
                 </div>
 
                 <div>
-                  <div style={{ marginLeft: "2.5rem", color: "#d91f11" }}>
-                    <FontAwesomeIcon icon={faXmark} />{" "}
-                    {formik.values.thirdFirstName} and{" "}
+                <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#FADEDC",
+                        color: "#d91f11",
+                        border: "2px solid #d91f11",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faXmark} style={{ marginRight: "5px" }} />{" "}
+                      {formik.values.thirdFirstName} and{" "}
                     {formik.values.forthFirstName} have not yet paid.
+                    </div>
                   </div>
+                  
                   <div
                     style={{
                       textDecoration: "none",
@@ -1582,7 +1618,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -1644,7 +1680,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -1659,7 +1695,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {SR2accessibilityOptions.map((option) => (
@@ -1711,7 +1747,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -1766,14 +1802,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -1932,14 +1968,51 @@ export default function FlexGrow() {
                 </div>
 
                 <div>
-                  <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
-                    <FontAwesomeIcon icon={faCheck} />{" "}
-                    {formik.values.fifthFirstName} has paid.
+                  <div style={{ marginLeft: "2.5rem", color: "#217952" }}></div>
+                  <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#E6F7EA",
+                        color: "#217952",
+                        border: "2px solid #217952",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ marginRight: "5px" }}
+                      />
+                      {formik.values.fifthFirstName} has paid.
+                    </div>
                   </div>
-                  <div style={{ marginLeft: "2.5rem", color: "#d91f11" }}>
-                    <FontAwesomeIcon icon={faXmark} />{" "}
-                    {formik.values.sixthFirstName} has not yet paid.
+                  <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#FADEDC",
+                        color: "#d91f11",
+                        border: "2px solid #d91f11",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faXmark} style={{ marginRight: "5px" }} />{" "}
+                      {formik.values.sixthFirstName} has not yet paid.
+                    </div>
                   </div>
+                  <div style={{ marginLeft: "2.5rem", color: "#d91f11" }}></div>
                   <div
                     style={{
                       textDecoration: "none",
@@ -1996,7 +2069,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -2058,7 +2131,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -2073,7 +2146,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {SR3accessibilityOptions.map((option) => (
@@ -2125,7 +2198,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -2180,14 +2253,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -2250,7 +2323,7 @@ export default function FlexGrow() {
                     <h2
                       style={{
                         fontSize: "18px",
-                        fontWeight: "300",
+                        fontWeight: "500",
                         marginBottom: "10px",
                       }}
                     >
@@ -2261,7 +2334,7 @@ export default function FlexGrow() {
                         listStyle: "none",
                         padding: 0,
                         margin: 0,
-                        fontWeight: "100",
+                        fontWeight: "500",
                         fontSize: "11px",
                       }}
                     >
@@ -2532,9 +2605,28 @@ export default function FlexGrow() {
                 </div>
 
                 <div>
-                  <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
-                    <FontAwesomeIcon icon={faCheck} />{" "}
+                <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#E6F7EA",
+                        color: "#217952",
+                        border: "2px solid #217952",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ marginRight: "5px" }}
+                      />
                     {formik.values.seventhFirstName} has paid.
+                  </div>
                   </div>
                   <div
                     style={{
@@ -2592,7 +2684,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include details of your special request and
@@ -2654,7 +2746,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please choose the accessibility options you
@@ -2669,7 +2761,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               {DS1accessibilityOptions.map((option) => (
@@ -2721,7 +2813,7 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0rem",
                                 fontSize: "11px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               Please include any necessary information about
@@ -2776,14 +2868,14 @@ export default function FlexGrow() {
                                 marginLeft: "3.5rem",
                                 marginTop: "0px",
                                 fontSize: "12px",
-                                fontWeight: "100",
+                                fontWeight: "normal",
                               }}
                             >
                               <p
                                 style={{
                                   marginTop: "0rem",
                                   fontSize: "11px",
-                                  fontWeight: "100",
+                                  fontWeight: "normal",
                                 }}
                               >
                                 Please include details of your date change for
@@ -2846,7 +2938,7 @@ export default function FlexGrow() {
                     <h2
                       style={{
                         fontSize: "18px",
-                        fontWeight: "300",
+                        fontWeight: "500",
                         marginBottom: "10px",
                       }}
                     >
@@ -2857,7 +2949,7 @@ export default function FlexGrow() {
                         listStyle: "none",
                         padding: 0,
                         margin: 0,
-                        fontWeight: "100",
+                        fontWeight: "500",
                         fontSize: "11px",
                       }}
                     >
@@ -3130,12 +3222,31 @@ export default function FlexGrow() {
                     </div>
 
                     <div>
-                      <div style={{ marginLeft: "2.5rem", color: "#217952" }}>
-                        <FontAwesomeIcon icon={faCheck} />{" "}
+                    <div style={{ marginTop: "0.3rem", marginLeft: "2.5rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "#E6F7EA",
+                        color: "#217952",
+                        border: "2px solid #217952",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "85%",
+                        height: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ marginRight: "5px" }}
+                      />
                         {formik.values.eleventhFirstName},{" "}
                         {formik.values.twelfthFirstName},{" "}
-                        {formik.values.thirteenthFirstName},{" "}
-                        {formik.values.fourteenthFirstName}, have paid.
+                        {formik.values.thirteenthFirstName} and {" "}
+                        {formik.values.fourteenthFirstName} have paid.
+                      </div>
                       </div>
                       <div
                         style={{
@@ -3197,7 +3308,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please include details of your special request
@@ -3259,7 +3370,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please choose the accessibility options you
@@ -3274,7 +3385,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0px",
                                     fontSize: "12px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   {KDS1accessibilityOptions.map((option) => (
@@ -3330,7 +3441,7 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0rem",
                                     fontSize: "11px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   Please include any necessary information about
@@ -3390,14 +3501,14 @@ export default function FlexGrow() {
                                     marginLeft: "3.5rem",
                                     marginTop: "0px",
                                     fontSize: "12px",
-                                    fontWeight: "100",
+                                    fontWeight: "normal",
                                   }}
                                 >
                                   <p
                                     style={{
                                       marginTop: "0rem",
                                       fontSize: "11px",
-                                      fontWeight: "100",
+                                      fontWeight: "normal",
                                     }}
                                   >
                                     Please include details of your date change
@@ -3467,7 +3578,7 @@ export default function FlexGrow() {
                         <h2
                           style={{
                             fontSize: "18px",
-                            fontWeight: "300",
+                            fontWeight: "500",
                             marginBottom: "10px",
                           }}
                         >
@@ -3478,7 +3589,7 @@ export default function FlexGrow() {
                             listStyle: "none",
                             padding: 0,
                             margin: 0,
-                            fontWeight: "100",
+                            fontWeight: "500",
                             fontSize: "11px",
                           }}
                         >
@@ -3536,7 +3647,7 @@ export default function FlexGrow() {
                       style={{
                         marginTop: "0rem",
                         fontSize: "13px",
-                        fontWeight: "100",
+                        fontWeight: "500",
                       }}
                     >
                       Please include any necessary information about your event

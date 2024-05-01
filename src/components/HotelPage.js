@@ -841,7 +841,7 @@ const HotelPage = ({ hotels }) => {
 
               <p
                 style={{
-                  fontWeight: 200,
+                  // fontWeight: 200,
                   fontSize: "14px",
                   color: "#191E3A",
                   marginTop: "0px",
@@ -859,7 +859,7 @@ const HotelPage = ({ hotels }) => {
                       marginBottom: "10px",
                       display: "flex",
                       fontSize: "14px",
-                      fontWeight: "100",
+                      // fontWeight: "100",
                       alignItems: "center",
                       justifyContent: "space-between",
                     }}
@@ -916,7 +916,7 @@ const HotelPage = ({ hotels }) => {
             <p
               style={{
                 fontSize: "13px",
-                fontWeight: "lighter",
+                // fontWeight: "lighter",
                 fontStyle: "italic",
                 marginTop: "0px",
               }}
@@ -992,7 +992,7 @@ const HotelPage = ({ hotels }) => {
                     marginTop: "10px",
                     fontSize: "13px",
                     color: "#191E3A",
-                    fontWeight: "100",
+                    // fontWeight: "100",
                   }}
                 >
                   <FontAwesomeIcon
@@ -1123,7 +1123,7 @@ const HotelPage = ({ hotels }) => {
             <p
               style={{
                 fontSize: "13px",
-                fontWeight: "lighter",
+                // fontWeight: "lighter",
                 fontStyle: "italic",
                 marginTop: "8px",
               }}
@@ -1315,7 +1315,7 @@ const HotelPage = ({ hotels }) => {
                 <h2
                   style={{
                     fontSize: "19px",
-                    fontWeight: "100",
+                    // fontWeight: "100",
                     textAlign: "center",
                   }}
                 >
@@ -1349,7 +1349,7 @@ const HotelPage = ({ hotels }) => {
                   <span
                     style={{
                       fontSize: "20px",
-                      fontWeight: "100",
+                      // fontWeight: "100",
                       margin: "0 20px",
                     }}
                   >
@@ -1378,7 +1378,7 @@ const HotelPage = ({ hotels }) => {
                 <div
                   style={{
                     fontSize: "14px",
-                    fontWeight: "300",
+                    fontWeight: "normal",
                     textAlign: "right",
                     marginRight: "15px",
                     marginBottom: "10px",

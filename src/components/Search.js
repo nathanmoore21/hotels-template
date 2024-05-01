@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; // Import the useState, useEffect, and useRef hooks
+import React, { useState, useRef, useEffect } from "react"; // Import the useState, useEffect, and useRef hooks
 import { Formik, Form, Field, ErrorMessage } from "formik"; // Import the Formik components
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
 import {
@@ -149,7 +149,7 @@ const Search = () => {
     localStorage.setItem("searchLocation", values.location);
     navigate("/results");
   };
-
+  
   return (
     <>
       <Formik
@@ -273,15 +273,13 @@ const Search = () => {
                 }}
               >
                 <DatePicker
-                  // Existing props
                   range
                   dateSeparator=" to "
                   value={dateRange}
                   onChange={setDateRange}
                   format="DD MMM YYYY"
-                  className="search-field custom-date-picker"
                   style={{
-                    width: "100%",
+                    width: "100% !important",
                     height: "42px",
                     border: "1px solid #818494",
                     backgroundColor: "transparent",
@@ -289,6 +287,11 @@ const Search = () => {
                     paddingLeft: "30px",
                     fontSize: "15px",
                   }}
+                  // minDate={new Date()}
+                  // renderInputValue={({ startDate, endDate }) => {
+                  //   if (!startDate || !endDate) return "";
+                  //   return `${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`;
+                  // }}
                 />
               </div>
 
