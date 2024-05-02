@@ -112,7 +112,7 @@ const HotelResult = ({ hotel }) => {
           {/* // display the heart icon, if the heart is clicked, display the solid heart icon, else display the regular heart icon */}
           <FontAwesomeIcon
             icon={isHeartClicked ? solidHeart : regularHeart}
-            style={{ color: "#FF0000", fontSize: "20px" }}
+            style={{ color: "#FF0000", fontSize: "20px", cursor: "pointer"}}
           />
         </div>
       </div>

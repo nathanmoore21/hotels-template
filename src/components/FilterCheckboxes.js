@@ -118,7 +118,7 @@ function FilterCheckboxes({
       </div>
 
       <div style={{ fontSize: "15px", marginTop: "10px", fontWeight: 400 }}>
-        Hotel Room Amenities
+        Hotel Amenities
       </div>
       {/* map over the hotel room amenities */}
       {/* for each amenity, create a checkbox */}

@@ -667,7 +667,7 @@ const HotelPage = ({ hotels }) => {
                   }}
                 />
                 {/* pay within 31 days, since it is a large booking, the hotel can't wait until last minute incase the party cancel */}
-                <span>Reserve Now, Pay Within 31 Days</span>
+                <span>Reserve now, pay within 31 days</span>
               </div>
               <div style={{ display: "flex", marginBottom: "0.5rem" }}>
                 <div
